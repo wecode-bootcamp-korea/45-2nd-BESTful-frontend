@@ -21,11 +21,9 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/mypage" element={<Mypage />} />
-        <Route path="/post-upload" element={<PostUpload />} />
-        <Route path="/following" element={<Following />} />
-        <Route path="/best-feeds" element={<BestFeeds />} />
-        <Route path="/contents/:id" element={<Contents />} />
         <Route path="/users/:id" element={<Users />} />
+        <Route path="/post-upload" element={<PostUpload />} />
+        <Route path="/contents/:id" element={<Contents />} />
       </Routes>
       <Footer />
     </BrowserRouter>
