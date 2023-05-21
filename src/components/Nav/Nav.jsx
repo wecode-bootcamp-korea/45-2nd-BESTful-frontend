@@ -1,16 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 
 const Nav = () => {
-  return (
-    <Container>
-      <div>Nav</div>
-    </Container>
-  );
+  return <div>Nav</div>;
 };
-
-const Container = styled.div`
-  margin-bottom: 80px;
-`;
 
 export default Nav;
