@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Main from './pages/Main/Main';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
@@ -11,12 +11,19 @@ import Nav from './components/Nav/Nav';
 import Container from './components/Container/Container';
 
 const Router = () => {
+  const location = useLocation();
+
+  const renderNav = () => {
+    if (location.pathname !== '/login') {
+      return <Nav />;
+    }
+  };
   return (
-    <BrowserRouter>
-      <Nav />
+    <>
+      {renderNav()}
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route element={<Container />}>
-          <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/users/:id" element={<Users />} />
@@ -25,7 +32,7 @@ const Router = () => {
         </Route>
         <Route path="/" element={<Main />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 };
 
