@@ -5,8 +5,6 @@ import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import Mypage from './pages/Mypage/Mypage';
 import PostUpload from './pages/PostUpload/PostUpload';
-import Following from './pages/Following/Following';
-import BestFeeds from './pages/BestFeeds/BestFeeds';
 import Contents from './pages/Contents/Contents';
 import Users from './pages/Users/Users';
 import Nav from './components/Nav/Nav';
