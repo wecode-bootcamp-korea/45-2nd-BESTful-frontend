@@ -14,8 +14,6 @@ const GlobalStyle = createGlobalStyle`
   }
 }    
 body{
-  max-width: 1050px;
-  margin: 0 auto;
   font-family: 'Lato', sans-serif; 
   font-family: 'Noto Sans KR', sans-serif; 
   }
