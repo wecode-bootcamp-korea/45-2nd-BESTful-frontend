@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import useFetch from '../../hooks/useFetch';
 import ProfileImage from '../ProfileImage/ProfileImage';
-import TagButton from '../tagButton/TagButton';
 import FollowingButton from '../followingButton/FollowingButton';
+import ArticleContent from './subComponent/ArticleContent';
+import Carousel from './subComponent/Carousel';
 import { faHeart as emptyHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as fullHeart } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
@@ -11,13 +13,15 @@ import variables from '../../styles/variables';
 import theme from '../../styles/theme';
 
 const Dashboard = () => {
-  const src = '/images/Components/profileImage/brunch.jpg';
+  const src = '/images/components/profileImage/brunch.jpg';
   const w =
     'you know we got that vibe, baby~ 해 뜰 때까지~ Look at me, look at me 느낌이 나지~ Look at me, look at me 느낌이 나지~ you know we got that vibe, baby~ 해 질 때까지~';
 
   const [heart, setHeart] = useState(false);
-  const [position, setPosition] = useState({});
-  const [tags, setTags] = useState([]);
+
+  const { loading, data, error } = useFetch([], '/data/tagData.json', {
+    method: 'GET',
+  });
 
   const heartMode = {
     false: emptyHeart,
@@ -28,15 +32,8 @@ const Dashboard = () => {
     setHeart(prev => !prev);
   };
 
-  const handleTag = e => {
-    setPosition({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
-  };
-
-  useEffect(() => {
-    if (position.x) {
-      setTags(prev => [...prev, position]);
-    }
-  }, [position]);
+  if (error) return alert(error);
+  if (loading) return null;
 
   return (
     <div className="dashboard">
@@ -51,15 +48,10 @@ const Dashboard = () => {
         </Head>
 
         <ImageLabel>
-          <img alt="이미지" src={src} onClick={handleTag} />
-          {tags.map((data, index) => {
-            return <TagButton key={index} point={data} />;
-          })}
+          <Carousel imageList={data} />
         </ImageLabel>
-        <Content>
-          <div className="main">{w}</div>
-          <div className="more">더보기</div>
-        </Content>
+
+        <ArticleContent content={w} length={120} />
         <Tail>
           <div className="first">
             <HeartIcon
@@ -81,7 +73,9 @@ const Dashboard = () => {
 
 const Wrapper = styled.div`
   width: 552px;
+  margin-left: 100px;
   border: 1px solid #a4acb3;
+  background-color: white;
 `;
 
 const Head = styled.div`
@@ -111,20 +105,6 @@ const ImageLabel = styled.div`
   img {
     width: 100%;
     object-fit: cover;
-  }
-`;
-
-const Content = styled.div`
-  padding: 16px 16px 10px;
-
-  .main {
-    line-height: 1.5;
-  }
-
-  .more {
-    margin: 5px 0px;
-    color: #a4acb3;
-    font-weight: bold;
   }
 `;
 
