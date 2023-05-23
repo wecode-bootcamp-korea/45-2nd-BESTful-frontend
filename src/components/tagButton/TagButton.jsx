@@ -24,6 +24,7 @@ const Tag = styled.div`
   transform: translate(-50%, -50%);
   top: ${props => props.y};
   left: ${props => props.x};
+  cursor: pointer;
 `;
 
 const BackIcon = styled(FontAwesomeIcon)`
