@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "src": "/images/components/dashboard/mickey_profile.jpg",
+    "tags": [
+      { "x": 200, "y": 170 },
+      { "x": 373, "y": 180 },
+      { "x": 317, "y": 438 },
+      { "x": 492, "y": 304 },
+      { "x": 55, "y": 394 },
+      { "x": 305, "y": 209 }
+    ]
+  },
+  {
+    "id": 2,
+    "src": "/images/components/dashboard/today.jpg",
+    "tags": [
+      { "x": 384, "y": 170 },
+      { "x": 373, "y": 50 },
+      { "x": 411, "y": 502 },
+      { "x": 2, "y": 304 },
+      { "x": 74, "y": 332 },
+      { "x": 399, "y": 23 }
+    ]
+  },
+  {
+    "id": 3,
+    "src": "/images/components/dashboard/icecream.jpg",
+    "tags": [
+      { "x": 200, "y": 170 },
+      { "x": 457, "y": 180 },
+      { "x": 317, "y": 517 },
+      { "x": 492, "y": 235 },
+      { "x": 55, "y": 394 },
+      { "x": 375, "y": 209 }
+    ]
+  },
+  {
+    "id": 4,
+    "src": "/images/components/dashboard/hanger.jpg",
+    "tags": [
+      { "x": 100, "y": 47 },
+      { "x": 512, "y": 180 },
+      { "x": 317, "y": 92 },
+      { "x": 492, "y": 304 },
+      { "x": 84, "y": 394 },
+      { "x": 63, "y": 345 }
+    ]
+  }
+]
