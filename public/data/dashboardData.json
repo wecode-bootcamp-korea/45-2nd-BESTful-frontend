@@ -1,0 +1,58 @@
+[
+  {
+    "userName": "문댕동",
+    "profile_image_url": "/images/components/dashboard/mickey_profile.jpg",
+    "feedDescription": "문댕동입니다",
+    "createdAt": "2023,05,23",
+    "contentUrls": [
+      {
+        "contentUrl": "/images/components/dashboard/today.jpg",
+        "clothesInfo": [
+          {
+            "style": "casual",
+            "season": "s/s",
+            "clothName": "옷1",
+            "clothPrice": 10000,
+            "tagContent": "이건 검정반팔이야",
+            "coordinateX": "X: 123",
+            "coordinateY": "y: 321",
+            "clothBuyingLink": "무신사",
+            "clothInformation": "검정반팔"
+          }
+        ]
+      },
+      {
+        "contentUrl": "/images/components/dashboard/icecream.jpg",
+        "clothesInfo": [
+          {
+            "style": "dandy look",
+            "season": "s/s",
+            "clothName": "옷2",
+            "clothPrice": 3000,
+            "tagContent": "이건 검정긴바지야",
+            "coordinateX": "X: 234",
+            "coordinateY": "y: 421",
+            "clothBuyingLink": "크림",
+            "clothInformation": "검정긴바지"
+          }
+        ]
+      },
+      {
+        "contentUrl": "/images/components/dashboard/hanger.jpg",
+        "clothesInfo": [
+          {
+            "style": "street look",
+            "season": "f/w",
+            "clothName": "옷3",
+            "clothPrice": 300000,
+            "tagContent": "이건 무지개장갑이야",
+            "coordinateX": "X: 264",
+            "coordinateY": "y: 81",
+            "clothBuyingLink": "쿠팡",
+            "clothInformation": "무지개장갑"
+          }
+        ]
+      }
+    ]
+  }
+]

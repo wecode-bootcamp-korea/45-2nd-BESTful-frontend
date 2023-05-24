@@ -5,13 +5,35 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
 import ArrowButton from './ArrowButton';
+import TagModal from './TagModal';
 
 const Carousel = ({ imageList }) => {
   const [current, setCurrent] = useState(0);
+  const [tags, setTags] = useState([]); //모든 태그 위치
+  const [modal, setModal] = useState(false); //모달 on/off
+  const [curTag, setCurTag] = useState(0); // 현재 클릭한 태그
+  const [position, setPostion] = useState({}); // 현재 클릭한 태그의 위치
 
-  useEffect(() => {
-    console.log(current);
-  }, [current]);
+  const translationX = curX => {
+    let x = curX;
+    if (curX < 20) {
+      x = curX + 10;
+    } else if (curX > 530) {
+      x = curX - 10;
+    }
+    return x;
+  };
+
+  const handleONDashTag = idx => {
+    setModal(true);
+    setCurTag(idx);
+    const xPos = translationX(tags[idx]?.x);
+    setPostion({ x: xPos, y: tags[idx]?.y });
+  };
+
+  const handleOFFDashTag = () => {
+    setModal(false);
+  };
 
   const settings = {
     dots: true,
@@ -34,6 +56,10 @@ const Carousel = ({ imageList }) => {
     ),
   };
 
+  useEffect(() => {
+    setTags(imageList[current]?.tags);
+  }, [current]);
+
   return (
     <Container>
       <StyledSlider {...settings}>
@@ -43,11 +69,15 @@ const Carousel = ({ imageList }) => {
               key={data.id}
               src={data.src}
               index={index}
-              tagList={data.tags}
+              tags={data.tags}
+              handleONDashTag={handleONDashTag}
+              handleOFFDashTag={handleOFFDashTag}
+              translationX={translationX}
             />
           );
         })}
       </StyledSlider>
+      {modal && <TagModal point={position} />}
     </Container>
   );
 };

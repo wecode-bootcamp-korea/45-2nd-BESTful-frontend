@@ -55,6 +55,7 @@ const Wrapper = styled.div`
       color: #a4acb3;
       font-weight: bold;
       font-size: 15px;
+      cursor: pointer;
     }
   }
 `;
