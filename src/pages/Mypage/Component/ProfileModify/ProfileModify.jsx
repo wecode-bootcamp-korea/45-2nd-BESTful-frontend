@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import ModifyInputs from '../ModifyInputs/ModifyInputs';
 
-const ProfileModify = ({ profile, setMe }) => {
+const ProfileModify = ({ profile }) => {
   return (
     <Container>
-      <ModifyInputs profile={profile} setMe={setMe} />
+      <ModifyInputs profile={profile} />
     </Container>
   );
 };

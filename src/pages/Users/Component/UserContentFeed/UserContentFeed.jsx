@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import FeedImage from '../FeedImage/FeedImage';
+import ContentImage from '../ContentImage/ContentImage';
 
-const ContentPosting = ({ category }) => {
+const UserContentFeed = () => {
   const [feed, setFeed] = useState([]);
-  const [like, setLike] = useState([]);
 
   const feedGet = () => {
-    fetch('/data/feedImage.json', {
+    fetch('/data/userFeed.json', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json;charset=utf-8' },
     })
@@ -17,33 +16,18 @@ const ContentPosting = ({ category }) => {
       });
   };
 
-  const likeGet = () => {
-    fetch('/data/likeFeed.json', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json;charset=utf-8' },
-    })
-      .then(res => res.json())
-      .then(like => {
-        setLike(like);
-      });
-  };
-
   useEffect(() => {
     feedGet();
-    likeGet();
   }, []);
 
   return (
     <Container>
       <Posting>
-        {(category ? feed : like)?.map(posting => {
+        {feed?.map(posting => {
           return (
-            <FeedImage
+            <ContentImage
               key={posting.feedId}
               image={posting.contentUrls[0].contentUrl}
-              posting={posting}
-              feedGet={feedGet}
-              category={category}
             />
           );
         })}
@@ -52,7 +36,7 @@ const ContentPosting = ({ category }) => {
   );
 };
 
-export default ContentPosting;
+export default UserContentFeed;
 
 const Container = styled.div`
   width: 65%;

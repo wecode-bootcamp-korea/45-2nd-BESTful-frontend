@@ -5,14 +5,34 @@ import { faCamera as camera } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ContentProfile = ({ profile, setProfileOrPosting }) => {
-  const [profileImage, setProfileImage] = useState(profile?.profile_image_url);
+  const [profileImage, setProfileImage] = useState(
+    `${profile?.profileImageUrl}`
+  );
   const profileImageInput = useRef(null);
+
+  const changeImage = () => {
+    const url = `http://10.58.52.204:3700/users/image`;
+
+    let formData = new FormData();
+    formData.append('profileImage', profileImage);
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: localStorage.getItem('resToken'),
+      },
+      body: formData,
+    }).then(res => res.json());
+    alert('프로필 이미지가 수정되었습니다');
+  };
 
   const profileChange = e => {
     if (e.target.files[0]) {
       setProfileImage(e.target.files[0]);
+      changeImage();
     } else {
-      setProfileImage(profile?.profile_image_url);
+      setProfileImage(profile?.profileImageUrl);
       return;
     }
     const reader = new FileReader();
@@ -55,7 +75,7 @@ const ContentProfile = ({ profile, setProfileOrPosting }) => {
         </ChangeImage>
       </CameraBox>
       <ProfileBox>
-        <NickName>{profile?.user_name}</NickName>
+        <NickName>{profile?.userName}</NickName>
         <ButtonBox>
           <FollowButton>
             <FollowNumber>100</FollowNumber>

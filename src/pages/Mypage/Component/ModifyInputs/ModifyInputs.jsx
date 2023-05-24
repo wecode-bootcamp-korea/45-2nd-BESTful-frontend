@@ -1,12 +1,56 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 
-const ModifyInputs = ({ profile, setMe }) => {
+const modalStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 350,
+  height: 150,
+  bgcolor: 'background.paper',
+  border: '1px solid #000',
+  borderRadius: '5px',
+  boxShadow: 24,
+  p: 3,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+};
+
+const changeBtn = {
+  backgroundColor: '#222222',
+
+  '&:hover': {
+    backgroundColor: '#FE4600',
+  },
+};
+
+const cancelBtn = {
+  backgroundColor: '#FE4600',
+
+  '&:hover': {
+    backgroundColor: '#222222',
+  },
+};
+
+const ModifyInputs = ({ profile }) => {
   const [textLength, setTextLength] = useState(0);
   const [changeSex, setChangeSex] = useState('');
   const [cellphone, setCellPhone] = useState(profile.cellphone);
-  const [userName, setUserName] = useState(profile.user_name);
+  const [userName, setUserName] = useState(profile.userName);
   const [biography, setBiography] = useState(profile.bio);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleModal = e => {
+    setIsOpen(e);
+  };
 
   const handleRadio = e => {
     setChangeSex(e);
@@ -26,29 +70,36 @@ const ModifyInputs = ({ profile, setMe }) => {
 
     setUserName(value);
     if (value === '') {
-      setUserName(profile.user_name);
+      setUserName(profile.userName);
     }
+  };
+
+  const acceptNumber = e => {
+    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+  };
+
+  const replacePage = () => {
+    window.location.reload();
   };
 
   const activateButton = cellphone.length === 11 && changeSex !== '';
 
   const postProfile = () => {
-    const url = ``;
+    const url = `http://10.58.52.204:3700/users/edit`;
 
     fetch(url, {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        Authorization: localStorage.getItem('token'),
+        Authorization: localStorage.getItem('resToken'),
       },
       body: JSON.stringify({
-        user_name: userName,
+        userName: userName,
         cellphone: cellphone,
         sex: changeSex,
         bio: biography,
       }),
     }).then(res => res.json());
-    alert('회원정보가 수정되었습니다');
   };
 
   return (
@@ -62,7 +113,7 @@ const ModifyInputs = ({ profile, setMe }) => {
         <ProfileInput
           type="text"
           id="userName"
-          placeholder={`${profile?.user_name}`}
+          placeholder={`${profile?.userName}`}
           onChange={handleName}
         />
       </ModifyBox>
@@ -73,6 +124,7 @@ const ModifyInputs = ({ profile, setMe }) => {
           id="cellphone"
           placeholder={`${profile?.cellphone}`}
           onChange={handleCellphone}
+          onInput={acceptNumber}
         />
       </ModifyBox>
       <Alert>- 를 제외하고 입력하시오</Alert>
@@ -102,6 +154,7 @@ const ModifyInputs = ({ profile, setMe }) => {
           <label for="none">선택하지 않음</label>
         </div>
       </ModifyBox>
+      <Alert>* 필수 선택</Alert>
       <ModifyBox>
         <Biography>
           <label for="bio">바이오그래피</label>
@@ -114,16 +167,51 @@ const ModifyInputs = ({ profile, setMe }) => {
 
               setTextLength(value.length);
               setBiography(value);
+              if (value === '') {
+                setBiography(profile.bio);
+              }
             }}
           />
           <span>{textLength}/300</span>
         </Biography>
       </ModifyBox>
       <SubmitDiv>
-        <SubmitButton disabled={!activateButton} onClick={postProfile}>
+        <SubmitButton
+          disabled={!activateButton}
+          onClick={() => {
+            handleModal(true);
+          }}
+        >
           변경 확인
         </SubmitButton>
-        <CancelButton>취소</CancelButton>
+        <Modal open={isOpen}>
+          <Box sx={modalStyle}>
+            <Typography sx={{ mt: 2 }}>회원 정보를 수정할까요🤩</Typography>
+            <Stack direction="row" spacing={3}>
+              <Button
+                variant="contained"
+                sx={changeBtn}
+                onClick={() => {
+                  postProfile();
+                  replacePage();
+                }}
+              >
+                하잇❗
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  handleModal(false);
+                }}
+                sx={cancelBtn}
+              >
+                아니오
+              </Button>
+            </Stack>
+          </Box>
+        </Modal>
+
+        <CancelButton onClick={replacePage}>취소</CancelButton>
       </SubmitDiv>
     </ProfileForm>
   );
