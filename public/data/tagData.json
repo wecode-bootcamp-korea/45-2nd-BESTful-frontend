@@ -46,5 +46,10 @@
       { "x": 84, "y": 394 },
       { "x": 63, "y": 345 }
     ]
+  },
+  {
+    "id": 5,
+    "src": "/images/components/profileImage/brunch.jpg",
+    "tags": [{ "x": 300, "y": 373 }]
   }
 ]
