@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "userName": "데이지",
+    "src": "/images/components/profileImage/me.jpg",
+    "follow": true
+  },
+  {
+    "id": 2,
+    "userName": "구피",
+    "src": "/images/components/profileImage/me.jpg",
+    "follow": true
+  },
+  {
+    "id": 3,
+    "userName": "미키",
+    "src": "/images/components/profileImage/me.jpg",
+    "follow": true
+  },
+  {
+    "id": 4,
+    "userName": "도날드",
+    "src": "/images/components/profileImage/me.jpg",
+    "follow": true
+  },
+  {
+    "id": 5,
+    "userName": "미니",
+    "src": "/images/components/profileImage/me.jpg",
+    "follow": true
+  },
+  {
+    "id": 6,
+    "userName": "플루토",
+    "src": "/images/components/profileImage/me.jpg",
+    "follow": true
+  },
+  {
+    "id": 7,
+    "userName": "데이지",
+    "src": "/images/components/profileImage/me.jpg",
+    "follow": true
+  },
+  {
+    "id": 8,
+    "userName": "구피",
+    "src": "/images/components/profileImage/me.jpg",
+    "follow": true
+  },
+  {
+    "id": 9,
+    "userName": "플루토",
+    "src": "/images/components/profileImage/me.jpg",
+    "follow": true
+  }
+]

@@ -42,10 +42,10 @@ const cancelBtn = {
 
 const ModifyInputs = ({ profile }) => {
   const [textLength, setTextLength] = useState(0);
-  const [changeSex, setChangeSex] = useState('');
+  const [changeSex, setChangeSex] = useState(profile.sex);
   const [cellphone, setCellPhone] = useState(profile.cellphone);
   const [userName, setUserName] = useState(profile.userName);
-  const [biography, setBiography] = useState(profile.bio);
+  const [biography, setBiography] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
   const handleModal = e => {
@@ -60,7 +60,7 @@ const ModifyInputs = ({ profile }) => {
     const { value } = e.target;
 
     setCellPhone(value);
-    if (value === '') {
+    if (value === null) {
       setCellPhone(profile.cellphone);
     }
   };
@@ -82,10 +82,10 @@ const ModifyInputs = ({ profile }) => {
     window.location.reload();
   };
 
-  const activateButton = cellphone.length === 11 && changeSex !== '';
+  const activateButton = cellphone !== null && changeSex !== '';
 
   const postProfile = () => {
-    const url = `http://10.58.52.204:3700/users/edit`;
+    const url = `http://10.58.52.125:6700/users/edit`;
 
     fetch(url, {
       method: 'PATCH',
@@ -113,7 +113,7 @@ const ModifyInputs = ({ profile }) => {
         <ProfileInput
           type="text"
           id="userName"
-          placeholder={`${profile?.userName}`}
+          placeholder={`${profile.userName}`}
           onChange={handleName}
         />
       </ModifyBox>
@@ -122,12 +122,14 @@ const ModifyInputs = ({ profile }) => {
         <ProfileInput
           type="text"
           id="cellphone"
-          placeholder={`${profile?.cellphone}`}
+          placeholder={cellphone}
           onChange={handleCellphone}
           onInput={acceptNumber}
         />
       </ModifyBox>
       <Alert>- 를 제외하고 입력하시오</Alert>
+      <Alert>* 필수 입력</Alert>
+
       <ModifyBox>
         <span>성별</span>
         <div>
@@ -135,20 +137,23 @@ const ModifyInputs = ({ profile }) => {
             type="radio"
             id="male"
             name="gender"
-            onClick={() => handleRadio('male')}
+            checked={changeSex === '1'}
+            onClick={() => handleRadio('남')}
           />
           <label for="male">남성</label>
           <input
             type="radio"
             id="female"
             name="gender"
-            onClick={() => handleRadio('female')}
+            checked={changeSex === '2'}
+            onClick={() => handleRadio('여')}
           />
           <label for="female">여성</label>
           <input
             type="radio"
             id="none"
             name="gender"
+            checked={changeSex === 'none'}
             onClick={() => handleRadio('none')}
           />
           <label for="none">선택하지 않음</label>
@@ -169,6 +174,8 @@ const ModifyInputs = ({ profile }) => {
               setBiography(value);
               if (value === '') {
                 setBiography(profile.bio);
+              } else if (profile.bio === null) {
+                setBiography('');
               }
             }}
           />
@@ -186,7 +193,7 @@ const ModifyInputs = ({ profile }) => {
         </SubmitButton>
         <Modal open={isOpen}>
           <Box sx={modalStyle}>
-            <Typography sx={{ mt: 2 }}>회원 정보를 수정할까요🤩</Typography>
+            <Typography sx={{ mt: 2 }}>회원 정보를 수정할까요?</Typography>
             <Stack direction="row" spacing={3}>
               <Button
                 variant="contained"
@@ -196,7 +203,7 @@ const ModifyInputs = ({ profile }) => {
                   replacePage();
                 }}
               >
-                하잇❗
+                하잇
               </Button>
               <Button
                 variant="contained"
@@ -229,7 +236,8 @@ const ModifyBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px 0;
+  margin: 10px 0;
+  padding-bottom: 10px;
   width: 100%;
 `;
 
@@ -305,6 +313,7 @@ const CancelButton = styled.button`
 `;
 
 const Alert = styled.div`
+  padding-bottom: 5px;
   text-align: end;
   font-size: 12px;
   color: ${props => props.theme.style.orange};

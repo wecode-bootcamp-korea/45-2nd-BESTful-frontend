@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash as trash } from '@fortawesome/free-solid-svg-icons';
 import Button from '@mui/material/Button';
@@ -42,34 +43,40 @@ const cancelBtn = {
   },
 };
 
-const FeedImage = ({ image, posting, feedGet, category }) => {
+const FeedImage = ({ image, posting, feedGet, category, myId, feedId }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate(`/contents/${feedId}`);
+  };
 
   const handleModal = e => {
     setIsOpen(e);
   };
 
   const deleteFeed = id => {
-    let query = '';
+    const url = `http://10.58.52.108:3700/feeds/${feedId}`;
+    // let query = '';
 
-    if (id) {
-      query += 'feedId=' + id;
-    }
+    // if (id) {
+    //   query += 'feedId=' + id;
+    // }
 
-    fetch(`/data/feedImage.json?${query}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: localStorage.getItem('token'),
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-    });
+    // fetch(url, {
+    //   method: 'DELETE',
+    //   headers: {
+    //     Authorization: localStorage.getItem('resToken'),
+    //     'Content-Type': 'application/json;charset=utf-8',
+    //   },
+    // });
 
-    feedGet();
+    // feedGet();
   };
 
   return (
     <Container>
-      <Image src={`${image}`} alt="feedImage" />
+      <Image src={`${image}`} alt="feedImage" onClick={handleNavigate} />
       {category ? (
         <Trash>
           <Button onClick={() => handleModal(true)}>
@@ -87,8 +94,7 @@ const FeedImage = ({ image, posting, feedGet, category }) => {
               variant="contained"
               sx={deleteBtn}
               onClick={() => {
-                deleteFeed(posting.id);
-                handleModal(false);
+                deleteFeed(feedId);
               }}
             >
               삭제

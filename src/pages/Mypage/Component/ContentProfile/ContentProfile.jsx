@@ -3,34 +3,56 @@ import { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { faCamera as camera } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import ProfileImage from '../../../../components/ProfileImage/ProfileImage';
 
-const ContentProfile = ({ profile, setProfileOrPosting }) => {
-  const [profileImage, setProfileImage] = useState(
-    `${profile?.profileImageUrl}`
-  );
+const ContentProfile = ({
+  profile,
+  setProfileOrPosting,
+  setClickedFollow,
+  setFollowerFollowing,
+  followerData,
+  followingData,
+  fetchResult,
+}) => {
+  const [profileImage, setProfileImage] = useState(profile?.profileImageUrl);
   const profileImageInput = useRef(null);
 
-  const changeImage = () => {
-    const url = `http://10.58.52.204:3700/users/image`;
+  const clickingFollow = e => {
+    setClickedFollow(e);
+  };
+
+  const changeImage = image => {
+    const url = `http://10.58.52.125:6700/users/image`;
 
     let formData = new FormData();
-    formData.append('profileImage', profileImage);
+    formData.append('profileImage', image); // Append the file object, not the file name
+
+    for (const [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
 
     fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'multipart/form-data',
         Authorization: localStorage.getItem('resToken'),
       },
       body: formData,
-    }).then(res => res.json());
-    alert('프로필 이미지가 수정되었습니다');
-  };
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log('이미지 제발 떠라###', data); // Server response
+        alert('프로필 이미지가 수정되었습니다');
+      })
+      .catch(error => {
+        console.error(error); // Error handling
+      });
 
+    fetchResult();
+  };
   const profileChange = e => {
     if (e.target.files[0]) {
       setProfileImage(e.target.files[0]);
-      changeImage();
+      changeImage(e.target.files[0]);
     } else {
       setProfileImage(profile?.profileImageUrl);
       return;
@@ -50,43 +72,63 @@ const ContentProfile = ({ profile, setProfileOrPosting }) => {
 
   return (
     <Container>
-      <CameraBox>
-        <ProfileImage
-          src={`${profileImage}`}
-          alt="프로필 이미지"
-          onClick={() => {
-            profileImageInput.current.click();
-          }}
-        />
-        <ChangeImage>
-          <label for="Imaging">
-            <ImageUpload>
-              <FontAwesomeIcon icon={camera} size="xl" />
-            </ImageUpload>
-          </label>
-          <UploadInput
-            type="file"
-            accept="image/*"
-            onChange={profileChange}
-            ref={profileImageInput}
-            name="profile_img"
-            id="Imaging"
+      <form>
+        <CameraBox>
+          <ProfileImage
+            src={profileImage}
+            alt="프로필 이미지"
+            onClick={() => {
+              profileImageInput.current.click();
+            }}
           />
-        </ChangeImage>
-      </CameraBox>
+          <ChangeImage>
+            <label for="Imaging">
+              <ImageUpload>
+                <FontAwesomeIcon icon={camera} size="xl" />
+              </ImageUpload>
+            </label>
+            <UploadInput
+              type="file"
+              accept="image/*"
+              formEncType="multipart/form-data"
+              onChange={profileChange}
+              ref={profileImageInput}
+              name="profile_img"
+              id="Imaging"
+            />
+          </ChangeImage>
+        </CameraBox>
+      </form>
       <ProfileBox>
         <NickName>{profile?.userName}</NickName>
         <ButtonBox>
-          <FollowButton>
-            <FollowNumber>100</FollowNumber>
+          <FollowButton
+            onClick={() => {
+              clickingFollow(true);
+              setFollowerFollowing(true);
+            }}
+          >
+            <FollowNumber>{followerData.length}</FollowNumber>
             follower
           </FollowButton>
-          <FollowButton>
-            <FollowNumber>100</FollowNumber>
+          <FollowButton
+            onClick={() => {
+              clickingFollow(true);
+              setFollowerFollowing(false);
+            }}
+          >
+            <FollowNumber>{followingData.length}</FollowNumber>
             following
           </FollowButton>
         </ButtonBox>
-        <ChangeProfile onClick={clickProfile}>프로필 편집</ChangeProfile>
+        <ChangeProfile
+          onClick={() => {
+            clickProfile();
+            clickingFollow(false);
+          }}
+        >
+          프로필 편집
+        </ChangeProfile>
         <Bio>{profile?.bio}</Bio>
       </ProfileBox>
     </Container>

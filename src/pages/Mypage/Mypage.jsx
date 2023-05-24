@@ -6,17 +6,22 @@ import MyPageContent from './Component/MyPageContent/MyPageContent';
 const Mypage = () => {
   const [category, setCategory] = useState(true);
   const [profileOrPosting, setProfileOrPosting] = useState(true);
+  const [clickedFollow, setClickedFollow] = useState(false);
 
   return (
     <Container>
       <MyPageCategory
         setCategory={setCategory}
         setProfileOrPosting={setProfileOrPosting}
+        setClickedFollow={setClickedFollow}
+        category={category}
       />
       <MyPageContent
         category={category}
         profileOrPosting={profileOrPosting}
         setProfileOrPosting={setProfileOrPosting}
+        clickedFollow={clickedFollow}
+        setClickedFollow={setClickedFollow}
       />
     </Container>
   );
