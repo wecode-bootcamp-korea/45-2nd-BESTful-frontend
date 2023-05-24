@@ -3,7 +3,7 @@ import { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { faCamera as camera } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import ProfileImage from '../../../../components/ProfileImage/ProfileImage';
+import ProfileImage from '../../../../components/ProfileImage/ProfileImage';
 
 const ContentProfile = ({
   profile,
@@ -27,10 +27,6 @@ const ContentProfile = ({
     let formData = new FormData();
     formData.append('profileImage', image); // Append the file object, not the file name
 
-    for (const [key, value] of formData.entries()) {
-      console.log(key, value);
-    }
-
     fetch(url, {
       method: 'POST',
       headers: {
@@ -40,7 +36,6 @@ const ContentProfile = ({
     })
       .then(res => res.json())
       .then(data => {
-        console.log('이미지 제발 떠라###', data); // Server response
         alert('프로필 이미지가 수정되었습니다');
       })
       .catch(error => {
@@ -76,6 +71,7 @@ const ContentProfile = ({
         <CameraBox>
           <ProfileImage
             src={profileImage}
+            width={100}
             alt="프로필 이미지"
             onClick={() => {
               profileImageInput.current.click();
@@ -146,12 +142,6 @@ const Container = styled.div`
 
 const CameraBox = styled.div`
   position: relative;
-`;
-
-const ProfileImage = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
 `;
 
 const ChangeImage = styled.div`

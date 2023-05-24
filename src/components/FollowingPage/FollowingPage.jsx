@@ -2,10 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import FollowingContent from './FollowingContent/FollowingContent';
 
-const FollowingPage = ({ followingData, me }) => {
+const FollowingPage = ({ followingData, me, followingFetch }) => {
   return (
     <Container>
-      <FollowingContent followingData={followingData} me={me} />
+      <FollowingContent
+        followingData={followingData}
+        me={me}
+        followingFetch={followingFetch}
+      />
     </Container>
   );
 };

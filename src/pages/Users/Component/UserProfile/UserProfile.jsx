@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import ProfileImage from '../../../../components/ProfileImage/ProfileImage';
 
 const UserProfile = ({
   user,
@@ -8,8 +9,10 @@ const UserProfile = ({
   userFollower,
   userFollowing,
   iFollowing,
+  followingsFetch,
 }) => {
   const [followState, setFollowState] = useState(false);
+  const [userImage, setUserImage] = useState(user?.profileImageUrl);
 
   const handleFollow = () => {
     setIsAll(false);
@@ -29,9 +32,10 @@ const UserProfile = ({
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({
-        id: user.id,
+        followedId: user.id,
       }),
     });
+    followingsFetch();
   };
 
   const handleFollowOrNot = () => {
@@ -50,7 +54,7 @@ const UserProfile = ({
   return (
     <Container>
       <CameraBox>
-        <ProfileImage src={`${user?.profileImageUrl}`} alt="프로필 이미지" />
+        <ProfileImage src={userImage} alt="프로필 이미지" width={100} />
       </CameraBox>
       <ProfileBox>
         <NickName>{user?.userName}</NickName>
@@ -95,12 +99,6 @@ const Container = styled.div`
 `;
 
 const CameraBox = styled.div``;
-
-const ProfileImage = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-`;
 
 const ProfileBox = styled.div`
   display: flex;

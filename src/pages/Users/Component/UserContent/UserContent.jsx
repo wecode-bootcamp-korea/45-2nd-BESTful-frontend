@@ -88,7 +88,7 @@ const UserContent = () => {
   };
   // 내 정보 가져오기
 
-  const IFollowing = () => {
+  const followingsFetch = () => {
     const url = `http://10.58.52.185:3000/follower/${myData.id}`;
 
     fetch(url, {
@@ -113,7 +113,7 @@ const UserContent = () => {
 
   useEffect(() => {
     meFetch();
-    IFollowing();
+    followingsFetch();
   }, [myData.id]);
 
   if (loading) return <div>로딩중...</div>;
@@ -128,6 +128,7 @@ const UserContent = () => {
         userFollower={userFollower}
         userFollowing={userFollowing}
         iFollowing={iFollowing}
+        followingsFetch={followingsFetch}
       />
       {isAll ? (
         <UserContentFeed userId={userId} />
@@ -137,6 +138,8 @@ const UserContent = () => {
           myData={myData}
           setIsAll={setIsAll}
           iFollowing={iFollowing}
+          followingsFetch={followingsFetch}
+          userFollowerFetch={userFollowerFetch}
         />
       ) : (
         <UserFollowing
@@ -144,6 +147,8 @@ const UserContent = () => {
           myData={myData}
           setIsAll={setIsAll}
           iFollowing={iFollowing}
+          followingsFetch={followingsFetch}
+          userFollowingFetch={userFollowingFetch}
         />
       )}
     </Container>
@@ -155,4 +160,5 @@ export default UserContent;
 const Container = styled.div`
   display: flex;
   justify-content: ${props => (props.isAll ? 'space-between' : 'center')};
+  padding-top: 70px;
 `;

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ProfileImage from '../../ProfileImage/ProfileImage';
 import FollowerBtn from '../FollowerBtn/FollowerBtn';
 
-const FollowerList = ({ name, src, id, follower, followingData }) => {
+const FollowerList = ({ name, src, id, followingData, followerFetch }) => {
   const [followOrNot, setFollowOrNot] = useState(false);
 
   const navigate = useNavigate();
@@ -23,9 +23,12 @@ const FollowerList = ({ name, src, id, follower, followingData }) => {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({
-        id: id,
+        followedId: id,
       }),
+    }).catch(error => {
+      console.error(error); // Error handling
     });
+    followerFetch();
   };
 
   useEffect(() => {
@@ -40,6 +43,10 @@ const FollowerList = ({ name, src, id, follower, followingData }) => {
     followUser();
     setFollowOrNot(prev => !prev);
   };
+
+  useEffect(() => {
+    followerFetch();
+  }, []);
 
   return (
     <Container>

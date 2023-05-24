@@ -15,6 +15,7 @@ const Mypage = () => {
         setProfileOrPosting={setProfileOrPosting}
         setClickedFollow={setClickedFollow}
         category={category}
+        clickedFollow={clickedFollow}
       />
       <MyPageContent
         category={category}

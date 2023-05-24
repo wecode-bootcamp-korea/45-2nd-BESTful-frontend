@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ProfileImage from '../../ProfileImage/ProfileImage';
 import FollowingBtn from '../FollowingBtn/FollowingBtn';
 
-const FollowingList = ({ name, src, id }) => {
+const FollowingList = ({ name, src, id, followingFetch }) => {
   const [followOrNot, setFollowOrNot] = useState(true);
 
   const navigate = useNavigate();
@@ -12,6 +12,10 @@ const FollowingList = ({ name, src, id }) => {
   const onClickFollowingUser = () => {
     navigate(`/users/${id}`);
   };
+
+  useEffect(() => {
+    followingFetch();
+  }, []);
 
   const followUser = () => {
     const url = `http://10.58.52.185:3000/follower`;
@@ -23,9 +27,12 @@ const FollowingList = ({ name, src, id }) => {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({
-        id: id,
+        followedId: id,
       }),
+    }).catch(error => {
+      console.error(error); // Error handling
     });
+    // followingFetch();
   };
 
   const handleBtn = () => {

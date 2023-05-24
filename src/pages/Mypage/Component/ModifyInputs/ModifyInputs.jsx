@@ -154,7 +154,7 @@ const ModifyInputs = ({ profile }) => {
             id="none"
             name="gender"
             checked={changeSex === 'none'}
-            onClick={() => handleRadio('none')}
+            onClick={() => handleRadio()}
           />
           <label for="none">선택하지 않음</label>
         </div>

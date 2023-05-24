@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import FollowerList from '../FollowerList/FollowerList';
 
-const FollowerContent = ({ followerData, me, followingData }) => {
+const FollowerContent = ({
+  followerData,
+  me,
+  followingData,
+  followerFetch,
+}) => {
   return (
     <Container>
       <Title>팔로워</Title>
@@ -16,11 +21,12 @@ const FollowerContent = ({ followerData, me, followingData }) => {
             <FollowerList
               key={follower.id}
               name={follower.userName}
-              src={follower.src}
+              src={follower.profileImage}
               id={follower.id}
               follower={follower}
               meId={me.id}
               followingData={followingData}
+              followerFetch={followerFetch}
             />
           ))}
       </List>
