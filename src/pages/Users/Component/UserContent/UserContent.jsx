@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import ContentProfile from '../ContentProfile/ContentProfile';
-import ContentPosting from '../ContentPosting/ContentPosting';
-import ProfileModify from '../ProfileModify/ProfileModify';
-const MyPageContent = ({ category, profileOrPosting, setProfileOrPosting }) => {
-  const [me, setMe] = useState([]);
+import UserProfile from '../UserProfile/UserProfile';
+import UserContentFeed from '../UserContentFeed/UserContentFeed';
+
+const UserContent = () => {
+  const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(true);
+  const params = useParams();
+
+  const userId = params.id;
 
   const fetchResult = async () => {
     try {
-      const response = await fetch('http://10.58.52.204:3700/users', {
+      const response = await fetch(`http://10.58.52.204:3700/users/${userId}`, {
         method: 'GET',
         headers: {
           Authorization: localStorage.getItem('resToken'),
@@ -17,7 +21,7 @@ const MyPageContent = ({ category, profileOrPosting, setProfileOrPosting }) => {
         },
       });
       const json = await response.json();
-      setMe(json);
+      setUser(json);
     } finally {
       setLoading(false);
     }
@@ -25,24 +29,21 @@ const MyPageContent = ({ category, profileOrPosting, setProfileOrPosting }) => {
 
   useEffect(() => {
     fetchResult();
-  }, []);
+  }, [userId]);
   if (loading) return <div>로딩중...</div>;
 
   return (
     <Container>
-      <ContentProfile profile={me} setProfileOrPosting={setProfileOrPosting} />
-      {profileOrPosting ? (
-        <ContentPosting category={category} />
-      ) : (
-        <ProfileModify profile={me} setMe={setMe} />
-      )}
+      <UserProfile user={user} />
+      <UserContentFeed />
     </Container>
   );
 };
 
-export default MyPageContent;
+export default UserContent;
 
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
+  padding-top: 70px;
 `;
