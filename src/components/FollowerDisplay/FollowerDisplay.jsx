@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import FollowElement from './subComponent/FollowElement';
+import FollowerElement from './FollowerElement/FollowerElement';
 
-const FollowDisplay = ({ EleWidth, init, data }) => {
-  const src1 = '/images/components/profileImage/brunch.jpg';
-
+const FollowerDisplay = ({ EleWidth, init, data }) => {
   return (
     <Container>
       <Title>{init ? '팔로워' : '팔로잉'}</Title>
       <FollowList>
         {data.map(user => (
-          <FollowElement
+          <FollowerElement
             key={user.id}
-            src={src1}
             name={user.userName}
             width={EleWidth}
-            init={init}
+            initial={init}
             id={user.id}
           />
         ))}
@@ -27,7 +24,6 @@ const FollowDisplay = ({ EleWidth, init, data }) => {
 const Container = styled.div`
   padding: 60px;
   background-color: pink;
-  width: 100%;
 `;
 
 const Title = styled.div`
@@ -38,4 +34,4 @@ const Title = styled.div`
 
 const FollowList = styled.div``;
 
-export default FollowDisplay;
+export default FollowerDisplay;

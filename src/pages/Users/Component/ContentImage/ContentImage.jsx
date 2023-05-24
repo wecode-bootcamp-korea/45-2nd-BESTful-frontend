@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const ContentImage = ({ image }) => {
+const ContentImage = ({ image, feedId }) => {
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate(`/contents/${feedId}`);
+  };
+
   return (
     <Container>
-      <Image src={image} alt="feedImage" />
+      <Image src={image} alt="feedImage" onClick={handleNavigate} />
     </Container>
   );
 };

@@ -1,13 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const MyPageCategory = ({ setCategory, setProfileOrPosting }) => {
-  const handleCategory = e => {
-    setCategory(e);
+const MyPageCategory = ({
+  setCategory,
+  setProfileOrPosting,
+  setClickedFollow,
+  category,
+}) => {
+  const handleCategory = handle => {
+    setCategory(handle);
   };
 
   const handleProfileOrPosting = () => {
     setProfileOrPosting(true);
+  };
+
+  const handleFollowOrPosting = () => {
+    setClickedFollow(false);
   };
 
   return (
@@ -18,9 +27,10 @@ const MyPageCategory = ({ setCategory, setProfileOrPosting }) => {
             onClick={() => {
               handleCategory(true);
               handleProfileOrPosting();
+              handleFollowOrPosting();
             }}
           >
-            게시글
+            <PostingButton category={category}>게시글</PostingButton>
           </Button>
         </List>
         <List>
@@ -28,9 +38,10 @@ const MyPageCategory = ({ setCategory, setProfileOrPosting }) => {
             onClick={() => {
               handleCategory(false);
               handleProfileOrPosting();
+              handleFollowOrPosting();
             }}
           >
-            좋아요
+            <LikeButton category={category}>좋아요</LikeButton>
           </Button>
         </List>
       </UL>
@@ -51,6 +62,7 @@ const UL = styled.ul`
 `;
 
 const List = styled.li`
+  width: 70px;
   margin-right: 10px;
 `;
 
@@ -61,10 +73,18 @@ const Button = styled.button`
   font-weight: bold;
 
   &:hover {
-    border-bottom: 1px solid gray;
-    cursor: pointer;
-    color: ${props => props.theme.style.orange};
+    border: 1px solid beige;
+    outline: none;
+    background-color: #ff5d2b12;
   }
+`;
+
+const PostingButton = styled.div`
+  color: ${props => (props.category ? props.theme.style.orange : 'black')};
+`;
+
+const LikeButton = styled.div`
+  color: ${props => (props.category ? 'black' : props.theme.style.orange)};
 `;
 
 export default MyPageCategory;

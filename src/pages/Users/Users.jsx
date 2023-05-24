@@ -1,15 +1,8 @@
-import React from 'react';
-import FollowDisplay from '../../components/FollowDisplay/FollowDisplay';
-import styled from 'styled-components';
+import React, { useState } from 'react';
 import UserContent from './Component/UserContent/UserContent';
 
 const Users = () => {
-  return (
-    <>
-      <UserContent />
-      <FollowDisplay />
-    </>
-  );
+  return <UserContent />;
 };
 
 export default Users;

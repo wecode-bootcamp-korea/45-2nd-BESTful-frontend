@@ -1,38 +1,52 @@
 [
   {
     "id": 1,
-    "userName": "미키",
+    "userId": 3,
+    "userName": "문딩동",
     "src": "/images/components/profileImage/brunch.jpg",
-    "follow": false
+    "follow": true
   },
+
   {
     "id": 2,
-    "userName": "댕동댕동",
+    "userId": 5,
+    "userName": "미키",
     "src": "/images/components/profileImage/brunch.jpg",
     "follow": true
   },
   {
     "id": 3,
+    "userId": 1,
     "userName": "미니",
     "src": "/images/components/profileImage/brunch.jpg",
     "follow": false
   },
   {
     "id": 4,
+    "userId": 2,
     "userName": "데이지",
     "src": "/images/components/profileImage/brunch.jpg",
-    "follow": false
+    "follow": true
   },
   {
     "id": 5,
+    "userId": 6,
     "userName": "구피",
     "src": "/images/components/profileImage/brunch.jpg",
     "follow": false
   },
   {
     "id": 6,
+    "userId": 7,
     "userName": "플루토",
     "src": "/images/components/profileImage/brunch.jpg",
-    "follow": true
+    "follow": false
+  },
+  {
+    "id": 7,
+    "userId": 4,
+    "userName": "이경진",
+    "src": "/images/components/profileImage/brunch.jpg",
+    "follow": false
   }
 ]

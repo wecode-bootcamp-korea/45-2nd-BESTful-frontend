@@ -1,7 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const UserProfile = ({ user }) => {
+const UserProfile = ({
+  user,
+  setIsAll,
+  setIsUserFollow,
+  userFollower,
+  userFollowing,
+  iFollowing,
+}) => {
+  const [followState, setFollowState] = useState(false);
+
+  const handleFollow = () => {
+    setIsAll(false);
+  };
+
+  const following = e => {
+    setIsUserFollow(e);
+  };
+
+  const followUser = () => {
+    const url = `http://10.58.52.125:6700/follower`;
+
+    fetch(url, {
+      method: `${followState ? 'DELETE' : 'POST'}`,
+      headers: {
+        Authorization: localStorage.getItem('resToken'),
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        id: user.id,
+      }),
+    });
+  };
+
+  const handleFollowOrNot = () => {
+    followUser();
+    setFollowState(prev => !prev);
+  };
+
+  useEffect(() => {
+    for (let i = 0; i < iFollowing.length; i++) {
+      if (iFollowing[i].id === user.id) {
+        setFollowState(true);
+      }
+    }
+  }, [iFollowing]);
+
   return (
     <Container>
       <CameraBox>
@@ -10,16 +55,28 @@ const UserProfile = ({ user }) => {
       <ProfileBox>
         <NickName>{user?.userName}</NickName>
         <ButtonBox>
-          <FollowButton>
-            <FollowNumber>100</FollowNumber>
+          <FollowButton
+            onClick={() => {
+              handleFollow();
+              following(true);
+            }}
+          >
+            <FollowNumber>{userFollower.length}</FollowNumber>
             follower
           </FollowButton>
-          <FollowButton>
-            <FollowNumber>100</FollowNumber>
+          <FollowButton
+            onClick={() => {
+              handleFollow();
+              following(false);
+            }}
+          >
+            <FollowNumber>{userFollowing.length}</FollowNumber>
             following
           </FollowButton>
         </ButtonBox>
-        <ChangeProfile>팔로잉</ChangeProfile>
+        <ChangeProfile followed={followState} onClick={handleFollowOrNot}>
+          {followState ? '팔로잉' : '팔로우'}
+        </ChangeProfile>
         <Bio>{user?.bio}</Bio>
       </ProfileBox>
     </Container>
@@ -80,9 +137,15 @@ const ChangeProfile = styled.button`
   border: none;
   border-radius: 3px;
   padding: 5px 7px;
-  background-color: ${props => props.theme.style.orange};
-  color: white;
+  outline: none;
+  border: ${props => (props.followed ? '1px solid black' : 'none')};
+
+  background-color: ${props =>
+    props.followed ? props.theme.style.white : props.theme.style.orange};
+  color: ${props =>
+    props.followed ? props.theme.style.black : props.theme.style.white};
   font-size: 15px;
+  font-weight: bold;
 
   &:hover {
     cursor: pointer;

@@ -1,20 +1,8 @@
 [
   {
-    "id": 1,
-    "user_name": "쫑이",
-    "profile_image_url": "",
+    "userId": 1,
+    "userName": "쫑이",
+    "profileImageUrl": "",
     "bio": "히히"
-  },
-  {
-    "id": 2,
-    "user_name": "쫑쫑이",
-    "profile_image_url": "",
-    "bio": "히히하하"
-  },
-  {
-    "id": 3,
-    "user_name": "쫑삼이",
-    "profile_image_url": "",
-    "bio": "히히하하호호"
   }
 ]

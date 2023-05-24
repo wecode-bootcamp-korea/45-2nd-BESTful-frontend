@@ -23,7 +23,7 @@ const ContentContainer = ({ className }) => {
           const token = accessToken;
 
           const response = await axios.post(
-            'http://10.58.52.185:3000/users/kakaologin',
+            `http://10.58.52.185:3000/users/kakaologin`,
             {
               kakaoToken: token,
             }
