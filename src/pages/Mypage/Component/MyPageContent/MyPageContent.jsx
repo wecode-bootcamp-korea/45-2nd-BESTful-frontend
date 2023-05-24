@@ -110,11 +110,17 @@ const MyPageContent = ({
         followerFollowing ? (
           <FollowerPage
             followerData={followerData}
+            followerFetch={followerFetch}
             me={me}
             followingData={followingData}
+            followingFetch={followingFetch}
           />
         ) : (
-          <FollowingPage followingData={followingData} me={me} />
+          <FollowingPage
+            followingData={followingData}
+            me={me}
+            followingFetch={followingFetch}
+          />
         )
       ) : profileOrPosting ? (
         <ContentPosting category={category} me={me} />

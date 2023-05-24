@@ -2,7 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import UserFollowerContent from './UserFollowerContent/UserFollowerContent';
 
-const UserFollower = ({ userFollower, myData, setIsAll, iFollowing }) => {
+const UserFollower = ({
+  userFollower,
+  myData,
+  setIsAll,
+  iFollowing,
+  followingsFetch,
+  userFollowerFetch,
+}) => {
   const setAll = () => {
     setIsAll(true);
   };
@@ -15,6 +22,8 @@ const UserFollower = ({ userFollower, myData, setIsAll, iFollowing }) => {
           userFollower={userFollower}
           myData={myData}
           iFollowing={iFollowing}
+          followingsFetch={followingsFetch}
+          userFollowerFetch={userFollowerFetch}
         />
       </Container>
     </RealContainer>
@@ -26,13 +35,11 @@ export default UserFollower;
 const RealContainer = styled.div`
   margin-bottom: 50px;
   width: 100%;
-  /* background-color: pink; */
 `;
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  /* background-color: olive; */
   padding: 10px 60px 60px 60px;
 `;
 

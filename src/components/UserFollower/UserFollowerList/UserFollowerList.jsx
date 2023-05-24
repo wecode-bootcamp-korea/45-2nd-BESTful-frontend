@@ -4,7 +4,16 @@ import styled from 'styled-components';
 import ProfileImage from '../../ProfileImage/ProfileImage';
 import UserFollowerBtn from '../UserFollowerBtn/UserFollowerBtn';
 
-const UserFollowerList = ({ name, src, id, iFollowing, meId, follower }) => {
+const UserFollowerList = ({
+  name,
+  src,
+  id,
+  iFollowing,
+  meId,
+  follower,
+  followingsFetch,
+  userFollowerFetch,
+}) => {
   const [followOrNot, setFollowOrNot] = useState(false);
   const [noButton, setNoButton] = useState(false);
 
@@ -20,9 +29,10 @@ const UserFollowerList = ({ name, src, id, iFollowing, meId, follower }) => {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({
-        id: id,
+        followedId: id,
       }),
     });
+    followingsFetch();
   };
 
   const replacePage = () => {
@@ -59,6 +69,10 @@ const UserFollowerList = ({ name, src, id, iFollowing, meId, follower }) => {
       }
     }
   }, [iFollowing]);
+
+  useEffect(() => {
+    userFollowerFetch();
+  }, []);
 
   return (
     <Container>
@@ -102,10 +116,4 @@ const FollowerInfo = styled.div`
 const FollowerName = styled.div`
   margin-left: 10px;
   font-weight: bold;
-`;
-
-const FollowBtn = styled.button`
-  width: 80px;
-  height: 30px;
-  border-radius: 5px;
 `;

@@ -2,7 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import UserFollowingContent from './UserFollowingContent/UserFollowingContent';
 
-const UserFollowing = ({ userFollowing, myData, setIsAll, iFollowing }) => {
+const UserFollowing = ({
+  userFollowing,
+  myData,
+  setIsAll,
+  iFollowing,
+  followingsFetch,
+  userFollowingFetch,
+}) => {
   const setAll = () => {
     setIsAll(true);
   };
@@ -15,6 +22,8 @@ const UserFollowing = ({ userFollowing, myData, setIsAll, iFollowing }) => {
           userFollowing={userFollowing}
           myData={myData}
           iFollowing={iFollowing}
+          followingsFetch={followingsFetch}
+          userFollowingFetch={userFollowingFetch}
         />
       </Container>
     </RealContainer>

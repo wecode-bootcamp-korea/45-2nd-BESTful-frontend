@@ -4,7 +4,12 @@ import theme from '../../../styles/theme';
 
 const UserFollowerBtn = ({ handleBtn, followOrNot }) => {
   return (
-    <FollowBtn onClick={handleBtn} select={followOrNot}>
+    <FollowBtn
+      onClick={() => {
+        handleBtn();
+      }}
+      select={followOrNot}
+    >
       {followOrNot ? '팔로잉' : '팔로우'}
     </FollowBtn>
   );

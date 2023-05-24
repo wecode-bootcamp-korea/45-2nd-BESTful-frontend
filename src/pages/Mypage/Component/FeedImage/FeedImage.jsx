@@ -43,7 +43,7 @@ const cancelBtn = {
   },
 };
 
-const FeedImage = ({ image, posting, feedGet, category, myId, feedId }) => {
+const FeedImage = ({ image, feedGet, category, feedId }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -55,23 +55,17 @@ const FeedImage = ({ image, posting, feedGet, category, myId, feedId }) => {
     setIsOpen(e);
   };
 
-  const deleteFeed = id => {
+  const deleteFeed = () => {
     const url = `http://10.58.52.185:3000/feeds/${feedId}`;
-    // let query = '';
 
-    // if (id) {
-    //   query += 'feedId=' + id;
-    // }
-
-    // fetch(url, {
-    //   method: 'DELETE',
-    //   headers: {
-    //     Authorization: localStorage.getItem('resToken'),
-    //     'Content-Type': 'application/json;charset=utf-8',
-    //   },
-    // });
-
-    // feedGet();
+    fetch(url, {
+      method: 'DELETE',
+      headers: {
+        Authorization: localStorage.getItem('resToken'),
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    });
+    feedGet();
   };
 
   return (
@@ -88,13 +82,15 @@ const FeedImage = ({ image, posting, feedGet, category, myId, feedId }) => {
       )}
       <Modal open={isOpen}>
         <Box sx={modalStyle}>
-          <Typography sx={{ mt: 2 }}>징짜 날 삭제하실꾸에오?🥺</Typography>
+          <Typography sx={{ mt: 2 }}>징짜 날 삭제하실꾸에오?</Typography>
           <Stack direction="row" spacing={3}>
             <Button
               variant="contained"
               sx={deleteBtn}
               onClick={() => {
-                deleteFeed(feedId);
+                deleteFeed();
+                handleModal(false);
+                window.location.reload();
               }}
             >
               삭제
@@ -130,6 +126,7 @@ const Image = styled.img`
   border-radius: 5px;
   width: 200px;
   height: 300px;
+  object-fit: cover;
 
   &:hover {
     transform: scale(1.1);

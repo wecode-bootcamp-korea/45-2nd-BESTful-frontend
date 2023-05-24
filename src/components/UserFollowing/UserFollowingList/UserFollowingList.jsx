@@ -4,8 +4,18 @@ import styled from 'styled-components';
 import ProfileImage from '../../ProfileImage/ProfileImage';
 import UserFollowingBtn from '../UserFollowingBtn/UserFollowingBtn';
 
-const UserFollowingList = ({ name, src, id, iFollowing }) => {
+const UserFollowingList = ({
+  name,
+  src,
+  id,
+  iFollowing,
+  followingsFetch,
+  meId,
+  follower,
+  userFollowingFetch,
+}) => {
   const [followOrNot, setFollowOrNot] = useState(false);
+  const [noButton, setNoButton] = useState(false);
 
   const navigate = useNavigate();
 
@@ -19,9 +29,10 @@ const UserFollowingList = ({ name, src, id, iFollowing }) => {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({
-        id: id,
+        followedId: id,
       }),
     });
+    followingsFetch();
   };
 
   const replacePage = () => {
@@ -31,6 +42,17 @@ const UserFollowingList = ({ name, src, id, iFollowing }) => {
   const onClickUserFollowing = () => {
     navigate(`/users/${id}`);
   };
+
+  useEffect(() => {
+    let followerArr = [];
+    followerArr.push(follower);
+
+    for (let j = 0; j < followerArr.length; j++) {
+      if (followerArr[j].id === meId) {
+        setNoButton(true);
+      }
+    }
+  }, [follower]);
 
   useEffect(() => {
     for (let i = 0; i < iFollowing.length; i++) {
@@ -45,6 +67,10 @@ const UserFollowingList = ({ name, src, id, iFollowing }) => {
     setFollowOrNot(prev => !prev);
   };
 
+  useEffect(() => {
+    userFollowingFetch();
+  }, []);
+
   return (
     <Container>
       <FollowerInfo
@@ -56,12 +82,15 @@ const UserFollowingList = ({ name, src, id, iFollowing }) => {
         <ProfileImage src={src} width={40} />
         <FollowerName>{name}</FollowerName>
       </FollowerInfo>
-      <UserFollowingBtn
-        handleBtn={handleBtn}
-        id={id}
-        followOrNot={followOrNot}
-        setFollowOrNot={setFollowOrNot}
-      />
+      {noButton ? (
+        ''
+      ) : (
+        <UserFollowingBtn
+          handleBtn={handleBtn}
+          id={id}
+          followOrNot={followOrNot}
+        />
+      )}
     </Container>
   );
 };
@@ -84,10 +113,4 @@ const FollowerInfo = styled.div`
 const FollowerName = styled.div`
   margin-left: 10px;
   font-weight: bold;
-`;
-
-const FollowBtn = styled.button`
-  width: 80px;
-  height: 30px;
-  border-radius: 5px;
 `;

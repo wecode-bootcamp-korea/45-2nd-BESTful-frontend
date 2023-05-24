@@ -6,6 +6,7 @@ const MyPageCategory = ({
   setProfileOrPosting,
   setClickedFollow,
   category,
+  clickedFollow,
 }) => {
   const handleCategory = handle => {
     setCategory(handle);
@@ -30,7 +31,9 @@ const MyPageCategory = ({
               handleFollowOrPosting();
             }}
           >
-            <PostingButton category={category}>게시글</PostingButton>
+            <PostingButton category={category} clickedFollow={clickedFollow}>
+              게시글
+            </PostingButton>
           </Button>
         </List>
         <List>
@@ -41,7 +44,9 @@ const MyPageCategory = ({
               handleFollowOrPosting();
             }}
           >
-            <LikeButton category={category}>좋아요</LikeButton>
+            <LikeButton category={category} clickedFollow={clickedFollow}>
+              좋아요
+            </LikeButton>
           </Button>
         </List>
       </UL>
@@ -80,11 +85,15 @@ const Button = styled.button`
 `;
 
 const PostingButton = styled.div`
-  color: ${props => (props.category ? props.theme.style.orange : 'black')};
+  color: ${props =>
+    props.clickedFollow === false &&
+    (props.category ? props.theme.style.orange : 'black')};
 `;
 
 const LikeButton = styled.div`
-  color: ${props => (props.category ? 'black' : props.theme.style.orange)};
+  color: ${props =>
+    props.clickedFollow === false &&
+    (props.category ? 'black' : props.theme.style.orange)};
 `;
 
 export default MyPageCategory;

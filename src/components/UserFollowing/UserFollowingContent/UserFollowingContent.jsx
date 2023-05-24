@@ -2,7 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import UserFollowingList from '../UserFollowingList/UserFollowingList';
 
-const UserFollowingContent = ({ userFollowing, myData, iFollowing }) => {
+const UserFollowingContent = ({
+  userFollowing,
+  myData,
+  iFollowing,
+  followingsFetch,
+  userFollowingFetch,
+}) => {
   return (
     <Container>
       <Title>팔로잉</Title>
@@ -16,11 +22,13 @@ const UserFollowingContent = ({ userFollowing, myData, iFollowing }) => {
             <UserFollowingList
               key={follower.id}
               name={follower.userName}
-              src={follower.src}
+              src={follower.profileImage}
               id={follower.id}
               follower={follower}
               meId={myData.id}
               iFollowing={iFollowing}
+              followingsFetch={followingsFetch}
+              userFollowingFetch={userFollowingFetch}
             />
           ))}
       </List>
