@@ -8,7 +8,7 @@ import ArrowButton from './ArrowButton';
 import TagModal from './TagModal';
 
 const Carousel = ({ imageList }) => {
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState(0); //현재 슬라이드 위치
   const [tags, setTags] = useState([]); //모든 태그 위치
   const [modal, setModal] = useState(false); //모달 on/off
   const [curTag, setCurTag] = useState(0); // 현재 클릭한 태그
@@ -89,7 +89,6 @@ const Container = styled.div`
 const StyledSlider = styled(Slider)`
   img {
     width: 550px;
-    height: 550px;
     object-fit: cover;
   }
   .slick-prev::before,

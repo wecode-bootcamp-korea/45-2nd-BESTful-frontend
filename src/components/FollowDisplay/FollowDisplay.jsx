@@ -3,7 +3,7 @@ import useFetch from '../../hooks/useFetch';
 import styled from 'styled-components';
 import FollowElement from './subComponent/FollowElement';
 
-const FollowDisplay = () => {
+const FollowDisplay = ({ EleWidth }) => {
   const { loading, data, error } = useFetch(
     [],
     '/data/followDisplayData.json',
@@ -20,7 +20,7 @@ const FollowDisplay = () => {
       <Title>팔로잉</Title>
       <FollowList>
         {data.map(user => (
-          <FollowElement key={user.id} name={user.userName} />
+          <FollowElement key={user.id} name={user.userName} width={EleWidth} />
         ))}
       </FollowList>
     </Container>
@@ -29,7 +29,6 @@ const FollowDisplay = () => {
 
 const Container = styled.div`
   padding: 60px;
-  background-color: pink;
 `;
 
 const Title = styled.div`
