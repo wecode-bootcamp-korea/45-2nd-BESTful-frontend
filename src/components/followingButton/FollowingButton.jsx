@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 import theme from '../../styles/theme';
@@ -18,8 +18,12 @@ const FollowingButton = ({ width, height, init }) => {
       width={width}
       height={height}
     >
-      {following && <FontAwesomeIcon icon={faCheck} />}
-      {following ? ' 팔로잉' : '팔로우'}
+      {following ? (
+        <FontAwesomeIcon icon={faPlus} />
+      ) : (
+        <FontAwesomeIcon icon={faCheck} />
+      )}
+      {following ? ' 팔로잉' : ' 팔로우'}
     </Follow>
   );
 };

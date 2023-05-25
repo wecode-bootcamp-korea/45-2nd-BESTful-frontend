@@ -5,10 +5,12 @@ import styled from 'styled-components';
 
 const Container = () => {
   return (
-    <Wrapper>
-      <Outlet />
+    <>
+      <Wrapper>
+        <Outlet />
+      </Wrapper>
       <Footer />
-    </Wrapper>
+    </>
   );
 };
 
