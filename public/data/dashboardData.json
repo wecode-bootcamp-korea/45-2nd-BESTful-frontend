@@ -1,58 +1,91 @@
-[
-  {
-    "userName": "문댕동",
-    "profile_image_url": "/images/components/dashboard/mickey_profile.jpg",
-    "feedDescription": "문댕동입니다",
-    "createdAt": "2023,05,23",
-    "contentUrls": [
-      {
-        "contentUrl": "/images/components/dashboard/today.jpg",
-        "clothesInfo": [
-          {
-            "style": "casual",
-            "season": "s/s",
-            "clothName": "옷1",
-            "clothPrice": 10000,
-            "tagContent": "이건 검정반팔이야",
-            "coordinateX": "X: 123",
-            "coordinateY": "y: 321",
-            "clothBuyingLink": "무신사",
-            "clothInformation": "검정반팔"
-          }
-        ]
-      },
-      {
-        "contentUrl": "/images/components/dashboard/icecream.jpg",
-        "clothesInfo": [
-          {
-            "style": "dandy look",
-            "season": "s/s",
-            "clothName": "옷2",
-            "clothPrice": 3000,
-            "tagContent": "이건 검정긴바지야",
-            "coordinateX": "X: 234",
-            "coordinateY": "y: 421",
-            "clothBuyingLink": "크림",
-            "clothInformation": "검정긴바지"
-          }
-        ]
-      },
-      {
-        "contentUrl": "/images/components/dashboard/hanger.jpg",
-        "clothesInfo": [
-          {
-            "style": "street look",
-            "season": "f/w",
-            "clothName": "옷3",
-            "clothPrice": 300000,
-            "tagContent": "이건 무지개장갑이야",
-            "coordinateX": "X: 264",
-            "coordinateY": "y: 81",
-            "clothBuyingLink": "쿠팡",
-            "clothInformation": "무지개장갑"
-          }
-        ]
-      }
-    ]
-  }
-]
+{
+  "feedId": 3,
+  "userName": "문댕동3",
+  "profileImageUrl": "/images/components/dashboard/mickey_profile.jpg",
+  "feedDescription": "문댕동입니다 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이보전하세",
+  "createdAt": "2023.05.25",
+  "likesCount": "2",
+  "contentUrls": [
+    {
+      "contentUrl": "/images/components/dashboard/today.jpg",
+      "clothesInfo": [
+        {
+          "style": "Casual",
+          "season": "S/S",
+          "clothName": "옷1",
+          "clothPrice": 10000,
+          "tagContent": "이건 검정반팔이야",
+          "coordinateX": "0",
+          "coordinateY": "0",
+          "clothBuyingLink": "무신사",
+          "clothInformation": "검정반팔"
+        },
+        {
+          "style": "Street Look",
+          "season": "F/W",
+          "clothName": "옷3",
+          "clothPrice": 300000,
+          "tagContent": "이건 무지개장갑이야",
+          "coordinateX": "550",
+          "coordinateY": "550",
+          "clothBuyingLink": "쿠팡",
+          "clothInformation": "무지개장갑"
+        }
+      ]
+    },
+    {
+      "contentUrl": "/images/components/dashboard/icecream.jpg",
+      "clothesInfo": [
+        {
+          "style": "Dandy Look",
+          "season": "S/S",
+          "clothName": "옷2",
+          "clothPrice": 3000,
+          "tagContent": "이건 검정긴바지야",
+          "coordinateX": "0",
+          "coordinateY": "550",
+          "clothBuyingLink": "크림",
+          "clothInformation": "검정긴바지"
+        },
+        {
+          "style": "Street Look",
+          "season": "F/W",
+          "clothName": "옷3",
+          "clothPrice": 300000,
+          "tagContent": "이건 무지개장갑이야",
+          "coordinateX": "550",
+          "coordinateY": "0",
+          "clothBuyingLink": "쿠팡",
+          "clothInformation": "무지개장갑"
+        },
+        {
+          "style": "Casual",
+          "season": "F/W",
+          "clothName": "블루자켓",
+          "clothPrice": 300000,
+          "tagContent": "이건 무지개장갑이야",
+          "coordinateX": "353",
+          "coordinateY": "280",
+          "clothBuyingLink": "쿠팡",
+          "clothInformation": "가죽자켓"
+        }
+      ]
+    },
+    {
+      "contentUrl": "/images/components/dashboard/hanger.jpg",
+      "clothesInfo": [
+        {
+          "style": "Street Look",
+          "season": "F/W",
+          "clothName": "옷3",
+          "clothPrice": 300000,
+          "tagContent": "이건 무지개장갑이야",
+          "coordinateX": "275",
+          "coordinateY": "275",
+          "clothBuyingLink": "쿠팡",
+          "clothInformation": "무지개장갑"
+        }
+      ]
+    }
+  ]
+}
