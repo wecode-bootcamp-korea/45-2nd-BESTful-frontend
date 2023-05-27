@@ -1,12 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 import variables from '../../../styles/variables';
+import theme from '../../../styles/theme';
 
-const SidePhoto = ({ data }) => {
+const SidePhoto = ({ data, onMoveImg }) => {
   return (
     <Container>
-      {data.map(img => {
-        return <img key={img.id} alt="이미지" src={img.src} />;
+      {data.map((img, index) => {
+        return (
+          <img
+            key={index}
+            alt="이미지"
+            src={img.contentUrl}
+            onClick={() => onMoveImg(index)}
+          />
+        );
       })}
     </Container>
   );
@@ -21,8 +29,13 @@ const Container = styled.div`
     width: 50px;
     height: 50px;
     margin: 5px 0px;
-    object-fit: cover;
     border-radius: 5px;
+    object-fit: cover;
+    cursor: pointer;
+
+    &:hover {
+      outline: 1px solid ${theme.orange};
+    }
   }
 `;
 

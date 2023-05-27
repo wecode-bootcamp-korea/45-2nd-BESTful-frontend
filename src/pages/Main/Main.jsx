@@ -9,9 +9,13 @@ const Main = () => {
   ///////////////////////////////////////////////////////////
   // for dashboard
 
-  const { loading, data, error } = useFetch([], '/data/dashboardData.json', {
-    method: 'GET',
-  });
+  const { loading, data, error } = useFetch(
+    [],
+    'http://10.58.52.108:3700/feeds/2',
+    {
+      method: 'GET',
+    }
+  );
 
   if (error) return alert(error);
   if (loading) return null;
@@ -22,7 +26,7 @@ const Main = () => {
       <FilterCategory />
       <MainSection>
         <DashboardWrapper>
-          <Dashboard data={data} scale={1} />
+          <Dashboard data={data[0]} scale={1} />
         </DashboardWrapper>
         <MainFooter />
       </MainSection>

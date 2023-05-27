@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ProfileImage from '../../../components/ProfileImage/ProfileImage';
 import InputPart from './InputPart';
 import styled from 'styled-components';
@@ -6,20 +6,57 @@ import variables from '../../../styles/variables';
 import theme from '../../../styles/theme';
 import CommentElement from './CommentElement';
 
-const Comment = () => {
-  const src = '/images/components/profileImage/brunch.jpg';
+const Comment = ({ feedId, commentRef }) => {
+  const [comments, setComments] = useState([]);
+  const [userInfo, setUserInfo] = useState({});
+
+  // 댓글 불러오기 fetch
+  const getComments = () => {
+    fetch(`http://10.58.52.108:3000/feeds/${feedId}/comment`)
+      .then(res => res.json())
+      .then(res => {
+        setComments(res);
+      });
+  };
+
+  // 현재 유저 정보 불러오기
+  useEffect(() => {
+    fetch('http://10.58.52.204:3700/users/', {
+      method: 'GET',
+      headers: {
+        Authorization: localStorage.getItem('resToken'),
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        setUserInfo(res);
+      });
+  }, []);
+
+  useEffect(() => {
+    getComments();
+  }, []);
+
   return (
-    <Container>
+    <Container ref={commentRef}>
       <div className="num">
-        댓글 <span>0</span>
+        댓글 <span>{comments.length}</span>
       </div>
       <AddPart>
-        <ProfileImage src={src} width={30} />
-        <InputPart />
+        <ProfileImage src={userInfo.profileImageUrl} width={30} />
+        <InputPart feedId={feedId} getComments={getComments} />
       </AddPart>
       <DisplayPart>
-        <CommentElement />
-        <CommentElement />
+        {comments &&
+          comments.map(comment => (
+            <CommentElement
+              key={comment.id}
+              feedId={feedId}
+              comment={comment}
+              getComments={getComments}
+            />
+          ))}
       </DisplayPart>
     </Container>
   );
