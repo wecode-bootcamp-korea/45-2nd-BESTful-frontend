@@ -17,7 +17,8 @@ const Container = styled.div`
   flex-wrap: wrap;
   align-content: flex-start;
   gap: 15px;
-  width: 30%;
+  width: 350px;
+  margin-left: 100px;
   font-size: 13px;
   color: #bbb;
 `;
@@ -43,12 +44,3 @@ const FOOTER_DATA = [
   { id: 7, title: '상품광고 소개' },
   { id: 8, title: '고개의 소리' },
 ];
-
-/* const BUSINESS_INFO = [
-  { id: 1, title: '(주)오늘뭐입지' },
-  { id: 2, title: '대표이사 박현아' },
-  { id: 3, title: '서울 서초구 선릉로 위워크 10층' },
-  { id: 4, title: 'contact@oneulmoipzi.com' },
-  { id: 5, title: '사업자등록번호 000-11-112345' },
-
-]; */
