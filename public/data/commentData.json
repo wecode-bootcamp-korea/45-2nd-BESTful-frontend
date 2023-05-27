@@ -1,0 +1,16 @@
+[
+  {
+    "id": 2,
+    "contents": "바이",
+    "userName": "이경진",
+    "profileImageUrl": null,
+    "createdAt": "2023.05.28.15.40"
+  },
+  {
+    "id": 3,
+    "contents": "하위",
+    "userName": "문댕동2",
+    "profileImageUrl": "profile_image2",
+    "createdAt": "2023.05.28.16.10"
+  }
+]

@@ -11,6 +11,8 @@ import Container from './components/Container/Container';
 import Best from './pages/Best/Best';
 import Following from './pages/Following/Following';
 import MainInfinite from './pages/Main/MainInfinite';
+import InvalidAccess from './pages/Contents/InvalidAccess';
+import Main from './pages/Main/Main';
 
 const Router = () => {
   const location = useLocation();
@@ -32,10 +34,12 @@ const Router = () => {
           <Route path="/users/:id" element={<Users />} />
           <Route path="/post-upload" element={<PostUpload />} />
           <Route path="/contents/:id" element={<Contents />} />
+          <Route path="*" element={<InvalidAccess />} />
         </Route>
         <Route path="/best" element={<Best />} />
         <Route path="/" element={<MainInfinite />} />
         <Route path="/:userId/following" element={<Following />} />
+        <Route path="/main-dashboard" element={<Main />} />
       </Routes>
     </>
   );

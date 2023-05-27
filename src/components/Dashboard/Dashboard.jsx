@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProfileImage from '../ProfileImage/ProfileImage';
 import ArticleContent from './subComponent/ArticleContent';
@@ -16,6 +16,7 @@ const Dashboard = ({ data, scale = 1 }) => {
 
   const [following, setFollowing] = useState(true); //팔로잉/팔로우
   const [heart, setHeart] = useState(false); //좋아요
+  const [likesCount, setLikesCount] = useState(parseInt(data.likesCount));
 
   //좋아요 유무에 따라 아이콘 변경
   const heartMode = {
@@ -25,28 +26,25 @@ const Dashboard = ({ data, scale = 1 }) => {
 
   //좋아요 버튼 클릭 함수
   const handleHeart = () => {
-    // fetch('http://10.58.52.204:3700/like', {
-    //   method: following ? 'DELETE' : 'POST',
-    //   headers: {
-    //     Authorization: localStorage.getItem('resToken'),
-    //     'Content-Type': 'application/json;charset=utf-8',
-    //   },
-    // })
-    //   .then(res => res.json())
-    //   .then(res => console.log(res));
+    fetch(`http://10.58.52.204:3700/likes/${data.feedId}`, {
+      method: heart ? 'DELETE' : 'POST',
+      headers: {
+        Authorization: localStorage.getItem('resToken'),
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    });
 
     setHeart(prev => !prev);
+    setLikesCount(prev => prev + (heart ? -1 : +1));
   };
 
   // 상단의 유저프로필 클릭 함수 (아직 백엔드에서 값 안줘서 지정X)
   const handleUser = () => {
-    // navigate(`/users/${data.userId}`);
-    console.log('클릭시 해당 Users 페이지 이동');
+    navigate(`/users/${data.userId}`);
   };
 
   const handleImageClick = imgIdx => {
     navigate(`/contents/${data.feedId}`, { state: { image: imgIdx } });
-    console.log('이미지 클릭', imgIdx);
   };
 
   //댓글 버튼 클릭시 함수 (해당 피드상세페이지로 이동)
@@ -54,21 +52,24 @@ const Dashboard = ({ data, scale = 1 }) => {
     navigate(`/contents/${data.feedId}`);
   };
 
-  // //피드 좋아요 유/무 설정
-  // useEffect(() => {
-  //   fetch('http://10.58.52.204:3700/like', {
-  //     method: 'GET',
-  //     headers: {
-  //       Authorization: localStorage.getItem('resToken'),
-  //       'Content-Type': 'application/json;charset=utf-8',
-  //     },
-  //   })
-  //     .then(res => res.json())
-  //     .then(
-  //       res => console.log(res)
-  //       // setHeart(res)
-  //     );
-  // }, []);
+  //좋아요 불러오기
+  useEffect(() => {
+    fetch(`http://10.58.52.204:3700/likes/${data.feedId}`, {
+      method: 'GET',
+      headers: {
+        Authorization: localStorage.getItem('resToken'),
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        const { liked } = res;
+        if (liked === true || liked === false) {
+          setHeart(liked);
+          return;
+        }
+      });
+  }, []);
 
   return (
     <div className="dashboard">
@@ -94,7 +95,7 @@ const Dashboard = ({ data, scale = 1 }) => {
         <Tail>
           <div className="heartPart" onClick={handleHeart}>
             <HeartIcon icon={heartMode[heart]} size="2x" isSelect={heart} />
-            <div className="heartCount">{data.likesCount}</div>
+            <div className="heartCount">{likesCount}</div>
           </div>
           <div>
             <CommentIcon icon={faComment} size="2x" onClick={handleComment} />
