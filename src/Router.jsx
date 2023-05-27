@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import Main from './pages/Main/Main';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import Mypage from './pages/Mypage/Mypage';
@@ -9,6 +8,9 @@ import Contents from './pages/Contents/Contents';
 import Users from './pages/Users/Users';
 import Nav from './components/Nav/Nav';
 import Container from './components/Container/Container';
+import Best from './pages/Best/Best';
+import Following from './pages/Following/Following';
+import MainInfinite from './pages/Main/MainInfinite';
 
 const Router = () => {
   const location = useLocation();
@@ -18,6 +20,7 @@ const Router = () => {
       return <Nav />;
     }
   };
+
   return (
     <>
       {renderNav()}
@@ -30,7 +33,9 @@ const Router = () => {
           <Route path="/post-upload" element={<PostUpload />} />
           <Route path="/contents/:id" element={<Contents />} />
         </Route>
-        <Route path="/" element={<Main />} />
+        <Route path="/best" element={<Best />} />
+        <Route path="/" element={<MainInfinite />} />
+        <Route path="/:userId/following" element={<Following />} />
       </Routes>
     </>
   );

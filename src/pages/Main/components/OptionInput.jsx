@@ -13,6 +13,7 @@ const OptionInput = ({
 }) => {
   const handleRadioButton = e => {
     setCheckedElement(Number(e.target.value));
+    // searchParams.set(category, `"${e.target.value}"`);
     searchParams.set(category, e.target.value);
     setSearchParams(searchParams);
   };

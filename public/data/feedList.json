@@ -1,0 +1,139 @@
+[
+  {
+    "feedId": 3,
+    "userName": "문댕동3",
+    "profile_image_url": "profile_image3",
+    "feedDescription": "3번입니다",
+    "createdAt": "2023.05.25",
+    "likesCount": "2",
+    "contentUrls": [
+      {
+        "contentUrl": "https://images.unsplash.com/photo-1684814833784-c9c8cdba1d20?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80",
+        "clothesInfo": [
+          {
+            "style": "street look",
+            "season": "f/w",
+            "clothName": "옷3",
+            "clothPrice": 300000,
+            "tagContent": "이건 이건이",
+            "coordinateX": "X:532",
+            "coordinateY": "Y: 2352",
+            "clothBuyingLink": "쿠팡",
+            "clothInformation": "무지개장갑"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "feedId": 2,
+    "userName": "문댕동2",
+    "profile_image_url": "profile_image2",
+    "feedDescription": "2번입니다",
+    "createdAt": "2023.05.24",
+    "likesCount": "1",
+    "contentUrls": [
+      {
+        "contentUrl": "https://images.unsplash.com/photo-1684936193634-655c7ff53b20?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+        "clothesInfo": [
+          {
+            "style": "casual",
+            "season": "s/s",
+            "clothName": "옷1",
+            "clothPrice": 10000,
+            "tagContent": "이건 검정반팔이야2",
+            "coordinateX": "X: 123",
+            "coordinateY": "Y: 123",
+            "clothBuyingLink": "무신사",
+            "clothInformation": "검정반팔"
+          }
+        ]
+      },
+      {
+        "contentUrl": "https://images.unsplash.com/photo-1684936193634-655c7ff53b20?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+        "clothesInfo": [
+          {
+            "style": "dandy look",
+            "season": "s/s",
+            "clothName": "옷2",
+            "clothPrice": 3000,
+            "tagContent": "이건 검정긴바지야2",
+            "coordinateX": "X:312",
+            "coordinateY": "Y: 3124",
+            "clothBuyingLink": "크림",
+            "clothInformation": "검정긴바지"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "feedId": 1,
+    "userName": "문댕동",
+    "profile_image_url": "profile_image",
+    "feedDescription": "문댕동입니다",
+    "createdAt": "2023.05.23",
+    "likesCount": "2",
+    "contentUrls": [
+      {
+        "contentUrl": "content_url1",
+        "clothesInfo": [
+          {
+            "style": "casual",
+            "season": "s/s",
+            "clothName": "옷1",
+            "clothPrice": 10000,
+            "tagContent": "이건 검정반팔이야",
+            "coordinateX": "X: 123",
+            "coordinateY": "y: 321",
+            "clothBuyingLink": "무신사",
+            "clothInformation": "검정반팔"
+          },
+          {
+            "style": "dandy look",
+            "season": "s/s",
+            "clothName": "옷4",
+            "clothPrice": 123456,
+            "tagContent": "이건 셔츠입니다",
+            "coordinateX": "X: 9808",
+            "coordinateY": "Y: 877980",
+            "clothBuyingLink": "홈쇼핑",
+            "clothInformation": "셔츠입니다"
+          }
+        ]
+      },
+      {
+        "contentUrl": "content_url2",
+        "clothesInfo": [
+          {
+            "style": "dandy look",
+            "season": "s/s",
+            "clothName": "옷2",
+            "clothPrice": 3000,
+            "tagContent": "이건 검정긴바지야",
+            "coordinateX": "X: 1234",
+            "coordinateY": "y: 4321",
+            "clothBuyingLink": "크림",
+            "clothInformation": "검정긴바지"
+          }
+        ]
+      },
+      {
+        "contentUrl": "content_url3",
+        "clothesInfo": [
+          {
+            "style": "street look",
+            "season": "f/w",
+            "clothName": "옷3",
+            "clothPrice": 300000,
+            "tagContent": "이건 무지개장갑이야",
+            "coordinateX": "X: 1234",
+            "coordinateY": "y: 4321",
+            "clothBuyingLink": "쿠팡",
+            "clothInformation": "무지개장갑"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -63,7 +63,7 @@ const FilterTitleWrapper = styled.div`
 const FilterTitle = styled.div`
   ${variables.flex('none', 'none', 'center')};
   height: 30px;
-  font-size: 24px;
+  font-size: 21px;
   font-weight: 700;
 `;
 
