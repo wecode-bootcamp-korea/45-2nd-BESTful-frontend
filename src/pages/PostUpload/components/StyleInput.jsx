@@ -1,6 +1,6 @@
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import theme from '../../../styles/theme';
 import TagContainer from './TagContainer';
@@ -13,7 +13,7 @@ const StyleInput = ({
   point,
   modal,
   setModal,
-  index,
+  currentIndex,
 }) => {
   const tagDescRef = useRef();
   const nameRef = useRef();
@@ -21,21 +21,42 @@ const StyleInput = ({
   const buyRef = useRef();
   const priceRef = useRef();
 
-  const [season, setSeason] = useState('');
-  const [style, setStyle] = useState('');
+  const [season, setSeason] = useState('S/S');
+  const [style, setStyle] = useState('Casual');
   const [newTags, setNewTags] = useState([]);
   const [isTagged, setIsTagged] = useState(false);
+
+  const [required, setRequired] = useState(false);
+
+  const [formCheck, setFormCheck] = useState({
+    tagDesc: '',
+    title: '',
+    description: '',
+    site: '',
+    price: '',
+  });
+
+  const handleFormCheck = e => {
+    setFormCheck({
+      ...formCheck,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleClose = () => {
     const copiedTags = [...tags];
     const newTags = copiedTags.filter(tag => tag.id !== point.id);
 
     setTags(newTags);
+    setSeason('S/S');
+    setStyle('Casual');
     setModal(prev => !prev);
   };
 
   const addTagInfo = e => {
     e.preventDefault();
+    const copiedDatas = [...datas];
+
     const currentTag = {
       id: point.id,
       coordinateX: point.coordinateX,
@@ -47,14 +68,18 @@ const StyleInput = ({
       clothBuyingLink: buyRef.current.value,
       clothInformation: descRef.current.value,
       clothPrice: priceRef.current.value,
+      fileName: copiedDatas.find(data => data.id === currentIndex).imgFile.name,
     };
 
-    const copiedDatas = [...datas];
-
-    copiedDatas[index - 1].clothesInfo = [...newTags, currentTag];
+    copiedDatas.find(data => data.id === currentIndex).clothesInfo = [
+      ...tags,
+      currentTag,
+    ];
     setDatas(copiedDatas);
-    setNewTags([...newTags, currentTag]);
-    setTags([...newTags, currentTag]);
+    setNewTags([...tags, currentTag]);
+    setTags([...tags, currentTag]);
+    setSeason('S/S');
+    setStyle('Casual');
     setModal(prev => !prev);
     setIsTagged(true);
   };
@@ -67,10 +92,34 @@ const StyleInput = ({
     setStyle(e.target.value);
   };
 
+  useEffect(() => {
+    if (
+      formCheck.tagDesc === '' ||
+      formCheck.title === '' ||
+      formCheck.description === '' ||
+      formCheck.site === '' ||
+      formCheck.price === ''
+    ) {
+      setRequired(true);
+    } else {
+      setRequired(false);
+    }
+  }, [formCheck]);
+
   return (
     <>
       {tags.map(tag => (
-        <TagContainer key={tag.id} tag={tag} />
+        <TagContainer
+          datas={datas}
+          setDatas={setDatas}
+          tags={tags}
+          setTags={setTags}
+          newTags={newTags}
+          setNewTags={setNewTags}
+          key={tag.id}
+          tag={tag}
+          currentIndex={currentIndex}
+        />
       ))}
       {modal && (
         <StyleInputContainer
@@ -78,43 +127,61 @@ const StyleInput = ({
           y={`${point.coordinateY}px`}
         >
           <Input>
-            <label htmlFor="tagDesc">태그 설명</label>
-            <Box>
+            <label htmlFor="tagDesc">
+              <span className="itemInfo">태그 설명</span>
+            </label>
+            <Box className="info">
               <input
                 required
                 type="text"
                 id="tagDesc"
                 name="tagDesc"
                 ref={tagDescRef}
+                onChange={handleFormCheck}
               />
+              {formCheck.tagDesc === '' && required && (
+                <span className="warning">태그 정보를 입력해주세요.</span>
+              )}
             </Box>
           </Input>
           <Input>
-            <label htmlFor="title">상품 이름</label>
-            <Box>
+            <label htmlFor="title">
+              <span className="itemInfo">상품 이름</span>
+            </label>
+            <Box className="info">
               <input
                 required
                 type="text"
                 id="title"
                 name="title"
                 ref={nameRef}
+                onChange={handleFormCheck}
               />
+              {formCheck.title === '' && required && (
+                <span className="warning">상품 이름을 입력해주세요.</span>
+              )}
             </Box>
           </Input>
           <Input>
-            <label htmlFor="description">설명</label>
-            <Box>
+            <label htmlFor="description">
+              <span className="itemInfo">설명</span>
+            </label>
+            <Box className="info">
               <input
                 required
                 type="text"
                 id="description"
                 name="description"
                 ref={descRef}
+                onChange={handleFormCheck}
               />
+              {formCheck.description === '' && required && (
+                <span className="warning">상품 설명 입력해주세요.</span>
+              )}
             </Box>
           </Input>
-          <Input>
-            <span>시즌</span>
+          <Input className="seasonInput">
+            <span className="itemInfo">시즌</span>
             <Box>
               <input
                 required
@@ -123,6 +190,7 @@ const StyleInput = ({
                 name="season"
                 value="S/S"
                 onClick={seasonInfo}
+                checked={season === 'S/S' ? true : false}
               />
               <label htmlFor="ss">S/S</label>
               <input
@@ -136,8 +204,8 @@ const StyleInput = ({
               <label htmlFor="fw">F/W</label>
             </Box>
           </Input>
-          <Input>
-            <span>스타일</span>
+          <Input className="styleInput">
+            <span className="itemInfo">스타일</span>
             <Box>
               <input
                 required
@@ -146,6 +214,7 @@ const StyleInput = ({
                 name="style"
                 value="Casual"
                 onClick={styleInfo}
+                checked={style === 'Casual' ? true : false}
               />
               <label htmlFor="casual">캐주얼</label>
               <input
@@ -153,7 +222,7 @@ const StyleInput = ({
                 type="radio"
                 id="dandy"
                 name="style"
-                value="Dandy"
+                value="Dandy Look"
                 onClick={styleInfo}
               />
               <label htmlFor="dandy">댄디</label>
@@ -162,7 +231,7 @@ const StyleInput = ({
                 type="radio"
                 id="street"
                 name="style"
-                value="Street"
+                value="Street Look"
                 onClick={styleInfo}
               />
               <label htmlFor="street">스트릿</label>
@@ -171,32 +240,53 @@ const StyleInput = ({
                 type="radio"
                 id="sports"
                 name="style"
-                value="Sports"
+                value="Sportswear"
                 onClick={styleInfo}
               />
               <label htmlFor="sports">스포츠</label>
             </Box>
           </Input>
           <Input>
-            <label htmlFor="site">구매 정보</label>
-            <Box>
-              <input required type="text" id="site" name="site" ref={buyRef} />
+            <label htmlFor="site">
+              <span className="itemInfo">구매 정보</span>
+            </label>
+            <Box className="info">
+              <input
+                required
+                type="text"
+                id="site"
+                name="site"
+                ref={buyRef}
+                onChange={handleFormCheck}
+              />
+              {formCheck.site === '' && required && (
+                <span className="warning">구매 정보를 입력해주세요.</span>
+              )}
             </Box>
           </Input>
           <Input>
-            <label htmlFor="price">가격</label>
-            <Box>
+            <label htmlFor="price">
+              <span className="itemInfo">가격</span>
+            </label>
+            <Box className="info">
               <input
                 required
                 type="number"
                 id="price"
                 name="price"
                 ref={priceRef}
+                onChange={handleFormCheck}
+                placeholder="원"
               />
+              {formCheck.price === '' && required && (
+                <span className="warning">가격 입력해주세요.</span>
+              )}
             </Box>
           </Input>
           <Button>
-            <span onClick={addTagInfo}>확인</span>
+            <button disabled={required ? true : false} onClick={addTagInfo}>
+              확인
+            </button>
           </Button>
           <Close onClick={handleClose}>
             <FontAwesomeIcon
@@ -224,6 +314,32 @@ const StyleInputContainer = styled.div`
   top: ${props => props.y};
   left: ${props => props.x};
   z-index: 5;
+  span.itemInfo {
+    padding-bottom: 10px;
+  }
+  .itemInfo {
+    border-bottom: 1px solid black;
+  }
+
+  .seasonInput label,
+  .styleInput label {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  input[type='radio'] {
+    display: none;
+  }
+
+  input[type='radio'] + label {
+    &:hover {
+      color: #ff9f43;
+    }
+  }
+
+  input[type='radio']:checked + label {
+    color: ${theme.orange};
+  }
 `;
 
 const Input = styled.div`
@@ -235,18 +351,37 @@ const Input = styled.div`
     -webkit-appearance: none;
     margin: 0;
   }
+  input {
+    background-color: #d9d9d9;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    padding: 5px;
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    input {
+      width: 250px;
+    }
+  }
 `;
 
 const Box = styled.div`
   width: 300px;
   margin-left: 30px;
+  .warning {
+    color: ${theme.orange};
+    font-size: 12px;
+    margin-top: 5px;
+  }
 `;
 
 const Button = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
-  span {
+  button {
     text-align: center;
     width: 50px;
     border: none;

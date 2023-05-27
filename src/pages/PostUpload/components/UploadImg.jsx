@@ -1,10 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import StyleInput from './StyleInput';
 import styled from 'styled-components';
 import variables from '../../../styles/variables';
 import theme from '../../../styles/theme';
 
-const UploadImg = ({ img, datas, setDatas, index, currentIndex }) => {
+const UploadImg = ({
+  img,
+  datas,
+  setDatas,
+  index,
+  currentIndex,
+  element,
+  imgIndex,
+  imageRef,
+}) => {
   const [tags, setTags] = useState([]);
   const [tagMode, setTagMode] = useState(false);
   const [position, setPosition] = useState({});
@@ -13,10 +22,20 @@ const UploadImg = ({ img, datas, setDatas, index, currentIndex }) => {
   const handleTag = e => {
     if (!tagMode) return;
     setPosition({
-      id: tags.length + 1,
+      id: tags.length === 0 ? 1 : tags[tags.length - 1].id + 1,
       coordinateX: e.nativeEvent.offsetX,
       coordinateY: e.nativeEvent.offsetY,
     });
+    const newPosition = {
+      id: tags.length === 0 ? 1 : tags[tags.length - 1].id + 1,
+      coordinateX: e.nativeEvent.offsetX,
+      coordinateY: e.nativeEvent.offsetY,
+    };
+    if (newPosition.x) {
+      setTags(prev => [...prev, position]);
+      const addedTags = [...tags, position];
+      saveTags(addedTags);
+    }
     setModal(prev => !prev);
   };
 
@@ -24,15 +43,15 @@ const UploadImg = ({ img, datas, setDatas, index, currentIndex }) => {
     const copiedDatas = [...datas];
     const newDatas = copiedDatas.filter(data => data.id !== currentIndex);
     if (newDatas.length === 0) {
-      setDatas([{ id: 1, contentUrl: '', clothesInfo: [] }]);
+      setDatas([{ id: 1, contentUrl: '', imgFile: '', clothesInfo: [] }]);
       return;
     }
     setDatas(newDatas);
   };
 
-  const saveTags = () => {
+  const saveTags = addedTags => {
     const copiedDatas = [...datas];
-    copiedDatas[index].clothesInfo = tags;
+    copiedDatas[index].clothesInfo = addedTags;
     setDatas(copiedDatas);
   };
 
@@ -41,16 +60,6 @@ const UploadImg = ({ img, datas, setDatas, index, currentIndex }) => {
     setTagMode(prev => !prev);
   };
 
-  useEffect(() => {
-    if (position.x) {
-      setTags(prev => [...prev, position]);
-    }
-  }, [position]);
-
-  useEffect(() => {
-    saveTags();
-  }, [tags]);
-
   return (
     <UploadedImg>
       <img
@@ -58,6 +67,7 @@ const UploadImg = ({ img, datas, setDatas, index, currentIndex }) => {
         className="uploadedImage"
         src={img}
         alt="업로드 이미지"
+        ref={ele => (imageRef.current[imgIndex] = ele)}
       />
       <StyleInput
         key={index}
@@ -68,7 +78,8 @@ const UploadImg = ({ img, datas, setDatas, index, currentIndex }) => {
         point={position}
         modal={modal}
         setModal={setModal}
-        index={currentIndex}
+        index={index}
+        currentIndex={currentIndex}
       />
       <div className="functionBox">
         <DeleteBtn onClick={deleteItem}>
@@ -120,6 +131,8 @@ const UploadedImg = styled.div`
   }
 `;
 
-const DeleteBtn = styled.div``;
+const DeleteBtn = styled.div`
+  cursor: pointer;
+`;
 
 export default UploadImg;

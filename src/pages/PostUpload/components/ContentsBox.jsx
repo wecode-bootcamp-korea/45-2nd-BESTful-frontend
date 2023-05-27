@@ -3,17 +3,34 @@ import styled from 'styled-components';
 import variables from '../../../styles/variables';
 import UploadImg from './UploadImg';
 
-const ContentsBox = ({ img, datas, setDatas, index, currentIndex }) => {
+const ContentsBox = ({
+  img,
+  datas,
+  setDatas,
+  index,
+  currentIndex,
+  pass,
+  element,
+  imgIndex,
+  imageRef,
+}) => {
   const imgRef = useRef([]);
 
   const savePhoto = event => {
     event.preventDefault();
+
     const file = imgRef.current[index].files[0];
+
+    if (file.length === 0 || !file) {
+      return;
+    }
+
     const copiedDatas = [...datas];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       copiedDatas[index].contentUrl = reader.result;
+      copiedDatas[index].imgFile = file;
       setDatas(copiedDatas);
     };
   };
@@ -26,7 +43,7 @@ const ContentsBox = ({ img, datas, setDatas, index, currentIndex }) => {
           type="file"
           accept="image/*"
           required
-          ref={el => (imgRef.current[index] = el)}
+          ref={ele => (imgRef.current[index] = ele)}
           onChange={savePhoto}
         />
         {img ? (
@@ -36,6 +53,9 @@ const ContentsBox = ({ img, datas, setDatas, index, currentIndex }) => {
             setDatas={setDatas}
             index={index}
             currentIndex={currentIndex}
+            element={element}
+            imgIndex={imgIndex}
+            imageRef={imageRef}
           />
         ) : (
           <Image htmlFor="imageInput">
@@ -52,6 +72,11 @@ const ContentsBox = ({ img, datas, setDatas, index, currentIndex }) => {
           </Image>
         )}
       </Contents>
+      {pass && datas[0].contentUrl.length === 0 && (
+        <div className="uploadWarning">
+          <span>사진을 등록해주세요.</span>
+        </div>
+      )}
     </Container>
   );
 };
@@ -70,6 +95,9 @@ const Contents = styled.div`
   .uploadedImage {
     width: 550px;
     border-radius: 5px;
+  }
+  .uploadWarning {
+    width: 100%;
   }
 `;
 
