@@ -18,6 +18,10 @@ const OptionInput = ({
     setSearchParams(searchParams);
   };
 
+  const MoveToTop = e => {
+    window.scrollTo({ top: 0 });
+  };
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   return (
@@ -27,6 +31,7 @@ const OptionInput = ({
         value={id}
         checked={checkedElement === id}
         onChange={handleRadioButton}
+        onClick={MoveToTop}
       />
       {checkedElement === id ? (
         <FontAwesomeIcon icon={faCircleCheck} className="radioIcon" />
@@ -43,12 +48,15 @@ const OptionWrapper = styled.label`
   gap: 8px;
   margin-bottom: 8px;
 
+  font-size: 14px;
+
   input {
     display: none;
   }
 
   .radioIcon {
     color: ${props => props.theme.style.orange};
+    color: #ff5f20;
   }
 `;
 

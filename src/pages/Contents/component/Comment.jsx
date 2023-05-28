@@ -21,7 +21,7 @@ const Comment = ({ feedId, commentRef }) => {
 
   // 현재 유저 정보 불러오기
   useEffect(() => {
-    fetch('http://10.58.52.185:3000/users', {
+    fetch('http://10.58.52.204:3700/users/', {
       method: 'GET',
       headers: {
         Authorization: localStorage.getItem('resToken'),

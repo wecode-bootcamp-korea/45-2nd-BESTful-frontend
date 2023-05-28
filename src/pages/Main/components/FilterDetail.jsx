@@ -20,9 +20,9 @@ const FilterDetail = ({ name, option }) => {
         <FilterTitleWrapper onClick={handleToggleMore}>
           <FilterTitle>{name}</FilterTitle>
           {toggleMore ? (
-            <FontAwesomeIcon icon={faChevronUp} />
+            <FontAwesomeIcon icon={faChevronUp} size="sm" />
           ) : (
-            <FontAwesomeIcon icon={faChevronDown} />
+            <FontAwesomeIcon icon={faChevronDown} size="sm" />
           )}
         </FilterTitleWrapper>
       </li>
@@ -55,16 +55,16 @@ const FilterTitleWrapper = styled.div`
   cursor: pointer;
 
   &:hover {
-    border-radius: 8px;
-    background-color: #eee;
+    border-radius: 4px;
+    background-color: #ff5d2b12;
   }
 `;
 
 const FilterTitle = styled.div`
   ${variables.flex('none', 'none', 'center')};
-  height: 30px;
-  font-size: 21px;
-  font-weight: 700;
+  height: 36px;
+  font-size: 17px;
+  font-weight: 400;
 `;
 
 const CategoryContentWrapper = styled.ul`

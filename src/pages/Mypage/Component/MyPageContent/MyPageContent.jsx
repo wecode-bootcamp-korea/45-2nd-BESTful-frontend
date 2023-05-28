@@ -30,7 +30,7 @@ const MyPageContent = ({
     const url = `http://10.58.52.185:3000/users/`;
 
     try {
-      const response = await fetch(url, {
+      const response = await fetch('http://10.58.52.185:3000/users', {
         method: 'GET',
         headers: {
           Authorization: localStorage.getItem('resToken'),
