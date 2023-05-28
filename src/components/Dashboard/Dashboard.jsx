@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import useFetch from '../../hooks/useFetch';
 import ProfileImage from '../ProfileImage/ProfileImage';
+import FollowingButton from '../followingButton/FollowingButton';
 import ArticleContent from './subComponent/ArticleContent';
 import Carousel from './subComponent/Carousel';
 import { faHeart as emptyHeart } from '@fortawesome/free-regular-svg-icons';
@@ -11,106 +12,70 @@ import styled from 'styled-components';
 import variables from '../../styles/variables';
 import theme from '../../styles/theme';
 
-const Dashboard = ({ data, scale = 1 }) => {
-  const navigate = useNavigate();
+const Dashboard = () => {
+  const src = '/images/components/profileImage/brunch.jpg';
+  const w =
+    'you know we got that vibe, baby~ 해 뜰 때까지~ Look at me, look at me 느낌이 나지~ Look at me, look at me 느낌이 나지~ you know we got that vibe, baby~ 해 질 때까지~';
 
-  const [following, setFollowing] = useState(true); //팔로잉/팔로우
-  const [heart, setHeart] = useState(false); //좋아요
+  const [heart, setHeart] = useState(false);
 
-  //좋아요 유무에 따라 아이콘 변경
+  const { loading, data, error } = useFetch([], '/data/tagData.json', {
+    method: 'GET',
+  });
+
   const heartMode = {
     false: emptyHeart,
     true: fullHeart,
   };
 
-  //좋아요 버튼 클릭 함수
   const handleHeart = () => {
-    // fetch('http://10.58.52.204:3700/like', {
-    //   method: following ? 'DELETE' : 'POST',
-    //   headers: {
-    //     Authorization: localStorage.getItem('resToken'),
-    //     'Content-Type': 'application/json;charset=utf-8',
-    //   },
-    // })
-    //   .then(res => res.json())
-    //   .then(res => console.log(res));
-
     setHeart(prev => !prev);
   };
 
-  // 상단의 유저프로필 클릭 함수 (아직 백엔드에서 값 안줘서 지정X)
-  const handleUser = () => {
-    // navigate(`/users/${data.userId}`);
-    console.log('클릭시 해당 Users 페이지 이동');
-  };
-
-  const handleImageClick = imgIdx => {
-    navigate(`/contents/${data.feedId}`, { state: { image: imgIdx } });
-    console.log('이미지 클릭', imgIdx);
-  };
-
-  //댓글 버튼 클릭시 함수 (해당 피드상세페이지로 이동)
-  const handleComment = () => {
-    navigate(`/contents/${data.feedId}`);
-  };
-
-  // //피드 좋아요 유/무 설정
-  // useEffect(() => {
-  //   fetch('http://10.58.52.204:3700/like', {
-  //     method: 'GET',
-  //     headers: {
-  //       Authorization: localStorage.getItem('resToken'),
-  //       'Content-Type': 'application/json;charset=utf-8',
-  //     },
-  //   })
-  //     .then(res => res.json())
-  //     .then(
-  //       res => console.log(res)
-  //       // setHeart(res)
-  //     );
-  // }, []);
+  if (error) return alert(error);
+  if (loading) return null;
 
   return (
     <div className="dashboard">
-      <Container scale={scale}>
+      <Wrapper>
         <Head>
           <div className="headLeft">
-            <div className="user" onClick={handleUser}>
-              <ProfileImage src={data.profileImageUrl} width={30} />
-              <div className="bold">{data.userName}</div>
-            </div>
+            <ProfileImage src={src} width={30} />
+            <div className="bold"> 미키</div>
+            <FollowingButton init={false} width="80px" height="30px" />
           </div>
-          <div className="time">{data.createdAt}</div>
+          <div className="time">23.05.23</div>
         </Head>
 
         <ImageLabel>
-          <Carousel
-            imageList={data.contentUrls}
-            handleImageClick={handleImageClick}
-          />
+          <Carousel imageList={data} />
         </ImageLabel>
 
-        <ArticleContent content={data.feedDescription} length={120} />
+        <ArticleContent content={w} length={120} />
         <Tail>
-          <div className="heartPart" onClick={handleHeart}>
-            <HeartIcon icon={heartMode[heart]} size="2x" isSelect={heart} />
-            <div className="heartCount">{data.likesCount}</div>
+          <div className="first">
+            <HeartIcon
+              icon={heartMode[heart]}
+              size="2x"
+              onClick={handleHeart}
+              isSelect={heart}
+            />
+            <div className="heartCount">5</div>
           </div>
           <div>
-            <CommentIcon icon={faComment} size="2x" onClick={handleComment} />
+            <FontAwesomeIcon icon={faComment} size="2x" />
           </div>
         </Tail>
-      </Container>
+      </Wrapper>
     </div>
   );
 };
 
-const Container = styled.div`
+const Wrapper = styled.div`
   width: 552px;
   margin-left: 100px;
   border: 1px solid #a4acb3;
   background-color: white;
-  transform: scale(${props => props.scale});
 `;
 
 const Head = styled.div`
@@ -122,14 +87,9 @@ const Head = styled.div`
     ${variables.flex('row', 'none')};
     margin-right: 10px;
 
-    .user {
-      ${variables.flex('row', 'center', 'center')}
-      cursor: pointer;
-
-      .bold {
-        margin: 0px 10px;
-        font-weight: bold;
-      }
+    .bold {
+      margin: 0px 10px;
+      font-weight: bold;
     }
   }
 
@@ -152,10 +112,8 @@ const Tail = styled.div`
   ${variables.flex('row', 'space-around', 'center')};
   padding: 16px;
 
-  .heartPart {
+  .first {
     ${variables.flex('row')};
-    cursor: pointer;
-
     .heartCount {
       margin-left: 10px;
     }
@@ -164,13 +122,5 @@ const Tail = styled.div`
 
 const HeartIcon = styled(FontAwesomeIcon)`
   color: ${props => (props.isSelect ? theme.orange : 'black')};
-  div {
-    cursor: pointer;
-  }
 `;
-
-const CommentIcon = styled(FontAwesomeIcon)`
-  cursor: pointer;
-`;
-
 export default Dashboard;
