@@ -18,26 +18,27 @@ const CarouselImage = ({
         src={src}
         ref={ele => (imgRef.current[imgIndex] = ele)}
       />
-      {infoList.map((tag, index) => {
-        let tagPosition = transformPos(
-          tag.coordinateX,
-          tag.coordinateY,
-          imgRef.current[imgIndex]?.offsetWidth,
-          imgRef.current[imgIndex]?.offsetHeight
-        );
+      {infoList &&
+        infoList.map((tag, index) => {
+          let tagPosition = transformPos(
+            tag.coordinateX,
+            tag.coordinateY,
+            imgRef.current[imgIndex]?.offsetWidth,
+            imgRef.current[imgIndex]?.offsetHeight
+          );
 
-        // 캐러셀용 좌표 이동 (캐러셀은 사진 펼쳐져 있음)
-        tagPosition.x = tagPosition.x + 550 * imgIndex;
+          // 캐러셀용 좌표 이동 (캐러셀은 사진 펼쳐져 있음)
+          tagPosition.x = tagPosition.x + 550 * imgIndex;
 
-        return (
-          <TagButton
-            key={index}
-            point={tagPosition}
-            handleONDashTag={() => handleONDashTag(index)}
-            handleOFFDashTag={handleOFFDashTag}
-          />
-        );
-      })}
+          return (
+            <TagButton
+              key={index}
+              point={tagPosition}
+              handleONDashTag={() => handleONDashTag(index)}
+              handleOFFDashTag={handleOFFDashTag}
+            />
+          );
+        })}
     </div>
   );
 };

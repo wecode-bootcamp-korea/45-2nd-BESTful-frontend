@@ -3,14 +3,25 @@ import styled from 'styled-components';
 
 const MainFooter = () => {
   return (
-    <Container>
-      {FOOTER_DATA.map(footer => {
-        return <FooterItem key={footer.id}>{footer.title}</FooterItem>;
-      })}
-      <CopyRight>&copy; 2023. oneul, Co., LTD. All rights reserved</CopyRight>
-    </Container>
+    <>
+      {/* <div>
+        <Line />
+      </div> */}
+      <Container>
+        {FOOTER_DATA.map(footer => {
+          return <FooterItem key={footer.id}>{footer.title}</FooterItem>;
+        })}
+        <CopyRight>&copy; 2023. oneul, Co., LTD. All rights reserved</CopyRight>
+      </Container>
+    </>
   );
 };
+
+// const Line = styled.div`
+//   width: 1px;
+//   height: 90px;
+//   border: 1px solid #dddedd;
+// `;
 
 const Container = styled.div`
   display: flex;
@@ -18,8 +29,7 @@ const Container = styled.div`
   align-content: flex-start;
   gap: 15px;
   width: 350px;
-  margin-left: 100px;
-  font-size: 13px;
+  font-size: 12px;
   color: #bbb;
 `;
 
@@ -41,6 +51,6 @@ const FOOTER_DATA = [
   { id: 4, title: '공지사항' },
   { id: 5, title: '개인정보 처리방침' },
   { id: 6, title: '제휴/광고 문의' },
-  { id: 7, title: '상품광고 소개' },
-  { id: 8, title: '고개의 소리' },
+  { id: 7, title: '상품 광고 소개' },
+  { id: 8, title: '고객의 소리' },
 ];

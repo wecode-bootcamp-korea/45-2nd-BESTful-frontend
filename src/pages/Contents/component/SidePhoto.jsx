@@ -6,16 +6,17 @@ import theme from '../../../styles/theme';
 const SidePhoto = ({ data, onMoveImg }) => {
   return (
     <Container>
-      {data.map((img, index) => {
-        return (
-          <img
-            key={index}
-            alt="이미지"
-            src={img.contentUrl}
-            onClick={() => onMoveImg(index)}
-          />
-        );
-      })}
+      {data &&
+        data.map((img, index) => {
+          return (
+            <img
+              key={index}
+              alt="이미지"
+              src={img.contentUrl}
+              onClick={() => onMoveImg(index)}
+            />
+          );
+        })}
     </Container>
   );
 };

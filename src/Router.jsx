@@ -8,10 +8,10 @@ import Contents from './pages/Contents/Contents';
 import Users from './pages/Users/Users';
 import Nav from './components/Nav/Nav';
 import Container from './components/Container/Container';
-import Best from './pages/Best/Best';
-import Following from './pages/Following/Following';
-import MainInfinite from './pages/Main/MainInfinite';
 import InvalidAccess from './pages/Contents/InvalidAccess';
+import InfiniteFollowing from './pages/Following/InfiniteFollowing';
+import InfiniteMain from './pages/Main/InfiniteMain';
+import InfiniteBest from './pages/Best/InfiniteBest';
 
 const Router = () => {
   const location = useLocation();
@@ -35,9 +35,9 @@ const Router = () => {
           <Route path="/contents/:id" element={<Contents />} />
           <Route path="*" element={<InvalidAccess />} />
         </Route>
-        <Route path="/best" element={<Best />} />
-        <Route path="/" element={<MainInfinite />} />
-        <Route path="/:userId/following" element={<Following />} />
+        <Route path="/best" element={<InfiniteBest />} />
+        <Route path="/" element={<InfiniteMain />} />
+        <Route path="/following" element={<InfiniteFollowing />} />
       </Routes>
     </>
   );
