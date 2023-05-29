@@ -69,7 +69,7 @@ export default Footer;
 
 const Container = styled.div`
   position: relative;
-  min-height: 100vh;
+  height: 400px;
   font-family: 'Noto Sans', sans-serif;
 `;
 
