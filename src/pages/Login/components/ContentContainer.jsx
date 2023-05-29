@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
-const ContentContainer = () => {
+const ContentContainer = ({ className }) => {
   const navigate = useNavigate();
 
   const loginButtonRef = useRef();
@@ -23,7 +23,7 @@ const ContentContainer = () => {
           const token = accessToken;
 
           const response = await axios.post(
-            'http://10.58.52.204:3700/users/kakaologin',
+            'http://10.58.52.185:3000/users/kakaologin',
             {
               kakaoToken: token,
             }
@@ -87,23 +87,23 @@ const ContentContainer = () => {
     cursor: pointer;
   `;
 
-  const ContentContainer = styled.div`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-  `;
-
   return (
-    <ContentContainer>
+    <StyledContentContainer className={className}>
       <SnsLoginSignup>SNS계정으로 간편 로그인/회원가입</SnsLoginSignup>
       <KakaoLoginButton id="kakaoLoginBtn" ref={loginButtonRef} />
       <UnlinkButton onClick={handleUnlink}>
         카카오 연결을 끊고 싶으신가요?
       </UnlinkButton>
-    </ContentContainer>
+    </StyledContentContainer>
   );
 };
 
 export default ContentContainer;
+
+const StyledContentContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+`;

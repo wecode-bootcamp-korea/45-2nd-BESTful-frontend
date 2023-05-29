@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ProfileImage = ({ src, width }) => {
+const ProfileImage = ({ src, width, goToMypage }) => {
   return (
     <div className="profileImage">
       <Image

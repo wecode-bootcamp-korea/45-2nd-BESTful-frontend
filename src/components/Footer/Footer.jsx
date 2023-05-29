@@ -23,9 +23,9 @@ const Footer = () => {
 
             <LeftBottomWrap>
               <LeftBottom>
-                <Div>(주)오늘뭐입지 |</Div>
+                <span>(주)오늘뭐입지 |</span>
                 <Div>대표이사 박현아 |</Div>
-                <Div>서울 서초구 선릉로 위워크 10층</Div>
+                <span>서울 서초구 선릉로 위워크 10층</span>
               </LeftBottom>
               <ContactoneulmoipzicomContainer>
                 <Contactoneulmoipzicom>
@@ -33,7 +33,7 @@ const Footer = () => {
                   <Span>사업자정보확인</Span>
                 </Contactoneulmoipzicom>
               </ContactoneulmoipzicomContainer>
-              <Div>통신판매업신고번호 제2000-서울선릉-000호</Div>
+              <div>통신판매업신고번호 제2000-서울선릉-000호</div>
             </LeftBottomWrap>
           </TextLeftWrap>
 
@@ -54,7 +54,7 @@ const Footer = () => {
                 </Adver>
                 <Copy>
                   copyright 2023. Oneul, Co., LTD. All rights reserved. made by
-                  SeungMinOh
+                  <SeungMin>SeungMinOh</SeungMin>
                 </Copy>
               </InfoContents>
             </TextRight>
@@ -103,6 +103,11 @@ const DivWrap = styled.div`
 const Div1 = styled.div`
   font-size: 32px;
   font-weight: 300;
+  cursor: pointer;
+  :hover {
+    transform: scale(1.1);
+    transition-duration: 0.3s;
+  }
 `;
 
 const Div2 = styled.div``;
@@ -118,6 +123,11 @@ const NumWrap = styled.div`
 const PhoneNum = styled.div`
   font-size: 32px;
   font-weight: bold;
+  cursor: pointer;
+  :hover {
+    transform: scale(1.1);
+    transition-duration: 0.3s;
+  }
 `;
 
 const Time = styled.div`
@@ -142,8 +152,19 @@ const LeftBottom = styled.div`
   font-size: 12px;
 `;
 
-const Div = styled.div``;
-
+const Div = styled.div`
+  cursor: pointer;
+  :hover {
+    transform: scale(1.1);
+    transition-duration: 0.3s;
+  }
+`;
+const SeungMin = styled.span`
+  margin-left: 4px;
+  :hover {
+    color: red;
+  }
+`;
 const ContactoneulmoipzicomContainer = styled.div`
   width: 380px;
 `;
