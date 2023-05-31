@@ -56,7 +56,7 @@ const FeedImage = ({ image, posting, feedGet, category, myId, feedId }) => {
   };
 
   const deleteFeed = id => {
-    const url = `http://10.58.52.108:3700/feeds/${feedId}`;
+    const url = `http://10.58.52.185:3000/feeds/${feedId}`;
     // let query = '';
 
     // if (id) {

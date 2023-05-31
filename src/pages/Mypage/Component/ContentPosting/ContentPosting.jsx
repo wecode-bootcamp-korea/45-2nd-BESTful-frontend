@@ -11,7 +11,7 @@ const ContentPosting = ({ category, me }) => {
   const categoryMode = { true: feed, false: like };
 
   const feedGet = () => {
-    const url = `http://10.58.52.125:6700/feeds/users/${myId}`;
+    const url = `http://10.58.52.185:3000/feeds/users/${myId}`;
 
     fetch(url, {
       method: 'GET',
@@ -24,7 +24,7 @@ const ContentPosting = ({ category, me }) => {
   };
 
   const likeGet = () => {
-    const url = `http://10.58.52.125:6700/feeds/likes/${myId}`;
+    const url = `http://10.58.52.185:3000/feeds/likes/${myId}`;
 
     fetch(url, {
       method: 'GET',
