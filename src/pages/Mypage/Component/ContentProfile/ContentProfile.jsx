@@ -22,7 +22,7 @@ const ContentProfile = ({
   };
 
   const changeImage = image => {
-    const url = `http://10.58.52.125:6700/users/image`;
+    const url = `http://10.58.52.185:3000/users/image`;
 
     let formData = new FormData();
     formData.append('profileImage', image); // Append the file object, not the file name

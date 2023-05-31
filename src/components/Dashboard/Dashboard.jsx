@@ -26,7 +26,7 @@ const Dashboard = ({ data, scale = 1 }) => {
 
   //좋아요 버튼 클릭 함수
   const handleHeart = () => {
-    fetch(`http://10.58.52.204:3700/likes/${data.feedId}`, {
+    fetch(`http://10.58.52.185:3000/likes/${data.feedId}`, {
       method: heart ? 'DELETE' : 'POST',
       headers: {
         Authorization: localStorage.getItem('resToken'),
@@ -54,7 +54,7 @@ const Dashboard = ({ data, scale = 1 }) => {
 
   //좋아요 불러오기
   useEffect(() => {
-    fetch(`http://10.58.52.204:3700/likes/${data.feedId}`, {
+    fetch(`http://10.58.52.185:3000/likes/${data.feedId}`, {
       method: 'GET',
       headers: {
         Authorization: localStorage.getItem('resToken'),
@@ -145,7 +145,6 @@ const ImageLabel = styled.div`
 
   img {
     width: 100%;
-    object-fit: cover;
   }
 `;
 

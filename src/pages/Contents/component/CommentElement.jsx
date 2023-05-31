@@ -8,13 +8,13 @@ const CommentElement = ({ comment, feedId, getComments }) => {
 
   // 댓글 삭제하기 버튼 (fetch)
   const handleDelete = () => {
-    fetch('http://10.58.52.108:3000/comment', {
+    fetch('http://10.58.52.185:3000/comment', {
       method: 'PATCH',
       headers: {
         Authorization: localStorage.getItem('resToken'),
         'Content-Type': 'application/json;charset=utf-8',
       },
-      body: JSON.stringify({ commentId: comment.id, feedId: feedId }),
+      body: JSON.stringify({ commentId: comment.commentsId, feedId: feedId }),
     })
       .then(res => res.json())
       .then(res => {
@@ -27,7 +27,7 @@ const CommentElement = ({ comment, feedId, getComments }) => {
       <ProfileImage src={comment.profileImageUrl} width={30} />
       <CharPart>
         <div className="name">{comment.userName}</div>
-        <div className="content">{comment.contents}</div>
+        <div className="content">{comment.commentContents}</div>
 
         <Under>
           <div>{time}</div>
@@ -77,7 +77,7 @@ const computeTime = createdAt => {
   const now = new Date();
   const year = now.getFullYear();
   const month = now.getMonth() + 1;
-  const day = now.getDate() + 1;
+  const day = now.getDate();
   const hour = now.getHours();
   const minutes = now.getMinutes();
 

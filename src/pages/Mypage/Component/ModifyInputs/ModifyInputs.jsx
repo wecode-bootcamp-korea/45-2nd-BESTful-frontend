@@ -85,7 +85,7 @@ const ModifyInputs = ({ profile }) => {
   const activateButton = cellphone !== null && changeSex !== '';
 
   const postProfile = () => {
-    const url = `http://10.58.52.125:6700/users/edit`;
+    const url = `http://10.58.52.185:3000/users/edit`;
 
     fetch(url, {
       method: 'PATCH',

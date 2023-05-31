@@ -23,7 +23,7 @@ const SidePhoto = ({ data, onMoveImg }) => {
 const Container = styled.div`
   ${variables.flex('column', 'flex-start')}
   position:fixed;
-  padding-top: 200px;
+  padding-top: 120px;
 
   img {
     width: 50px;

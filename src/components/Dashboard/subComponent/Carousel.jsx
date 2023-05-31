@@ -135,7 +135,6 @@ const Container = styled.div`
 const StyledSlider = styled(Slider)`
   img {
     width: 550px;
-    object-fit: cover;
   }
   .slick-prev::before,
   .slick-next::before {

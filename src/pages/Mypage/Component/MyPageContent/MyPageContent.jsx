@@ -27,7 +27,7 @@ const MyPageContent = ({
   const meMeId = me.id;
 
   const fetchResult = async () => {
-    const url = `http://10.58.52.125:6700/users/`;
+    const url = `http://10.58.52.185:3000/users/`;
 
     try {
       const response = await fetch(url, {
@@ -47,7 +47,7 @@ const MyPageContent = ({
   // 로그인 한 유저(나) 정보 받기
 
   const followerFetch = () => {
-    const url = `http://10.58.52.125:6700/follower/following/${meMeId}`;
+    const url = `http://10.58.52.185:3000/follower/following/${meMeId}`;
 
     fetch(url, {
       method: 'GET',
@@ -65,7 +65,7 @@ const MyPageContent = ({
   // 팔로워 정보 받기
 
   const followingFetch = () => {
-    const url = `http://10.58.52.125:6700/follower/${meMeId}`;
+    const url = `http://10.58.52.185:3000/follower/${meMeId}`;
 
     fetch(url, {
       method: 'GET',

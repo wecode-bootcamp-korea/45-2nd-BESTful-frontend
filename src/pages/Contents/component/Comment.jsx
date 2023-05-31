@@ -12,7 +12,7 @@ const Comment = ({ feedId, commentRef }) => {
 
   // 댓글 불러오기 fetch
   const getComments = () => {
-    fetch(`http://10.58.52.108:3000/feeds/${feedId}/comment`)
+    fetch(`http://10.58.52.185:3000/feeds/${feedId}/comment`)
       .then(res => res.json())
       .then(res => {
         setComments(res);
@@ -21,7 +21,7 @@ const Comment = ({ feedId, commentRef }) => {
 
   // 현재 유저 정보 불러오기
   useEffect(() => {
-    fetch('http://10.58.52.204:3700/users/', {
+    fetch('http://10.58.52.185:3000/users', {
       method: 'GET',
       headers: {
         Authorization: localStorage.getItem('resToken'),
@@ -51,7 +51,7 @@ const Comment = ({ feedId, commentRef }) => {
         {comments &&
           comments.map(comment => (
             <CommentElement
-              key={comment.id}
+              key={comment.commentsId}
               feedId={feedId}
               comment={comment}
               getComments={getComments}

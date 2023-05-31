@@ -11,7 +11,7 @@ const Main = () => {
 
   const { loading, data, error } = useFetch(
     [],
-    'http://10.58.52.108:3700/feeds/2',
+    'http://10.58.52.185:3000/feeds/2',
     {
       method: 'GET',
     }

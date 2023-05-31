@@ -21,7 +21,7 @@ const UserContent = () => {
   const userId = params.id;
 
   const fetchResult = async () => {
-    const url = `http://10.58.52.125:6700/users/${userId}`;
+    const url = `http://10.58.52.185:3000/users/${userId}`;
 
     try {
       const response = await fetch(url, {
@@ -40,7 +40,7 @@ const UserContent = () => {
   // 유저 데이터 받아오기
 
   const userFollowerFetch = () => {
-    const url = `http://10.58.52.125:6700/follower/following/${userId}`;
+    const url = `http://10.58.52.185:3000/follower/following/${userId}`;
 
     fetch(url, {
       method: 'GET',
@@ -57,7 +57,7 @@ const UserContent = () => {
   // 팔로워 데이터 받아오기
 
   const userFollowingFetch = () => {
-    const url = `http://10.58.52.125:6700/follower/${userId}`;
+    const url = `http://10.58.52.185:3000/follower/${userId}`;
 
     fetch(url, {
       method: 'GET',
@@ -74,7 +74,7 @@ const UserContent = () => {
   // 팔로잉 데이터 받아오기
 
   const meFetch = () => {
-    fetch(`http://10.58.52.125:6700/users`, {
+    fetch(`http://10.58.52.185:3000/users`, {
       method: 'GET',
       headers: {
         Authorization: localStorage.getItem('resToken'),
@@ -89,7 +89,7 @@ const UserContent = () => {
   // 내 정보 가져오기
 
   const IFollowing = () => {
-    const url = `http://10.58.52.125:6700/follower/${myData.id}`;
+    const url = `http://10.58.52.185:3000/follower/${myData.id}`;
 
     fetch(url, {
       method: 'GET',

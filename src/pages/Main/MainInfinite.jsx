@@ -20,7 +20,7 @@ const MainInfinite = () => {
 
   const fetchData = () => {
     fetch(
-      `http://10.58.52.108:3700/feeds?from=${
+      `http://10.58.52.185:3000/feeds?from=${
         offset + limit
       }&count=${limit}&${queryString}`
     )
@@ -35,7 +35,7 @@ const MainInfinite = () => {
   };
 
   useEffect(() => {
-    fetch(`http://10.58.52.108:3700/feeds?from=0&count=3&${queryString}`)
+    fetch(`http://10.58.52.185:3000/feeds?from=0&count=3&${queryString}`)
       .then(res => res.json())
       .then(res => {
         if (res.length < limit) {
