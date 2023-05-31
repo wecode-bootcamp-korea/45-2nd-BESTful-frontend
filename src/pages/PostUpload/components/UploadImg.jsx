@@ -1,7 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import StyleInput from './StyleInput';
 import styled from 'styled-components';
-import variables from '../../../styles/variables';
 import theme from '../../../styles/theme';
 
 const UploadImg = ({
@@ -10,7 +9,6 @@ const UploadImg = ({
   setDatas,
   index,
   currentIndex,
-  element,
   imgIndex,
   imageRef,
 }) => {
@@ -81,27 +79,25 @@ const UploadImg = ({
         index={index}
         currentIndex={currentIndex}
       />
-      <div className="functionBox">
-        <DeleteBtn onClick={deleteItem}>
-          <svg
-            className="imgDelete"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 448 512"
-          >
-            {/*<!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) --> */}
-            <path d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z" />
-          </svg>
-        </DeleteBtn>
-        {tagMode ? (
-          <button className="taggingBtn" onClick={handleTagBtn}>
-            편집 완료
-          </button>
-        ) : (
-          <button className="taggingBtn" onClick={handleTagBtn}>
-            + 상품 태그하기
-          </button>
-        )}
-      </div>
+      <DeleteBtn onClick={deleteItem}>
+        <svg
+          className="imgDelete"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 448 512"
+        >
+          {/*<!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) --> */}
+          <path d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z" />
+        </svg>
+      </DeleteBtn>
+      {tagMode ? (
+        <button className="taggingBtn" onClick={handleTagBtn}>
+          편집 완료
+        </button>
+      ) : (
+        <button className="taggingBtn" onClick={handleTagBtn}>
+          + 상품 태그하기
+        </button>
+      )}
     </UploadedImg>
   );
 };
@@ -110,24 +106,23 @@ const UploadedImg = styled.div`
   width: 550px;
   position: relative;
   margin: 0 24px 0 0;
-  .functionBox {
-    padding: 0px 12px;
+  .imgDelete {
     position: absolute;
     bottom: 10px;
-    width: 100%;
-    ${variables.flex('row', 'space-between', 'center')}
-    .imgDelete {
-      width: 20px;
-      fill: white;
-    }
-    .taggingBtn {
-      border: none;
-      background-color: ${theme.orange};
-      color: white;
-      padding: 5px 10px;
-      border-radius: 15px;
-      cursor: pointer;
-    }
+    left: 10px;
+    width: 20px;
+    fill: white;
+  }
+  .taggingBtn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border: none;
+    background-color: ${theme.orange};
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    cursor: pointer;
   }
 `;
 

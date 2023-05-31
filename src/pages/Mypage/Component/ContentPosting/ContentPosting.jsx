@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import FeedImage from '../FeedImage/FeedImage';
+import { useNavigate } from 'react-router-dom';
 
 const ContentPosting = ({ category, me }) => {
   const [feed, setFeed] = useState([]);
   const [like, setLike] = useState([]);
   const myId = me.id;
+
+  const navigate = useNavigate();
 
   const categoryMode = { true: feed, false: like };
 
@@ -46,9 +49,16 @@ const ContentPosting = ({ category, me }) => {
         {(categoryMode[category] === undefined ||
           categoryMode[category].length === 0) && (
           <PostingNone>
-            {category
-              ? '+ 첫 게시물을 올려보세요!'
-              : '+ 게시물을 좋아요 해보세요!'}
+            {category ? (
+              <span
+                className="firstPost"
+                onClick={() => navigate('/post-upload')}
+              >
+                + 첫 게시물을 올려보세요!
+              </span>
+            ) : (
+              '+ 게시물을 좋아요 해보세요!'
+            )}
           </PostingNone>
         )}
         {categoryMode[category] !== undefined &&
@@ -91,4 +101,7 @@ const PostingNone = styled.div`
   width: 100%;
   height: 200px;
   color: lightgray;
+  .firstPost {
+    cursor: pointer;
+  }
 `;

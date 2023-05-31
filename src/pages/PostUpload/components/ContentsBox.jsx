@@ -21,7 +21,7 @@ const ContentsBox = ({
 
     const file = imgRef.current[index].files[0];
 
-    if (file.length === 0 || !file) {
+    if (!file || file.length === 0) {
       return;
     }
 
