@@ -37,6 +37,8 @@ const Contents = () => {
     let x = parseInt(curX);
     let y = parseInt(curY);
 
+    if (height === 0) return { x: x, y: y };
+
     if (x < 20) {
       x = x + 10;
     } else if (x > width - 20) {
@@ -94,7 +96,7 @@ const Contents = () => {
 
   //피드 데이터 불러오기
   useEffect(() => {
-    fetch(`http://10.58.52.108:3700/feeds/${feedId}`)
+    fetch(`http://10.58.52.185:3000/feeds/${feedId}`)
       .then(res => res.json())
       .then(res => {
         const [data] = res;

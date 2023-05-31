@@ -23,7 +23,7 @@ const SideBar = ({ likes, onMoveComment, feedId }) => {
 
   // 좋아요 클릭시 실행 함수
   const handleHeart = () => {
-    fetch(`http://10.58.52.204:3700/likes/${feedId}`, {
+    fetch(`http://10.58.52.185:3000/likes/${feedId}`, {
       method: heart ? 'DELETE' : 'POST',
       headers: {
         Authorization: localStorage.getItem('resToken'),
@@ -37,7 +37,7 @@ const SideBar = ({ likes, onMoveComment, feedId }) => {
 
   //좋아요 불러오기
   useEffect(() => {
-    fetch(`http://10.58.52.204:3700/likes/${feedId}`, {
+    fetch(`http://10.58.52.185:3000/likes/${feedId}`, {
       method: 'GET',
       headers: {
         Authorization: localStorage.getItem('resToken'),
@@ -75,7 +75,7 @@ const SideBar = ({ likes, onMoveComment, feedId }) => {
 const Container = styled.div`
   ${variables.flex('column')}
   position:fixed;
-  padding-top: 200px;
+  padding-top: 120px;
 
   .heartWrapper {
     ${variables.flex('column', 'center', 'center')}

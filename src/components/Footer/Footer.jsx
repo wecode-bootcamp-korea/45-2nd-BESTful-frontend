@@ -9,7 +9,7 @@ const Footer = () => {
           <TextLeftWrap>
             <DivWrap>
               <Div1>고객센터</Div1>
-              <Div2>></Div2>
+              <Div2>{'>'}</Div2>
             </DivWrap>
             <NumWrap>
               <PhoneNum>1234 - 0712</PhoneNum>
@@ -24,7 +24,7 @@ const Footer = () => {
             <LeftBottomWrap>
               <LeftBottom>
                 <span>(주)오늘뭐입지 |</span>
-                <Div>대표이사 박현아 |</Div>
+                <span>대표이사 박현아 |</span>
                 <span>서울 서초구 선릉로 위워크 10층</span>
               </LeftBottom>
               <ContactoneulmoipzicomContainer>
@@ -148,7 +148,7 @@ const Day = styled.div``;
 const LeftBottom = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 340px;
+  width: 380px;
   font-size: 12px;
 `;
 
@@ -166,7 +166,7 @@ const SeungMin = styled.span`
   }
 `;
 const ContactoneulmoipzicomContainer = styled.div`
-  width: 380px;
+  width: 420px;
 `;
 
 const Contactoneulmoipzicom = styled.span`

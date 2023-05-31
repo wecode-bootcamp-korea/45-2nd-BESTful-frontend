@@ -12,7 +12,6 @@ import Best from './pages/Best/Best';
 import Following from './pages/Following/Following';
 import MainInfinite from './pages/Main/MainInfinite';
 import InvalidAccess from './pages/Contents/InvalidAccess';
-import Main from './pages/Main/Main';
 
 const Router = () => {
   const location = useLocation();
@@ -39,7 +38,6 @@ const Router = () => {
         <Route path="/best" element={<Best />} />
         <Route path="/" element={<MainInfinite />} />
         <Route path="/:userId/following" element={<Following />} />
-        <Route path="/main-dashboard" element={<Main />} />
       </Routes>
     </>
   );

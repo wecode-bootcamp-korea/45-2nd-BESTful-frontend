@@ -15,7 +15,7 @@ const TagModal = ({ point, info, handleONDashTag, handleOFFDashTag }) => {
     >
       <Triangle />
       <Rectangle>
-        <div className="info">[{info.clothInformation}]</div>
+        <div className="info">[{info.tagContent}]</div>
         <div className="name">{info.clothName}</div>
         <div className="price">{info.clothPrice?.toLocaleString()} 원</div>
         <div className="hash">
@@ -29,7 +29,7 @@ const TagModal = ({ point, info, handleONDashTag, handleOFFDashTag }) => {
         </Details>
         <Details>
           <div className="title">설명:</div>
-          <div className="detailInfo">{info.tagContent}</div>
+          <div className="detailInfo">{info.clothInformation}</div>
         </Details>
       </Rectangle>
     </Modal>

@@ -8,7 +8,7 @@ const InputPart = ({ feedId, getComments }) => {
 
   // 댓글 추가 fetch
   const addComment = () => {
-    fetch('http://10.58.52.108:3000/comment', {
+    fetch('http://10.58.52.185:3000/comment', {
       method: 'POST',
       headers: {
         Authorization: localStorage.getItem('resToken'),
