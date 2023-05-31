@@ -158,7 +158,7 @@ const Best = styled(Link)`
   cursor: pointer;
   text-decoration: none;
   :hover {
-    color: skyblue;
+    color: #fe4600;
   }
 `;
 
@@ -166,7 +166,7 @@ const Following = styled(Link)`
   cursor: pointer;
   text-decoration: none;
   :hover {
-    color: skyblue;
+    color: #fe4600;
   }
 `;
 
@@ -180,7 +180,7 @@ const BottomRight = styled.div`
 const IsLogin = styled.div`
   cursor: pointer;
   :hover {
-    color: skyblue;
+    color: #fe4600;
   }
 `;
 
@@ -188,7 +188,7 @@ const Write = styled(Link)`
   cursor: pointer;
   text-decoration: none;
   :hover {
-    color: skyblue;
+    color: #fe4600;
   }
 `;
 

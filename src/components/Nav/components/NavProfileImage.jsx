@@ -20,7 +20,7 @@ const Image = styled.img`
   object-fit: cover;
   cursor: pointer;
   :hover {
-    border: skyblue 2px solid;
+    border: #fe4600 2px solid;
   }
 `;
 
