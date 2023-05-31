@@ -36,31 +36,62 @@ const PostUpload = () => {
 
     const url = `http://10.58.52.185:3000/feeds/upload`;
 
-    let formData = new FormData();
-    formData.append('feedDescription', desc);
-    for (let i = 1; i <= datas[datas.length - 1].id; i++) {
-      formData.append(
-        'contentsImage',
-        datas.find(data => data.id === i).imgFile
-      );
-    }
-    formData.append('feedInfo', JSON.stringify(datas));
+    if (datas[datas.length - 1].contentUrl === '') {
+      const copiedDatas = [...datas];
+      copiedDatas.pop();
 
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        Authorization: localStorage.getItem('resToken'),
-      },
-      body: formData,
-    })
-      .then(res => res.json())
-      .then(data => {
-        alert(`업로드 되었습니다!`);
-        navigate('/');
+      let formData = new FormData();
+      formData.append('feedDescription', desc);
+      for (let i = 1; i <= copiedDatas[copiedDatas.length - 1].id; i++) {
+        formData.append(
+          'contentsImage',
+          copiedDatas.find(data => data.id === i).imgFile
+        );
+      }
+      formData.append('feedInfo', JSON.stringify(copiedDatas));
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          Authorization: localStorage.getItem('resToken'),
+        },
+        body: formData,
       })
-      .catch(error => {
-        console.error(error);
-      });
+        .then(res => res.json())
+        .then(data => {
+          alert(`업로드 되었습니다!`);
+          navigate('/');
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    } else {
+      let formData = new FormData();
+      formData.append('feedDescription', desc);
+      for (let i = 1; i <= datas[datas.length - 1].id; i++) {
+        formData.append(
+          'contentsImage',
+          datas.find(data => data.id === i).imgFile
+        );
+      }
+      formData.append('feedInfo', JSON.stringify(datas));
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          Authorization: localStorage.getItem('resToken'),
+        },
+        body: formData,
+      })
+        .then(res => res.json())
+        .then(data => {
+          alert(`업로드 되었습니다!`);
+          navigate('/');
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
   };
 
   const handleAdd = event => {
@@ -173,6 +204,7 @@ const Form = styled.form`
       height: 60px;
       object-fit: cover;
       border-radius: 5px;
+      cursor: pointer;
     }
   }
 `;
