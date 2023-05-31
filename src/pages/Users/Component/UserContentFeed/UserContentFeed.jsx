@@ -5,7 +5,7 @@ import ContentImage from '../ContentImage/ContentImage';
 const UserContentFeed = ({ userId }) => {
   const [feed, setFeed] = useState([]);
   const feedGet = () => {
-    const url = `http://10.58.52.125:6700/feeds/users/${userId}`;
+    const url = `http://10.58.52.185:3000/feeds/users/${userId}`;
 
     fetch(url, {
       method: 'GET',

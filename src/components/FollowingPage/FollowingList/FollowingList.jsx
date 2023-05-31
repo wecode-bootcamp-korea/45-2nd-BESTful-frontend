@@ -14,7 +14,7 @@ const FollowingList = ({ name, src, id }) => {
   };
 
   const followUser = () => {
-    const url = `http://10.58.52.125:6700/follower`;
+    const url = `http://10.58.52.185:3000/follower`;
 
     fetch(url, {
       method: `${followOrNot ? 'DELETE' : 'POST'}`,
