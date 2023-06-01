@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import TagButton from '../../tagButton/TagButton';
 import TagModal from './TagModal';
+import styled from 'styled-components';
 
 const CarouselImage = ({
   src, //캐러셀 이미지 src
@@ -13,7 +14,7 @@ const CarouselImage = ({
   handleImageClick, //해당 이미지 클릭시 함수 (피드 상세페이지로 이동)
 }) => {
   return (
-    <div onClick={() => handleImageClick(imgIndex)}>
+    <Container onClick={() => handleImageClick(imgIndex)}>
       <img
         alt="이미지"
         src={src}
@@ -42,8 +43,10 @@ const CarouselImage = ({
             />
           );
         })}
-    </div>
+    </Container>
   );
 };
 
 export default CarouselImage;
+
+const Container = styled.div``;
