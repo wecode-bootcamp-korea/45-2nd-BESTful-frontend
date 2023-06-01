@@ -24,6 +24,7 @@ const InfiniteBest = () => {
   }, []);
 
   useEffect(() => {
+    setLikedFeeds([]);
     const fetchProducts = async () => {
       try {
         // 인코딩

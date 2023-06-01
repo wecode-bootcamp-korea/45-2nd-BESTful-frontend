@@ -34,6 +34,7 @@ const Nav = () => {
   };
 
   const goToLogin = () => {
+    localStorage.removeItem('resToken');
     navigate('/login');
   };
   const goToHome = () => {
@@ -46,18 +47,20 @@ const Nav = () => {
 
   //ProfileImage 가져오기 위함
   useEffect(() => {
-    fetch('http://10.58.52.185:3000/users', {
-      method: 'GET',
-      headers: {
-        Authorization: localStorage.getItem('resToken'),
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-    })
-      .then(res => res.json())
-      .then(data => {
-        setUserInfo(data);
-      });
-  }, []);
+    if (!showModal) {
+      fetch('http://10.58.52.185:3000/users', {
+        method: 'GET',
+        headers: {
+          Authorization: localStorage.getItem('resToken'),
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+      })
+        .then(res => res.json())
+        .then(data => {
+          setUserInfo(data);
+        });
+    }
+  }, [showModal]);
 
   return (
     <Container>
@@ -172,6 +175,7 @@ const Home = styled.img`
 const Best = styled(Link)`
   cursor: pointer;
   text-decoration: none;
+  color: black;
   :hover {
     color: #fe4600;
   }
@@ -180,6 +184,7 @@ const Best = styled(Link)`
 const Following = styled(Link)`
   cursor: pointer;
   text-decoration: none;
+  color: black;
   :hover {
     color: #fe4600;
   }
@@ -202,6 +207,7 @@ const IsLogin = styled.div`
 const Write = styled(Link)`
   cursor: pointer;
   text-decoration: none;
+  color: black;
   :hover {
     color: #fe4600;
   }

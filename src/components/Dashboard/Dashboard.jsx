@@ -98,7 +98,7 @@ const Dashboard = ({ data, scale = 1, searchParams }) => {
               <div className="bold">{data.userName}</div>
             </div>
           </div>
-          <div className="time">{data.createdAt}</div>
+          <div className="time">{data.createdAt.slice(0, 10)}</div>
         </Head>
 
         <ImageLabel>
