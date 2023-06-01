@@ -173,8 +173,6 @@ const ModifyInputs = ({ profile }) => {
               setTextLength(value.length);
               setBiography(value);
               if (value === '') {
-                setBiography(profile.bio);
-              } else if (profile.bio === null) {
                 setBiography('');
               }
             }}

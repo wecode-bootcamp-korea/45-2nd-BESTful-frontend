@@ -27,6 +27,7 @@ const InfiniteFollowing = () => {
   const token = localStorage.getItem('resToken');
 
   useEffect(() => {
+    setFollowerFeeds([]);
     const fetchProducts = async () => {
       try {
         // 인코딩
