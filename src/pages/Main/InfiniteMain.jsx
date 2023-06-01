@@ -40,7 +40,6 @@ const InfiniteMain = () => {
         );
         const data = await response.json();
         setMainFeeds(data);
-        console.log('main', data);
       } catch (error) {
         console.log(error);
       }

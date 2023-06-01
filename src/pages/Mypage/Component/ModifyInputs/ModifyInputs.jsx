@@ -48,7 +48,6 @@ const ModifyInputs = ({ profile }) => {
   const [biography, setBiography] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log('profile', profile);
   const handleModal = e => {
     setIsOpen(e);
   };
