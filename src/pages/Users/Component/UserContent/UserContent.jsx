@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import UserProfile from '../UserProfile/UserProfile';
 import UserContentFeed from '../UserContentFeed/UserContentFeed';
@@ -19,6 +19,7 @@ const UserContent = () => {
   const params = useParams();
 
   const userId = params.id;
+  const navigate = useNavigate();
 
   const fetchResult = async () => {
     const url = `http://10.58.52.185:3000/users/${userId}`;
@@ -114,6 +115,9 @@ const UserContent = () => {
   useEffect(() => {
     meFetch();
     followingsFetch();
+    if (parseInt(userId) === parseInt(myData.id)) {
+      navigate('/mypage');
+    }
   }, [myData.id]);
 
   if (loading) return <div>로딩중...</div>;

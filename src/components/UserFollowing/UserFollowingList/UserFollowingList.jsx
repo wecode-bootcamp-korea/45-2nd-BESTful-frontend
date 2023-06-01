@@ -44,13 +44,8 @@ const UserFollowingList = ({
   };
 
   useEffect(() => {
-    let followerArr = [];
-    followerArr.push(follower);
-
-    for (let j = 0; j < followerArr.length; j++) {
-      if (followerArr[j].id === meId) {
-        setNoButton(true);
-      }
+    if (follower.id === meId) {
+      setNoButton(true);
     }
   }, [follower]);
 

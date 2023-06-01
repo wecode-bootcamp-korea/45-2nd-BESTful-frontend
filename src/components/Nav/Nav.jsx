@@ -33,6 +33,9 @@ const Nav = () => {
     navigate('/');
   };
 
+  const goToLogin = () => {
+    navigate('/login');
+  };
   const goToHome = () => {
     navigate('/');
   };
@@ -59,9 +62,11 @@ const Nav = () => {
   return (
     <Container>
       <NavWrapper>
-        <TitleWrap>
-          <Title onClick={goToHome} src="/images/logo/title.png" />
-        </TitleWrap>
+        <div className="titleWrapper">
+          <TitleWrap to="/">
+            <Title onClick={goToHome} src="/images/logo/title.png" />
+          </TitleWrap>
+        </div>
 
         <BottomWrap>
           <BottomLeft>
@@ -77,7 +82,7 @@ const Nav = () => {
           </BottomLeft>
 
           <BottomRight>
-            <IsLogin onClick={token ? logout : loginModal}>
+            <IsLogin onClick={goToLogin}>
               {token ? '로그아웃' : '로그인'}
             </IsLogin>
             {token && (
@@ -113,19 +118,19 @@ const Nav = () => {
 export default Nav;
 
 const Container = styled.div`
-  position: relative;
   width: 100%;
-  height: 160px;
   overflow: hidden;
   color: black;
 `;
 
 const NavWrapper = styled.div`
-  position: absolute;
-  top: 40px;
+  margin-bottom: 30px;
   width: 100%;
-  height: 98px;
   border-bottom: 0.4px solid grey;
+  .titleWrapper {
+    ${props => props.theme.variables.flex('row', 'center', 'center')}
+    padding: 16px;
+  }
 `;
 
 const Title = styled.img`
@@ -134,7 +139,7 @@ const Title = styled.img`
   cursor: pointer;
 `;
 
-const TitleWrap = styled.div`
+const TitleWrap = styled(Link)`
   font-size: 20px;
   font-family: 'MARU BuriOTF Beta';
   text-align: center;
