@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -42,9 +42,9 @@ const cancelBtn = {
 
 const ModifyInputs = ({ profile }) => {
   const [textLength, setTextLength] = useState(0);
-  const [changeSex, setChangeSex] = useState(profile.sex);
-  const [cellphone, setCellPhone] = useState(profile.cellphone);
-  const [userName, setUserName] = useState(profile.userName);
+  const [changeSex, setChangeSex] = useState('null');
+  const [cellphone, setCellPhone] = useState('010');
+  const [userName, setUserName] = useState('닉네임');
   const [biography, setBiography] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
@@ -101,6 +101,12 @@ const ModifyInputs = ({ profile }) => {
       }),
     }).then(res => res.json());
   };
+
+  useEffect(() => {
+    setChangeSex(profile.sex ? profile.sex : 'null');
+    setCellPhone(profile.cellphone ? profile.cellphone : '010');
+    setUserName(profile.userName ? profile.userName : '유저네임');
+  }, []);
 
   return (
     <ProfileForm>

@@ -48,7 +48,6 @@ const Nav = () => {
   //ProfileImage 가져오기 위함
   useEffect(() => {
     if (!showModal) {
-      console.log('showModal', showModal);
       fetch('http://10.58.52.185:3000/users', {
         method: 'GET',
         headers: {
