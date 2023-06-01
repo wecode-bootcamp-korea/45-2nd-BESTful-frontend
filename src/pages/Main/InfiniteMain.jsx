@@ -102,7 +102,7 @@ const Container = styled.div`
 const StyledInfiniteScroll = styled(InfiniteScroll)`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 55px;
 
   padding-right: 120px;
 
