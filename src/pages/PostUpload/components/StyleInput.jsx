@@ -222,7 +222,7 @@ const StyleInput = ({
                 type="radio"
                 id="dandy"
                 name="style"
-                value="Dandy Look"
+                value="Dandy"
                 onClick={styleInfo}
               />
               <label htmlFor="dandy">댄디</label>
@@ -231,7 +231,7 @@ const StyleInput = ({
                 type="radio"
                 id="street"
                 name="style"
-                value="Street Look"
+                value="Street"
                 onClick={styleInfo}
               />
               <label htmlFor="street">스트릿</label>
