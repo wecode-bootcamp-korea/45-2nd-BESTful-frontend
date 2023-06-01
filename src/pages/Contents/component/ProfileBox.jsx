@@ -18,7 +18,7 @@ const ProfileBox = ({ src, userId, userName, createdAt }) => {
         <ProfileImage src={src} width={70} />
         <div className="bold">{userName}</div>
       </User>
-      <div>{createdAt}</div>
+      <div>{createdAt.slice(0, 10)}</div>
     </Container>
   );
 };

@@ -106,12 +106,18 @@ const UploadedImg = styled.div`
   width: 550px;
   position: relative;
   margin: 0 24px 0 0;
+  .uploadedImage {
+    box-shadow: 0px 0px 2px #000000;
+  }
   .imgDelete {
     position: absolute;
     bottom: 10px;
     left: 10px;
     width: 20px;
-    fill: white;
+    fill: ${theme.orange};
+    &:hover {
+      fill: white;
+    }
   }
   .taggingBtn {
     position: absolute;

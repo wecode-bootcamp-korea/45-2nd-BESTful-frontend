@@ -9,6 +9,9 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const Carousel = ({ imageList, handleImageClick, searchParams }) => {
   const imgRef = useRef([]); //이미지 useRef
+
+  const [imgData, setImgData] = useState([]);
+
   const [current, setCurrent] = useState(0); //현재 이미지 인덱스
   const [clothesInfo, setClothesInfo] = useState([]); //해당 이미지에 부착된 태그위치와 옷 정보(모달을 위한 배열, 태그의 갯수만큼 배열에 객체 존재, 해당 이미지의 n개의 태그이어서 배열형태)
   const [modal, setModal] = useState(false); //모달 on/off
@@ -96,22 +99,39 @@ const Carousel = ({ imageList, handleImageClick, searchParams }) => {
     ),
   };
 
+  const handleInfo = async () => {
+    const sortedImageList = imageList.sort((a, b) => a.id - b.id);
+
+    const [sortedImgData, sortedClothesInfo] = await Promise.all([
+      sortedImageList,
+      sortedImageList[current].clothesInfo,
+    ]);
+
+    setImgData(sortedImgData);
+    setClothesInfo(sortedClothesInfo);
+  };
+
+  useEffect(() => {
+    handleInfo();
+  }, []);
+
   //현재 모여주는 이미지 바뀔때마다 태그위치와 옷정보 변경
   useEffect(() => {
-    setClothesInfo(imageList[current]?.clothesInfo);
+    setClothesInfo(imgData[current]?.clothesInfo);
   }, [current, searchParams]);
+
   return (
     <Container>
       <StyledSlider {...settings}>
-        {imageList &&
-          imageList?.length !== 0 &&
-          imageList?.map((imgData, index) => {
+        {imgData &&
+          imgData?.length !== 0 &&
+          imgData?.map((img, index) => {
             return (
               <CarouselImage
                 key={index}
-                src={imgData.contentUrl}
+                src={img.contentUrl}
                 imgIndex={index}
-                infoList={imgData.clothesInfo}
+                infoList={img.clothesInfo}
                 handleONDashTag={handleONDashTag}
                 handleOFFDashTag={handleOFFDashTag}
                 imgRef={imgRef}

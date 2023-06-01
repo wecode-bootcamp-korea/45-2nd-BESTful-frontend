@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
 const LoginModal = ({ className, setShowModal, url }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const loginButtonRef = useRef();
 
@@ -38,7 +39,11 @@ const LoginModal = ({ className, setShowModal, url }) => {
           console.error(error);
         }
         setShowModal(false);
-        navigate(url);
+        if (location.pathname === url) {
+          window.location.reload();
+        } else {
+          navigate(url);
+        }
 
         window.Kakao.API.request({
           url: '/v2/user/me',

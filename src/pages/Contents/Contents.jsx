@@ -101,11 +101,14 @@ const Contents = () => {
       .then(res => res.json())
       .then(res => {
         const [data] = res;
+
+        data.contentUrls = data.contentUrls?.sort((a, b) => a.id - b.id);
         setData(data);
       });
   }, []);
 
-  if (JSON.stringify(data) === JSON.stringify({})) return;
+  if (data === undefined || JSON.stringify(data) === JSON.stringify({})) return;
+
   return (
     <Container>
       <SidePhoto data={data.contentUrls} onMoveImg={onMoveImg} />
@@ -121,7 +124,7 @@ const Contents = () => {
             key={0}
             imgIndex={0}
             src={data.contentUrls[0]?.contentUrl}
-            infoList={data.contentUrls[0]?.clothesInfo}
+            infoList={data?.contentUrls[0]?.clothesInfo}
             handleONDashTag={handleONDashTag}
             handleOFFDashTag={handleOFFDashTag}
             handleONImage={handleONImage}

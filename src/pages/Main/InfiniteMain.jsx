@@ -96,6 +96,7 @@ const Container = styled.div`
   max-width: 1300px;
   margin: 0 auto;
   height: unset;
+  margin-top: 40px;
 `;
 
 const StyledInfiniteScroll = styled(InfiniteScroll)`

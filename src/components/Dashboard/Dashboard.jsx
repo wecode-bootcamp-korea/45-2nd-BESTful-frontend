@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import ProfileImage from '../ProfileImage/ProfileImage';
 import ArticleContent from './subComponent/ArticleContent';
 import Carousel from './subComponent/Carousel';
@@ -14,7 +14,9 @@ import theme from '../../styles/theme';
 
 const Dashboard = ({ data, scale = 1, searchParams }) => {
   const navigate = useNavigate();
-  // const [data, setData] = useState({});
+  const location = useLocation();
+
+  const [url, setUrl] = useState('');
   const [heart, setHeart] = useState(false); //좋아요
   const [likesCount, setLikesCount] = useState(parseInt(data?.likesCount));
   const [showModal, setShowModal] = useState(false);
@@ -29,6 +31,7 @@ const Dashboard = ({ data, scale = 1, searchParams }) => {
     if (!localStorage.getItem('resToken')) {
       e.preventDefault();
       setShowModal(true);
+      setUrl(location.pathname);
       return;
     }
     fetch(`http://10.58.52.185:3000/likes/${data.feedId}`, {
@@ -87,6 +90,7 @@ const Dashboard = ({ data, scale = 1, searchParams }) => {
           <StyledLoginContentContainer
             onClose={() => setShowModal(false)}
             setShowModal={setShowModal}
+            url={url}
           />
         </>
       )}
