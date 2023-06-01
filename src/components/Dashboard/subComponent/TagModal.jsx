@@ -54,7 +54,7 @@ const Triangle = styled.div`
 `;
 
 const Rectangle = styled.div`
-  width: 210px;
+  width: 300px;
   padding: 10px;
   border-radius: 5px;
   background-color: white;
@@ -99,7 +99,7 @@ const Details = styled.div`
   }
 
   .detailInfo {
-    flex-basis: 150px;
+    flex-basis: 200px;
   }
 `;
 
