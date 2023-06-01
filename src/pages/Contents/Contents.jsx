@@ -37,7 +37,7 @@ const Contents = () => {
     let x = parseInt(curX);
     let y = parseInt(curY);
 
-    if (height === 0) return { x: x, y: y };
+    if (height === undefined || height === 0) return { x: x, y: y };
 
     if (x < 20) {
       x = x + 10;
@@ -66,22 +66,23 @@ const Contents = () => {
     setModal(true);
     let tagPosition;
 
+    // 모달 위
+    if (tagIdx !== 0 && !tagIdx) {
+      tagPosition = transformPos(
+        clothesInfo[curTag]?.coordinateX,
+        clothesInfo[curTag]?.coordinateY,
+        imgRef.current[current]?.offsetWidth,
+        imgRef.current[current]?.offsetHeight
+      );
+    }
+
     //태그버튼 위
-    if (typeof tagIdx === 'number') {
+    else {
       setCurTag(tagIdx); //현재 태그 인덱스 설정
 
       tagPosition = transformPos(
         clothesInfo[tagIdx]?.coordinateX,
         clothesInfo[tagIdx]?.coordinateY,
-        imgRef.current[current]?.offsetWidth,
-        imgRef.current[current]?.offsetHeight
-      );
-    }
-    // 모달 위
-    else {
-      tagPosition = transformPos(
-        clothesInfo[curTag]?.coordinateX,
-        clothesInfo[curTag]?.coordinateY,
         imgRef.current[current]?.offsetWidth,
         imgRef.current[current]?.offsetHeight
       );

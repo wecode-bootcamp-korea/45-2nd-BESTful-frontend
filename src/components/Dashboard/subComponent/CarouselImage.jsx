@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TagButton from '../../tagButton/TagButton';
 
 const CarouselImage = ({
@@ -10,6 +10,7 @@ const CarouselImage = ({
   imgRef, //이미지 useRef
   transformPos, //태그버튼이 사진 끝에 있을때 x, y 좌표 옮겨주는 함수
   handleImageClick, //해당 이미지 클릭시 함수 (피드 상세페이지로 이동)
+  searchParams, //필터링 변경
 }) => {
   return (
     <div onClick={() => handleImageClick(imgIndex)}>
@@ -19,7 +20,8 @@ const CarouselImage = ({
         ref={ele => (imgRef.current[imgIndex] = ele)}
       />
       {infoList &&
-        infoList.map((tag, index) => {
+        infoList?.length !== 0 &&
+        infoList?.map((tag, index) => {
           let tagPosition = transformPos(
             tag.coordinateX,
             tag.coordinateY,
@@ -33,8 +35,9 @@ const CarouselImage = ({
           return (
             <TagButton
               key={index}
+              tagIndex={index}
               point={tagPosition}
-              handleONDashTag={() => handleONDashTag(index)}
+              handleONDashTag={handleONDashTag}
               handleOFFDashTag={handleOFFDashTag}
             />
           );

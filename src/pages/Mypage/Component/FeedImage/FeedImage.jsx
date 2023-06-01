@@ -82,7 +82,7 @@ const FeedImage = ({ image, feedGet, category, feedId }) => {
       )}
       <Modal open={isOpen}>
         <Box sx={modalStyle}>
-          <Typography sx={{ mt: 2 }}>징짜 날 삭제하실꾸에오?</Typography>
+          <Typography sx={{ mt: 2 }}>징짜?</Typography>
           <Stack direction="row" spacing={3}>
             <Button
               variant="contained"

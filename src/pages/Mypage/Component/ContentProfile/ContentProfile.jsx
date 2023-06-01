@@ -37,6 +37,7 @@ const ContentProfile = ({
       .then(res => res.json())
       .then(data => {
         alert('프로필 이미지가 수정되었습니다');
+        window.location.reload();
       })
       .catch(error => {
         console.error(error); // Error handling

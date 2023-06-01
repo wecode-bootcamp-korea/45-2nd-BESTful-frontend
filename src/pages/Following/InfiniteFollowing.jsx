@@ -19,8 +19,6 @@ const InfiniteFollowing = () => {
     new URLSearchParams()
   );
 
-  console.log('followerFeeds', followerFeeds);
-
   // 새로고침 시, 쿼리스트링 지우기
   useEffect(() => {
     setSearchParams(new URLSearchParams());
@@ -33,12 +31,6 @@ const InfiniteFollowing = () => {
       try {
         // 인코딩
         const queryString = searchParams.toString();
-        // function encodeQuery(url) {
-        //   const encodedUrl = encodeURIComponent(url);
-        //   return encodedUrl;
-        // }
-        // const encodedQuery = encodeQuery(queryString);
-        // console.log(encodedQuery);
 
         const response = await fetch(
           `${API_ADDRESS}/feeds/followings?from=0&count=${LIMIT}&${queryString}`,
@@ -51,7 +43,12 @@ const InfiniteFollowing = () => {
         );
         const data = await response.json();
         setFollowerFeeds(data);
-        setHasMore(true);
+
+        if (!data || data.length === 0) {
+          setHasMore(false);
+        } else {
+          setHasMore(true);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -65,11 +62,6 @@ const InfiniteFollowing = () => {
       const offset = followerFeeds?.length;
       // 인코딩
       const queryString = searchParams.toString();
-      // function encodeQuery(url) {
-      //   const encodedUrl = encodeURIComponent(url);
-      //   return encodedUrl;
-      // }
-      // const encodedQuery = encodeQuery(queryString);
 
       const response = await fetch(
         `${API_ADDRESS}/feeds/followings?from=${offset}&count=${LIMIT}&${queryString}`,

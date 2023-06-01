@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
-const ContentContainer = ({ className }) => {
+const LoginModal = ({ className, setShowModal, url }) => {
   const navigate = useNavigate();
 
   const loginButtonRef = useRef();
@@ -37,7 +37,8 @@ const ContentContainer = ({ className }) => {
         } catch (error) {
           console.error(error);
         }
-        navigate('/');
+        setShowModal(false);
+        navigate(url);
 
         window.Kakao.API.request({
           url: '/v2/user/me',
@@ -88,7 +89,6 @@ const ContentContainer = ({ className }) => {
     background: none;
     cursor: pointer;
   `;
-
   return (
     <StyledContentContainer className={className}>
       <SnsLoginSignup>SNS계정으로 간편 로그인/회원가입</SnsLoginSignup>
@@ -100,7 +100,7 @@ const ContentContainer = ({ className }) => {
   );
 };
 
-export default ContentContainer;
+export default LoginModal;
 
 const StyledContentContainer = styled.div`
   position: absolute;

@@ -5,12 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 import theme from '../../styles/theme';
 
-const TagButton = ({ point, handleONDashTag, handleOFFDashTag }) => {
+const TagButton = ({ point, tagIndex, handleONDashTag, handleOFFDashTag }) => {
   return (
     <Tag
       x={`${point.x}px`}
       y={`${point.y}px`}
-      onMouseOver={handleONDashTag}
+      onMouseOver={() => handleONDashTag(tagIndex)}
       onMouseLeave={handleOFFDashTag}
     >
       <BackIcon icon={faCircle} size="lg" />

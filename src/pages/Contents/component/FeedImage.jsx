@@ -21,6 +21,7 @@ const FeedImage = ({
 
   useEffect(() => {
     const hashSet = new Set();
+    if (!infoList || infoList.length === 0) return;
     infoList.forEach(data => {
       hashSet.add(data.style).add(data.season);
     });
@@ -56,8 +57,9 @@ const FeedImage = ({
           return (
             <TagButton
               key={index}
+              tagIndex={index}
               point={tagPosition}
-              handleONDashTag={() => handleONDashTag(index)}
+              handleONDashTag={handleONDashTag}
               handleOFFDashTag={handleOFFDashTag}
             />
           );

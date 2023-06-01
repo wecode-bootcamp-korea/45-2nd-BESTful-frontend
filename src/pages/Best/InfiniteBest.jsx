@@ -23,43 +23,11 @@ const InfiniteBest = () => {
     setSearchParams(new URLSearchParams());
   }, []);
 
-  // // 인코딩
-  // const queryString = searchParams.toString();
-  // function encodeQuery(url) {
-  //   const encodedUrl = encodeURIComponent(url);
-  //   return encodedUrl;
-  // }
-  // const encodedQuery = encodeQuery(queryString);
-
-  // best 5 carousel 용 data fetching
-  const [bestFeeds, setBestFeeds] = useState([]);
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch(
-          `${API_ADDRESS}/feeds/best?orderBy=likesDesc&from=0&count=${LIMIT}`
-        );
-        const data = await response.json();
-        setBestFeeds(data);
-        setHasMore(true);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         // 인코딩
         const queryString = searchParams.toString();
-        // function encodeQuery(url) {
-        //   const encodedUrl = encodeURIComponent(url);
-        //   return encodedUrl;
-        // }
-        // const encodedQuery = encodeQuery(queryString);
 
         const response = await fetch(
           `${API_ADDRESS}/feeds/best?orderBy=likesDesc&from=0&count=${LIMIT}&${queryString}`
@@ -79,11 +47,6 @@ const InfiniteBest = () => {
       const offset = likedFeeds?.length;
       // 인코딩
       const queryString = searchParams.toString();
-      // function encodeQuery(url) {
-      //   const encodedUrl = encodeURIComponent(url);
-      //   return encodedUrl;
-      // }
-      // const encodedQuery = encodeQuery(queryString);
 
       const response = await fetch(
         `${API_ADDRESS}/feeds/best?orderBy=likesDesc&from=${offset}&count=${LIMIT}&${queryString}`
