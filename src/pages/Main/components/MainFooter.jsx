@@ -3,25 +3,14 @@ import styled from 'styled-components';
 
 const MainFooter = () => {
   return (
-    <>
-      {/* <div>
-        <Line />
-      </div> */}
-      <Container>
-        {FOOTER_DATA.map(footer => {
-          return <FooterItem key={footer.id}>{footer.title}</FooterItem>;
-        })}
-        <CopyRight>&copy; 2023. oneul, Co., LTD. All rights reserved</CopyRight>
-      </Container>
-    </>
+    <Container>
+      {FOOTER_DATA.map(footer => {
+        return <FooterItem key={footer.id}>{footer.title}</FooterItem>;
+      })}
+      <CopyRight>&copy; 2023. oneul, Co., LTD. All rights reserved</CopyRight>
+    </Container>
   );
 };
-
-// const Line = styled.div`
-//   width: 1px;
-//   height: 90px;
-//   border: 1px solid #dddedd;
-// `;
 
 const Container = styled.div`
   display: flex;

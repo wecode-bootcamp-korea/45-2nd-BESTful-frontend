@@ -6,6 +6,7 @@ import Dashboard from '../../components/Dashboard/Dashboard';
 import EndMsg from '../../components/InfiniteScroll/EndMsg';
 import Loading from '../../components/InfiniteScroll/Loading';
 import FilterCategory from './components/FilterCategory';
+import TopButton from '../../components/InfiniteScroll/TopButton';
 import { useSearchParams } from 'react-router-dom';
 import { API_ADDRESS } from '../../utils/API_ADDRESS';
 
@@ -13,7 +14,6 @@ const LIMIT = 3;
 
 const InfiniteMain = () => {
   const [mainFeeds, setMainFeeds] = useState([]);
-
   const [hasMore, setHasMore] = useState(true);
 
   const [searchParams, setSearchParams] = useSearchParams(
@@ -33,11 +33,6 @@ const InfiniteMain = () => {
       try {
         // 인코딩
         const queryString = searchParams.toString();
-        // function encodeQuery(url) {
-        //   const encodedUrl = encodeURIComponent(url);
-        //   return encodedUrl;
-        // }
-        // const encodedQuery = encodeQuery(queryString);
 
         const response = await fetch(
           `${API_ADDRESS}/feeds?from=0&count=${LIMIT}&${queryString}`
@@ -57,11 +52,6 @@ const InfiniteMain = () => {
       const offset = mainFeeds?.length;
       // 인코딩
       const queryString = searchParams.toString();
-      // function encodeQuery(url) {
-      //   const encodedUrl = encodeURIComponent(url);
-      //   return encodedUrl;
-      // }
-      // const encodedQuery = encodeQuery(queryString);
 
       const response = await fetch(
         `${API_ADDRESS}/feeds?from=${offset}&count=${LIMIT}&${queryString}`
@@ -90,9 +80,10 @@ const InfiniteMain = () => {
         scrollThreshold={0.8}
       >
         {mainFeeds?.map((feed, index) => (
-          <Dashboard key={index} data={feed} />
+          <Dashboard key={index} data={feed} searchParams={searchParams} />
         ))}
       </StyledInfiniteScroll>
+      <TopButton />
       <MainFooter />
     </Container>
   );

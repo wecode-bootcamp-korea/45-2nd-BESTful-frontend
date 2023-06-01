@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import ProfileImage from '../ProfileImage/ProfileImage';
 import ArticleContent from './subComponent/ArticleContent';
 import Carousel from './subComponent/Carousel';
+import LoginModal from '../../pages/Login/components/LoginModal';
 import { faHeart as emptyHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as fullHeart } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
@@ -11,12 +12,12 @@ import styled from 'styled-components';
 import variables from '../../styles/variables';
 import theme from '../../styles/theme';
 
-const Dashboard = ({ data, scale = 1 }) => {
+const Dashboard = ({ data, scale = 1, searchParams }) => {
   const navigate = useNavigate();
-
-  const [following, setFollowing] = useState(true); //팔로잉/팔로우
+  // const [data, setData] = useState({});
   const [heart, setHeart] = useState(false); //좋아요
-  const [likesCount, setLikesCount] = useState(parseInt(data.likesCount));
+  const [likesCount, setLikesCount] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   //좋아요 유무에 따라 아이콘 변경
   const heartMode = {
@@ -25,7 +26,12 @@ const Dashboard = ({ data, scale = 1 }) => {
   };
 
   //좋아요 버튼 클릭 함수
-  const handleHeart = () => {
+  const handleHeart = e => {
+    if (!localStorage.getItem('resToken')) {
+      e.preventDefault();
+      setShowModal(true);
+      return;
+    }
     fetch(`http://10.58.52.185:3000/likes/${data.feedId}`, {
       method: heart ? 'DELETE' : 'POST',
       headers: {
@@ -66,13 +72,25 @@ const Dashboard = ({ data, scale = 1 }) => {
         const { liked } = res;
         if (liked === true || liked === false) {
           setHeart(liked);
+          setLikesCount(parseInt(data.likesCount));
           return;
         }
       });
   }, []);
 
+  if (data === undefined || JSON.stringify(data) === JSON.stringify({})) return;
+
   return (
     <div className="dashboard">
+      {showModal && (
+        <>
+          <ModalBackground onClick={() => setShowModal(false)} />
+          <StyledLoginContentContainer
+            onClose={() => setShowModal(false)}
+            setShowModal={setShowModal}
+          />
+        </>
+      )}
       <Container scale={scale}>
         <Head>
           <div className="headLeft">
@@ -88,6 +106,7 @@ const Dashboard = ({ data, scale = 1 }) => {
           <Carousel
             imageList={data.contentUrls}
             handleImageClick={handleImageClick}
+            searchParams={searchParams}
           />
         </ImageLabel>
 
@@ -171,6 +190,24 @@ const HeartIcon = styled(FontAwesomeIcon)`
 
 const CommentIcon = styled(FontAwesomeIcon)`
   cursor: pointer;
+`;
+
+const StyledLoginContentContainer = styled(LoginModal)`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+`;
+
+const ModalBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
 `;
 
 export default Dashboard;

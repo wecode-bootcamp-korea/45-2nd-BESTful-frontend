@@ -7,7 +7,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const Carousel = ({ imageList, handleImageClick }) => {
+const Carousel = ({ imageList, handleImageClick, searchParams }) => {
   const imgRef = useRef([]); //이미지 useRef
   const [current, setCurrent] = useState(0); //현재 이미지 인덱스
   const [clothesInfo, setClothesInfo] = useState([]); //해당 이미지에 부착된 태그위치와 옷 정보(모달을 위한 배열, 태그의 갯수만큼 배열에 객체 존재, 해당 이미지의 n개의 태그이어서 배열형태)
@@ -20,6 +20,10 @@ const Carousel = ({ imageList, handleImageClick }) => {
   const transformPos = (curX, curY, width, height) => {
     let x = parseInt(curX);
     let y = parseInt(curY);
+
+    if (!height || height === 0) {
+      return { x: x, y: y };
+    }
 
     if (x < 20) {
       x = x + 10;
@@ -41,22 +45,23 @@ const Carousel = ({ imageList, handleImageClick }) => {
     setModal(true);
     let tagPosition;
 
+    // 모달 위
+    if (tagIdx !== 0 && !tagIdx) {
+      tagPosition = transformPos(
+        clothesInfo[curTag]?.coordinateX,
+        clothesInfo[curTag]?.coordinateY,
+        imgRef.current[current]?.offsetWidth,
+        imgRef.current[current]?.offsetHeight
+      );
+    }
+
     //태그버튼 위
-    if (typeof tagIdx === 'number') {
+    else {
       setCurTag(tagIdx); //현재 태그 인덱스 설정
 
       tagPosition = transformPos(
         clothesInfo[tagIdx]?.coordinateX,
         clothesInfo[tagIdx]?.coordinateY,
-        imgRef.current[current]?.offsetWidth,
-        imgRef.current[current]?.offsetHeight
-      );
-    }
-    // 모달 위
-    else {
-      tagPosition = transformPos(
-        clothesInfo[curTag]?.coordinateX,
-        clothesInfo[curTag]?.coordinateY,
         imgRef.current[current]?.offsetWidth,
         imgRef.current[current]?.offsetHeight
       );
@@ -94,13 +99,14 @@ const Carousel = ({ imageList, handleImageClick }) => {
   //현재 모여주는 이미지 바뀔때마다 태그위치와 옷정보 변경
   useEffect(() => {
     setClothesInfo(imageList[current]?.clothesInfo);
-  }, [current]);
+  }, [current, searchParams]);
 
   return (
     <Container>
       <StyledSlider {...settings}>
         {imageList &&
-          imageList.map((imgData, index) => {
+          imageList?.length !== 0 &&
+          imageList?.map((imgData, index) => {
             return (
               <CarouselImage
                 key={index}
@@ -112,6 +118,7 @@ const Carousel = ({ imageList, handleImageClick }) => {
                 imgRef={imgRef}
                 transformPos={transformPos}
                 handleImageClick={handleImageClick}
+                searchParams={searchParams}
               />
             );
           })}

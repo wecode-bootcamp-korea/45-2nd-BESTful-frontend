@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import NavProfileImage from './components/NavProfileImage';
-import ContentContainer from '../../../src/pages/Login/components/ContentContainer';
+import LoginModal from '../../pages/Login/components/LoginModal';
 
 const Nav = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const [url, setUrl] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [userInfo, setUserInfo] = useState({});
 
@@ -15,10 +16,15 @@ const Nav = () => {
 
   const token = localStorage.getItem('resToken');
 
-  const loginModal = e => {
+  const loginModal = (e, id) => {
     if (!token) {
       e.preventDefault();
       setShowModal(true);
+      if (id === 1) {
+        setUrl('/following');
+      } else if (id === 2) {
+        setUrl('/post-upload');
+      }
     }
   };
 
@@ -64,7 +70,7 @@ const Nav = () => {
               alt="homeIcon"
               src="/images/logo/hanger.png"
             />
-            <Following to="/:userId/following" onClick={loginModal}>
+            <Following to="/following" onClick={e => loginModal(e, 1)}>
               팔로잉
             </Following>
             <Best to="/best">베스트</Best>
@@ -83,7 +89,7 @@ const Nav = () => {
             )}
 
             {!isPostUploadPage && (
-              <Write to="/post-upload" onClick={loginModal}>
+              <Write to="/post-upload" onClick={e => loginModal(e, 2)}>
                 글쓰기
               </Write>
             )}
@@ -93,7 +99,11 @@ const Nav = () => {
       {showModal && (
         <>
           <ModalBackground onClick={() => setShowModal(false)} />
-          <StyledLoginContentContainer onClose={() => setShowModal(false)} />
+          <StyledLoginContentContainer
+            onClose={() => setShowModal(false)}
+            setShowModal={setShowModal}
+            url={url}
+          />
         </>
       )}
     </Container>
@@ -192,7 +202,7 @@ const Write = styled(Link)`
   }
 `;
 
-const StyledLoginContentContainer = styled(ContentContainer)`
+const StyledLoginContentContainer = styled(LoginModal)`
   position: fixed;
   top: 50%;
   left: 50%;

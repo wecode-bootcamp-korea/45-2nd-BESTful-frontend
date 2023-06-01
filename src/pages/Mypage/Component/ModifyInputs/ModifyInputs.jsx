@@ -25,18 +25,18 @@ const modalStyle = {
 };
 
 const changeBtn = {
-  backgroundColor: '#222222',
-
-  '&:hover': {
-    backgroundColor: '#FE4600',
-  },
-};
-
-const cancelBtn = {
   backgroundColor: '#FE4600',
 
   '&:hover': {
     backgroundColor: '#222222',
+  },
+};
+
+const cancelBtn = {
+  backgroundColor: '#222222',
+
+  '&:hover': {
+    backgroundColor: '#FE4600',
   },
 };
 
@@ -138,7 +138,7 @@ const ModifyInputs = ({ profile }) => {
             id="male"
             name="gender"
             checked={changeSex === '1'}
-            onClick={() => handleRadio('남')}
+            onClick={() => handleRadio('1')}
           />
           <label for="male">남성</label>
           <input
@@ -146,15 +146,15 @@ const ModifyInputs = ({ profile }) => {
             id="female"
             name="gender"
             checked={changeSex === '2'}
-            onClick={() => handleRadio('여')}
+            onClick={() => handleRadio('2')}
           />
           <label for="female">여성</label>
           <input
             type="radio"
             id="none"
             name="gender"
-            checked={changeSex === 'none'}
-            onClick={() => handleRadio()}
+            checked={changeSex === 'null'}
+            onClick={() => handleRadio('null')}
           />
           <label for="none">선택하지 않음</label>
         </div>
@@ -203,7 +203,7 @@ const ModifyInputs = ({ profile }) => {
                   replacePage();
                 }}
               >
-                하잇
+                네
               </Button>
               <Button
                 variant="contained"
