@@ -64,10 +64,19 @@ const ContentPosting = ({ category, me }) => {
         {categoryMode[category] !== undefined &&
           categoryMode[category].length > 0 &&
           categoryMode[category].map(posting => {
+            // contentsUrl의 min id 값의 index 반환
+            let minId = posting.contentUrls[0].id;
+            let minIndex = 0;
+            for (let i = 0; i < posting.contentUrls.length; i++) {
+              if (minId > posting.contentUrls[i].id) {
+                minId = posting.contentUrls[i].id;
+                minIndex = i;
+              }
+            }
             return (
               <FeedImage
                 key={posting.feedId}
-                image={posting.contentUrls[0].contentUrl}
+                image={posting.contentUrls[minIndex].contentUrl}
                 posting={posting}
                 feedGet={feedGet}
                 category={category}

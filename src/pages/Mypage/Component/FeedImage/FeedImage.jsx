@@ -74,7 +74,7 @@ const FeedImage = ({ image, feedGet, category, feedId }) => {
       {category ? (
         <Trash>
           <Button onClick={() => handleModal(true)}>
-            <FontAwesomeIcon icon={trash} size="xl" color="white" />
+            <FontAwesomeIcon icon={trash} size="xl" color="#fe4600" />
           </Button>
         </Trash>
       ) : (
