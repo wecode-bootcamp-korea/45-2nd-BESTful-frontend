@@ -16,9 +16,8 @@ const Dashboard = ({ data, scale = 1, searchParams }) => {
   const navigate = useNavigate();
   // const [data, setData] = useState({});
   const [heart, setHeart] = useState(false); //좋아요
-  const [likesCount, setLikesCount] = useState(0);
+  const [likesCount, setLikesCount] = useState(parseInt(data?.likesCount));
   const [showModal, setShowModal] = useState(false);
-
   //좋아요 유무에 따라 아이콘 변경
   const heartMode = {
     false: emptyHeart,
@@ -50,7 +49,7 @@ const Dashboard = ({ data, scale = 1, searchParams }) => {
   };
 
   const handleImageClick = imgIdx => {
-    navigate(`/contents/${data.feedId}`, { state: { image: imgIdx } });
+    navigate(`/contents/${data.feedId}`);
   };
 
   //댓글 버튼 클릭시 함수 (해당 피드상세페이지로 이동)

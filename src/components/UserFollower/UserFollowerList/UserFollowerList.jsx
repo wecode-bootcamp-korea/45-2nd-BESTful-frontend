@@ -55,13 +55,10 @@ const UserFollowerList = ({
   // TODO 5. unfollow, follow 통신이 성공적으로 진행될 때마다 이어서 2번의 api를 재호출하여 업데이트된 데이터 받아옴
 
   useEffect(() => {
-    for (let j = 0; j < follower.length; j++) {
-      if (follower[j].id === meId) {
-        setNoButton(true);
-      }
+    if (follower.id === meId) {
+      setNoButton(true);
     }
   }, [follower]);
-
   useEffect(() => {
     for (let i = 0; i < iFollowing.length; i++) {
       if (iFollowing[i].id === id) {

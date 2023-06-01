@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import variables from '../../../styles/variables';
 
 const TagModal = ({ point, info, handleONDashTag, handleOFFDashTag }) => {
-  //return
   if (info === undefined || JSON.stringify(info) === JSON.stringify({})) return;
 
   return (

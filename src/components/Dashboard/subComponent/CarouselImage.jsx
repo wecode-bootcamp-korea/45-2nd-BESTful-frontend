@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import TagButton from '../../tagButton/TagButton';
+import TagModal from './TagModal';
 
 const CarouselImage = ({
   src, //캐러셀 이미지 src
@@ -10,7 +11,6 @@ const CarouselImage = ({
   imgRef, //이미지 useRef
   transformPos, //태그버튼이 사진 끝에 있을때 x, y 좌표 옮겨주는 함수
   handleImageClick, //해당 이미지 클릭시 함수 (피드 상세페이지로 이동)
-  searchParams, //필터링 변경
 }) => {
   return (
     <div onClick={() => handleImageClick(imgIndex)}>

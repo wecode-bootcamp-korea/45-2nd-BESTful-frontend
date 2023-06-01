@@ -42,7 +42,6 @@ const Carousel = ({ imageList, handleImageClick, searchParams }) => {
 
   //태그 위에 마우스함수 (모달 ON)
   const handleONDashTag = tagIdx => {
-    setModal(true);
     let tagPosition;
 
     // 모달 위
@@ -66,7 +65,8 @@ const Carousel = ({ imageList, handleImageClick, searchParams }) => {
         imgRef.current[current]?.offsetHeight
       );
     }
-    setPostion(tagPosition); //현재 태그의 위치로 모달의 위치 결정s
+    setPostion(tagPosition); //현재 태그의 위치로 모달의 위치 결정
+    setModal(true);
   };
 
   //태그 밖에 마우스함수 (모달 OFF)
@@ -100,7 +100,6 @@ const Carousel = ({ imageList, handleImageClick, searchParams }) => {
   useEffect(() => {
     setClothesInfo(imageList[current]?.clothesInfo);
   }, [current, searchParams]);
-
   return (
     <Container>
       <StyledSlider {...settings}>
@@ -119,6 +118,7 @@ const Carousel = ({ imageList, handleImageClick, searchParams }) => {
                 transformPos={transformPos}
                 handleImageClick={handleImageClick}
                 searchParams={searchParams}
+                modal={modal}
               />
             );
           })}

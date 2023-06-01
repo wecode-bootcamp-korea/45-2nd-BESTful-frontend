@@ -29,6 +29,7 @@ const InfiniteMain = () => {
   }, []);
 
   useEffect(() => {
+    setMainFeeds([]);
     const fetchMainFeeds = async () => {
       try {
         // 인코딩
@@ -39,6 +40,7 @@ const InfiniteMain = () => {
         );
         const data = await response.json();
         setMainFeeds(data);
+        console.log('main', data);
       } catch (error) {
         console.log(error);
       }
