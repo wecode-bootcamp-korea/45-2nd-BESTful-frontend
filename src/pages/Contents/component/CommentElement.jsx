@@ -74,12 +74,15 @@ export default CommentElement;
 const computeTime = createdAt => {
   const [y, m, d, th, tm] = createdAt.split('.');
 
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth() + 1;
-  const day = now.getDate();
-  const hour = now.getHours();
-  const minutes = now.getMinutes();
+  let _gmt = new Date(); // GMT시간
+  let _utc = new Date(_gmt.getTime() + _gmt.getTimezoneOffset() * 60000); // UTC 시간으로 변환
+
+  // const now = new Date();
+  const year = _utc.getFullYear();
+  const month = _utc.getMonth() + 1;
+  const day = _utc.getDate();
+  const hour = _utc.getHours();
+  const minutes = _utc.getMinutes();
 
   if (year > parseInt(y)) {
     return createdAt.slice(0, 10);
