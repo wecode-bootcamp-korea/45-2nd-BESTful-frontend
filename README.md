@@ -127,9 +127,25 @@
 - 태그에 마우스를 hover 하면 자신이 입력한 정보를 볼 수 있기 때문에 각 상품의 정보를 알맞게 입력했는지 확인할 수 있다.
 - 편하게 여러 사진과 태그를 입력하고 삭제할 수 있고 사이드의 사진으로 스크롤을 함으로써 사용자의 편의성을 높일 수 있다.
 
+  
+- 추가한 사진에 태그 정보 입력
   <br>
 
+  ![ezgif com-video-to-gif (4)](https://github.com/wecode-bootcamp-korea/45-2nd-BESTful-frontend/assets/76932302/de72569d-a1e4-4a1d-9c08-db174f9acf47)
+  
+  <br>
+- 태그 입력, 미리보기 이미지 클릭시 자동 스크롤, 사진 삭제
+  <br>
 
+  ![ezgif com-video-to-gif (5)](https://github.com/wecode-bootcamp-korea/45-2nd-BESTful-frontend/assets/76932302/d329af52-4db1-4d4b-b182-9ed6781d7fea)
+  
+  <br>
+  
+- 태그 삭제 기능, 태그 정보를 입력할 수 있는 모달, 포스트 업로드
+  <br>
+
+  ![ezgif com-video-to-gif (6)](https://github.com/wecode-bootcamp-korea/45-2nd-BESTful-frontend/assets/76932302/70609b5b-de47-4c7b-985a-07da8838b2b0)
+  
   <br>
 
 <h2>포스트 상세</h2>
