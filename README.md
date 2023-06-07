@@ -116,6 +116,7 @@
 
   <br>
 
+  ![dashboard (2)](https://github.com/wecode-bootcamp-korea/45-2nd-BESTful-frontend/assets/33508589/4df7c20f-d3a9-49ec-836a-d0eb61bfe495)
   <br>
 
 <h2>포스트 업로드</h2>
