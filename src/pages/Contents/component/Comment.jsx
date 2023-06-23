@@ -16,7 +16,7 @@ const Comment = ({ feedId, commentRef }) => {
     fetch(`${API_ADDRESS}/feeds/${feedId}/comment`)
       .then(res => res.json())
       .then(res => {
-        setComments(res.reverse()); // 최신 댓글부터 보여주기
+        setComments(res); // 최신 댓글부터 보여주기
       });
   };
 
