@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ProfileImage from '../../ProfileImage/ProfileImage';
 import UserFollowingBtn from '../UserFollowingBtn/UserFollowingBtn';
+import { API_ADDRESS } from '../../../utils/API_ADDRESS';
 
 const UserFollowingList = ({
   name,
@@ -20,7 +21,7 @@ const UserFollowingList = ({
   const navigate = useNavigate();
 
   const followUser = () => {
-    const url = `http://10.58.52.185:3000/follower`;
+    const url = `${API_ADDRESS}/follower`;
 
     fetch(url, {
       method: `${followOrNot ? 'DELETE' : 'POST'}`,

@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 import variables from '../../styles/variables';
 import theme from '../../styles/theme';
+import { API_ADDRESS } from '../../utils/API_ADDRESS';
 
 const Dashboard = ({ data, scale = 1, searchParams }) => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const Dashboard = ({ data, scale = 1, searchParams }) => {
       setUrl(location.pathname);
       return;
     }
-    fetch(`http://10.58.52.185:3000/likes/${data.feedId}`, {
+    fetch(`${API_ADDRESS}/likes/${data.feedId}`, {
       method: heart ? 'DELETE' : 'POST',
       headers: {
         Authorization: localStorage.getItem('resToken'),
@@ -62,7 +63,7 @@ const Dashboard = ({ data, scale = 1, searchParams }) => {
 
   //좋아요 불러오기
   useEffect(() => {
-    fetch(`http://10.58.52.185:3000/likes/${data.feedId}`, {
+    fetch(`${API_ADDRESS}/likes/${data.feedId}`, {
       method: 'GET',
       headers: {
         Authorization: localStorage.getItem('resToken'),

@@ -1,6 +1,7 @@
 import React from 'react';
 import ProfileImage from '../../../components/ProfileImage/ProfileImage';
 import styled from 'styled-components';
+import { API_ADDRESS } from '../../../utils/API_ADDRESS';
 
 const CommentElement = ({ comment, feedId, getComments }) => {
   // 댓글 시간 계산
@@ -8,7 +9,7 @@ const CommentElement = ({ comment, feedId, getComments }) => {
 
   // 댓글 삭제하기 버튼 (fetch)
   const handleDelete = () => {
-    fetch('http://10.58.52.185:3000/comment', {
+    fetch(`${API_ADDRESS}/comment`, {
       method: 'PATCH',
       headers: {
         Authorization: localStorage.getItem('resToken'),

@@ -7,6 +7,7 @@ import Comment from './component/Comment';
 import SideBar from './component/SideBar';
 import styled from 'styled-components';
 import variables from '../../styles/variables';
+import { API_ADDRESS } from '../../utils/API_ADDRESS';
 
 const Contents = () => {
   const params = useParams();
@@ -97,7 +98,7 @@ const Contents = () => {
 
   //피드 데이터 불러오기
   useEffect(() => {
-    fetch(`http://10.58.52.185:3000/feeds/${feedId}`)
+    fetch(`${API_ADDRESS}/feeds/${feedId}`)
       .then(res => res.json())
       .then(res => {
         const [data] = res;

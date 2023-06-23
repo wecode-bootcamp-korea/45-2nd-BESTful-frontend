@@ -3,6 +3,7 @@ import { useLocation, Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import NavProfileImage from './components/NavProfileImage';
 import LoginModal from '../../pages/Login/components/LoginModal';
+import { API_ADDRESS } from '../../utils/API_ADDRESS';
 
 const Nav = () => {
   const location = useLocation();
@@ -48,7 +49,7 @@ const Nav = () => {
   //ProfileImage 가져오기 위함
   useEffect(() => {
     if (!showModal) {
-      fetch('http://10.58.52.185:3000/users', {
+      fetch(`${API_ADDRESS}/users`, {
         method: 'GET',
         headers: {
           Authorization: localStorage.getItem('resToken'),

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ContentImage from '../ContentImage/ContentImage';
+import { API_ADDRESS } from '../../../../utils/API_ADDRESS';
 
 const UserContentFeed = ({ userId }) => {
   const [feed, setFeed] = useState([]);
   const feedGet = () => {
-    const url = `http://10.58.52.185:3000/feeds/users/${userId}`;
+    const url = `${API_ADDRESS}/feeds/users/${userId}`;
 
     fetch(url, {
       method: 'GET',

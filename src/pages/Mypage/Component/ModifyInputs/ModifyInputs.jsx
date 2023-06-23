@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import { API_ADDRESS } from '../../../../utils/API_ADDRESS';
 
 const modalStyle = {
   position: 'absolute',
@@ -85,7 +86,7 @@ const ModifyInputs = ({ profile }) => {
   const activateButton = cellphone !== null && changeSex !== '';
 
   const postProfile = () => {
-    const url = `http://10.58.52.185:3000/users/edit`;
+    const url = `${API_ADDRESS}/users/edit`;
 
     fetch(url, {
       method: 'PATCH',
