@@ -5,6 +5,7 @@ import UserProfile from '../UserProfile/UserProfile';
 import UserContentFeed from '../UserContentFeed/UserContentFeed';
 import UserFollower from '../../../../components/UserFollower/UserFollower';
 import UserFollowing from '../../../../components/UserFollowing/UserFollowing';
+import { API_ADDRESS } from '../../../../utils/API_ADDRESS';
 
 const UserContent = () => {
   const [user, setUser] = useState([]);
@@ -22,7 +23,7 @@ const UserContent = () => {
   const navigate = useNavigate();
 
   const fetchResult = async () => {
-    const url = `http://10.58.52.185:3000/users/${userId}`;
+    const url = `${API_ADDRESS}/users/${userId}`;
 
     try {
       const response = await fetch(url, {
@@ -41,7 +42,7 @@ const UserContent = () => {
   // 유저 데이터 받아오기
 
   const userFollowerFetch = () => {
-    const url = `http://10.58.52.185:3000/follower/following/${userId}`;
+    const url = `${API_ADDRESS}/follower/following/${userId}`;
 
     fetch(url, {
       method: 'GET',
@@ -58,7 +59,7 @@ const UserContent = () => {
   // 팔로워 데이터 받아오기
 
   const userFollowingFetch = () => {
-    const url = `http://10.58.52.185:3000/follower/${userId}`;
+    const url = `${API_ADDRESS}/follower/${userId}`;
 
     fetch(url, {
       method: 'GET',
@@ -75,7 +76,7 @@ const UserContent = () => {
   // 팔로잉 데이터 받아오기
 
   const meFetch = () => {
-    fetch(`http://10.58.52.185:3000/users`, {
+    fetch(`${API_ADDRESS}/users`, {
       method: 'GET',
       headers: {
         Authorization: localStorage.getItem('resToken'),
@@ -90,7 +91,7 @@ const UserContent = () => {
   // 내 정보 가져오기
 
   const followingsFetch = () => {
-    const url = `http://10.58.52.185:3000/follower/${myData.id}`;
+    const url = `${API_ADDRESS}/follower/${myData.id}`;
 
     fetch(url, {
       method: 'GET',

@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import { API_ADDRESS } from '../../../../utils/API_ADDRESS';
 
 const modalStyle = {
   position: 'absolute',
@@ -56,7 +57,7 @@ const FeedImage = ({ image, feedGet, category, feedId }) => {
   };
 
   const deleteFeed = () => {
-    const url = `http://10.58.52.185:3000/feeds/${feedId}`;
+    const url = `${API_ADDRESS}/feeds/${feedId}`;
 
     fetch(url, {
       method: 'DELETE',

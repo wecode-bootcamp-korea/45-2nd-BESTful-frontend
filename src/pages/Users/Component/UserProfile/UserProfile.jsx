@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ProfileImage from '../../../../components/ProfileImage/ProfileImage';
+import { API_ADDRESS } from '../../../../utils/API_ADDRESS';
 
 const UserProfile = ({
   user,
@@ -23,7 +24,7 @@ const UserProfile = ({
   };
 
   const followUser = () => {
-    const url = `http://10.58.52.185:3000/follower`;
+    const url = `${API_ADDRESS}/follower`;
 
     fetch(url, {
       method: `${followState ? 'DELETE' : 'POST'}`,

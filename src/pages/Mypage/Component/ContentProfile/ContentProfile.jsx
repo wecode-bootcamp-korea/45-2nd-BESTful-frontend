@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { faCamera as camera } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ProfileImage from '../../../../components/ProfileImage/ProfileImage';
+import { API_ADDRESS } from '../../../../utils/API_ADDRESS';
 
 const ContentProfile = ({
   profile,
@@ -22,7 +23,7 @@ const ContentProfile = ({
   };
 
   const changeImage = image => {
-    const url = `http://10.58.52.185:3000/users/image`;
+    const url = `${API_ADDRESS}/users/image`;
 
     let formData = new FormData();
     formData.append('profileImage', image); // Append the file object, not the file name

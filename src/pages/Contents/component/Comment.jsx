@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import variables from '../../../styles/variables';
 import theme from '../../../styles/theme';
 import CommentElement from './CommentElement';
+import { API_ADDRESS } from '../../../utils/API_ADDRESS';
 
 const Comment = ({ feedId, commentRef }) => {
   const [comments, setComments] = useState([]);
@@ -12,7 +13,7 @@ const Comment = ({ feedId, commentRef }) => {
 
   // 댓글 불러오기 fetch
   const getComments = () => {
-    fetch(`http://10.58.52.185:3000/feeds/${feedId}/comment`)
+    fetch(`${API_ADDRESS}/feeds/${feedId}/comment`)
       .then(res => res.json())
       .then(res => {
         setComments(res);
@@ -21,7 +22,7 @@ const Comment = ({ feedId, commentRef }) => {
 
   // 현재 유저 정보 불러오기
   useEffect(() => {
-    fetch('http://10.58.52.185:3000/users/', {
+    fetch(`${API_ADDRESS}/users/`, {
       method: 'GET',
       headers: {
         Authorization: localStorage.getItem('resToken'),
