@@ -5,6 +5,7 @@ import ContentPosting from '../ContentPosting/ContentPosting';
 import ProfileModify from '../ProfileModify/ProfileModify';
 import FollowerPage from '../../../../components/FollowerPage/FollowerPage';
 import FollowingPage from '../../../../components/FollowingPage/FollowingPage';
+import { API_ADDRESS } from '../../../../utils/API_ADDRESS';
 
 const MyPageContent = ({
   category,
@@ -27,10 +28,10 @@ const MyPageContent = ({
   const meMeId = me.id;
 
   const fetchResult = async () => {
-    const url = `http://10.58.52.185:3000/users/`;
+    const url = `${API_ADDRESS}/users`;
 
     try {
-      const response = await fetch('http://10.58.52.185:3000/users', {
+      const response = await fetch(url, {
         method: 'GET',
         headers: {
           Authorization: localStorage.getItem('resToken'),
@@ -47,7 +48,7 @@ const MyPageContent = ({
   // 로그인 한 유저(나) 정보 받기
 
   const followerFetch = () => {
-    const url = `http://10.58.52.185:3000/follower/following/${meMeId}`;
+    const url = `${API_ADDRESS}/follower/following/${meMeId}`;
 
     fetch(url, {
       method: 'GET',
@@ -65,7 +66,7 @@ const MyPageContent = ({
   // 팔로워 정보 받기
 
   const followingFetch = () => {
-    const url = `http://10.58.52.185:3000/follower/${meMeId}`;
+    const url = `${API_ADDRESS}/follower/${meMeId}`;
 
     fetch(url, {
       method: 'GET',

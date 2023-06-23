@@ -4,6 +4,7 @@ import ContentsBox from './components/ContentsBox';
 import variables from '../../styles/variables';
 import theme from '../../styles/theme';
 import { useNavigate } from 'react-router-dom';
+import { API_ADDRESS } from '../../utils/API_ADDRESS';
 
 const PostUpload = () => {
   const [datas, setDatas] = useState([
@@ -34,7 +35,7 @@ const PostUpload = () => {
   const postUpload = e => {
     e.preventDefault();
 
-    const url = `http://10.58.52.185:3000/feeds/upload`;
+    const url = `${API_ADDRESS}/feeds/upload`;
 
     if (datas[datas.length - 1].contentUrl === '') {
       const copiedDatas = [...datas];

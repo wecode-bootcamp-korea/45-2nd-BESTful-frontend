@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import FeedImage from '../FeedImage/FeedImage';
 import { useNavigate } from 'react-router-dom';
+import { API_ADDRESS } from '../../../../utils/API_ADDRESS';
 
 const ContentPosting = ({ category, me }) => {
   const [feed, setFeed] = useState([]);
@@ -13,7 +14,7 @@ const ContentPosting = ({ category, me }) => {
   const categoryMode = { true: feed, false: like };
 
   const feedGet = () => {
-    const url = `http://10.58.52.185:3000/feeds/users/${myId}`;
+    const url = `${API_ADDRESS}/feeds/users/${myId}`;
 
     fetch(url, {
       method: 'GET',
@@ -26,7 +27,7 @@ const ContentPosting = ({ category, me }) => {
   };
 
   const likeGet = () => {
-    const url = `http://10.58.52.185:3000/feeds/likes/${myId}`;
+    const url = `${API_ADDRESS}/feeds/likes/${myId}`;
 
     fetch(url, {
       method: 'GET',

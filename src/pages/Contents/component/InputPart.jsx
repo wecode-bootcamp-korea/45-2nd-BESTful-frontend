@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import variables from '../../../styles/variables';
 import theme from '../../../styles/theme';
+import { API_ADDRESS } from '../../../utils/API_ADDRESS';
 
 const InputPart = ({ feedId, getComments }) => {
   const [input, setInput] = useState('');
 
   // 댓글 추가 fetch
   const addComment = () => {
-    fetch('http://10.58.52.185:3000/comment', {
+    fetch(`${API_ADDRESS}/comment`, {
       method: 'POST',
       headers: {
         Authorization: localStorage.getItem('resToken'),
