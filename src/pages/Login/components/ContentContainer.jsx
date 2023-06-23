@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
+import { API_ADDRESS } from '../../../utils/API_ADDRESS';
 
 const ContentContainer = ({ className }) => {
   const navigate = useNavigate();
@@ -24,12 +25,9 @@ const ContentContainer = ({ className }) => {
         try {
           const token = accessToken;
 
-          const response = await axios.post(
-            `http://13.125.231.183:3001/users/kakaologin`,
-            {
-              kakaoToken: token,
-            }
-          );
+          const response = await axios.post(`${API_ADDRESS}/users/kakaologin`, {
+            kakaoToken: token,
+          });
 
           const data = response.data;
 
