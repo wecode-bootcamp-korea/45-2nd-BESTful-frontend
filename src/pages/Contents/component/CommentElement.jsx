@@ -1,4 +1,6 @@
 import React from 'react';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import ProfileImage from '../../../components/ProfileImage/ProfileImage';
 import styled from 'styled-components';
 import { API_ADDRESS } from '../../../utils/API_ADDRESS';
@@ -73,25 +75,20 @@ const Under = styled.div`
 export default CommentElement;
 
 const computeTime = createdAt => {
+  dayjs.extend(utc);
+
   const [y, m, d, th, tm] = createdAt.split('.');
+  const upload = dayjs(`${y}-${m}-${d}T${th}:${tm}:00Z`);
 
-  let _gmt = new Date(); // GMT시간
-  let _utc = new Date(_gmt.getTime() + _gmt.getTimezoneOffset() * 60000); // UTC 시간으로 변환
+  const now = dayjs().utc();
 
-  // const now = new Date();
-  const year = _utc.getFullYear();
-  const month = _utc.getMonth() + 1;
-  const day = _utc.getDate();
-  const hour = _utc.getHours();
-  const minutes = _utc.getMinutes();
-
-  if (year > parseInt(y)) {
+  if (now.diff(upload, 'year')) {
     return createdAt.slice(0, 10);
-  } else if (month > parseInt(m)) {
-    return `${month - parseInt(m)}개월전`;
-  } else if (day > parseInt(d)) {
-    return `${day - parseInt(d)}일전`;
-  } else if (hour > parseInt(th)) {
-    return `${hour - th}시간전`;
-  } else return `${minutes - tm}분전`;
+  } else if (now.diff(upload, 'month')) {
+    return `${now.diff(upload, 'month')}개월전`;
+  } else if (now.diff(upload, 'day')) {
+    return `${now.diff(upload, 'day')}일전`;
+  } else if (now.diff(upload, 'hour')) {
+    return `${now.diff(upload, 'hour')}시간전`;
+  } else return `${now.diff(upload, 'minute')}분전`;
 };
