@@ -65,7 +65,7 @@ http://my-ootd.s3-website.ap-northeast-2.amazonaws.com/
 <br>
 
 ## Figma
-https://www.figma.com/file/Phdi4zHwhyDcAekaz7AJuN/Untitled?type=design&node-id=0%3A1&mode=design&t=Rm404dq64L38GQhn-1
+<a href="https://www.figma.com/file/Phdi4zHwhyDcAekaz7AJuN/Untitled?type=design&node-id=0%3A1&mode=design&t=zs6cMceeNlEBAYrg-1"><img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"/></a>
 ![image](https://github.com/wecode-bootcamp-korea/45-2nd-BESTful-frontend/assets/33508589/1752c316-b7e5-4cc6-9318-1ab61618082e)
 
 
