@@ -62,6 +62,11 @@ http://my-ootd.s3-website.ap-northeast-2.amazonaws.com/
 </div>
 <br>
 <br>
+
+## Figma
+![image](https://github.com/wecode-bootcamp-korea/45-2nd-BESTful-frontend/assets/33508589/1752c316-b7e5-4cc6-9318-1ab61618082e)
+
+
 <h2>로그인/회원가입</h2>
 
 <br>
