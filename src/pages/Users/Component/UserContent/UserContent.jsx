@@ -17,7 +17,30 @@ const UserContent = () => {
   const [userFollowing, setUserFollowing] = useState([]);
   const [myData, setMyData] = useState([]);
   const [iFollowing, setIFollowing] = useState([]);
+  const [userCategory, setUserCategory] = useState(0);
   const params = useParams();
+
+  const categoryList = {
+    0: <UserContentFeed userId={userId} />,
+    1: (
+      <UserFollower
+        userFollower={userFollower}
+        myData={myData}
+        iFollowing={iFollowing}
+        followingsFetch={followingsFetch}
+        userFollowerFetch={userFollowerFetch}
+      />
+    ),
+    2: (
+      <UserFollowing
+        userFollowing={userFollowing}
+        myData={myData}
+        iFollowing={iFollowing}
+        followingsFetch={followingsFetch}
+        userFollowingFetch={userFollowingFetch}
+      />
+    ),
+  };
 
   const userId = params.id;
   const navigate = useNavigate();
