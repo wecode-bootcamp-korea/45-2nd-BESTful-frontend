@@ -43,35 +43,42 @@ const cancelBtn = {
 
 const ModifyInputs = ({ profile }) => {
   const [textLength, setTextLength] = useState(0);
-  const [changeSex, setChangeSex] = useState('null');
-  const [cellphone, setCellPhone] = useState('010');
-  const [userName, setUserName] = useState('닉네임');
-  const [biography, setBiography] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [myInfo, setMyInfo] = useState({
+    mySex: profile?.sex || 'null',
+    myPhoneNumber: profile?.cellphone || 'none',
+    nickname: profile?.userName || '닉네임을 입력해주세요',
+    myBio: null,
+  });
+
+  const { mySex, myPhoneNumber, nickname, myBio } = myInfo;
 
   const handleModal = e => {
     setIsOpen(e);
   };
 
   const handleRadio = e => {
-    setChangeSex(e);
+    setMyInfo(prev => ({ ...prev, mySex: e }));
   };
 
   const handleCellphone = e => {
     const { value } = e.target;
 
-    setCellPhone(value);
-    if (value === null) {
-      setCellPhone(profile.cellphone);
+    setMyInfo(prev => ({ ...prev, myPhoneNumber: value }));
+    if (value === null || value === '') {
+      setMyInfo(prev => ({
+        ...prev,
+        myPhoneNumber: profile?.cellphone || 'none',
+      }));
     }
   };
 
   const handleName = e => {
     const { value } = e.target;
 
-    setUserName(value);
-    if (value === '') {
-      setUserName(profile.userName);
+    setMyInfo(prev => ({ ...prev, nickname: value }));
+    if (value === '' || value === null) {
+      setMyInfo(prev => ({ ...prev, nickname: profile.userName }));
     }
   };
 
@@ -83,7 +90,7 @@ const ModifyInputs = ({ profile }) => {
     window.location.reload();
   };
 
-  const activateButton = cellphone !== null && changeSex !== '';
+  const activateButton = myPhoneNumber !== null && mySex !== '';
 
   const postProfile = () => {
     const url = `${API_ADDRESS}/users/edit`;
@@ -95,19 +102,13 @@ const ModifyInputs = ({ profile }) => {
         Authorization: localStorage.getItem('resToken'),
       },
       body: JSON.stringify({
-        userName: userName,
-        cellphone: cellphone,
-        sex: changeSex,
-        bio: biography,
+        userName: nickname,
+        cellphone: myPhoneNumber,
+        sex: mySex,
+        bio: myBio,
       }),
     }).then(res => res.json());
   };
-
-  useEffect(() => {
-    setChangeSex(profile.sex ? profile.sex : 'null');
-    setCellPhone(profile.cellphone ? profile.cellphone : '010');
-    setUserName(profile.userName ? profile.userName : '유저네임');
-  }, []);
 
   return (
     <ProfileForm>
@@ -129,7 +130,7 @@ const ModifyInputs = ({ profile }) => {
         <ProfileInput
           type="text"
           id="cellphone"
-          placeholder={cellphone}
+          placeholder={myPhoneNumber}
           onChange={handleCellphone}
           onInput={acceptNumber}
         />
@@ -144,7 +145,7 @@ const ModifyInputs = ({ profile }) => {
             type="radio"
             id="male"
             name="gender"
-            checked={changeSex === '1'}
+            checked={mySex === '1'}
             onClick={() => handleRadio('1')}
           />
           <label for="male">남성</label>
@@ -152,7 +153,7 @@ const ModifyInputs = ({ profile }) => {
             type="radio"
             id="female"
             name="gender"
-            checked={changeSex === '2'}
+            checked={mySex === '2'}
             onClick={() => handleRadio('2')}
           />
           <label for="female">여성</label>
@@ -160,7 +161,7 @@ const ModifyInputs = ({ profile }) => {
             type="radio"
             id="none"
             name="gender"
-            checked={changeSex === 'null'}
+            checked={mySex === 'null'}
             onClick={() => handleRadio('null')}
           />
           <label for="none">선택하지 않음</label>
@@ -178,10 +179,7 @@ const ModifyInputs = ({ profile }) => {
               const { value } = e.target;
 
               setTextLength(value.length);
-              setBiography(value);
-              if (value === '') {
-                setBiography('');
-              }
+              setMyInfo(prev => ({ ...prev, myBio: value }));
             }}
           />
           <span>{textLength}/300</span>
