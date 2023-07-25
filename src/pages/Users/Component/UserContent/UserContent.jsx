@@ -15,6 +15,7 @@ const UserContent = ({
   myFollowingUser,
   userId,
   loading,
+  myFollowingUserFetch,
 }) => {
   // const [user, setUser] = useState([]);
   const [isUserFollow, setIsUserFollow] = useState(false);
@@ -23,7 +24,7 @@ const UserContent = ({
   // const [userFollower, setUserFollower] = useState([]);
   // const [userFollowing, setUserFollowing] = useState([]);
   // const [myData, setMyData] = useState([]);
-  const [iFollowing, setIFollowing] = useState([]);
+  // const [iFollowing, setIFollowing] = useState([]);
   const [userCategory, setUserCategory] = useState(0);
   // const params = useParams();
 
@@ -33,7 +34,7 @@ const UserContent = ({
       <UserFollower
         userFollower={userFollower}
         myData={myData}
-        iFollowing={iFollowing}
+        iFollowing={myFollowingUser}
         // followingsFetch={followingsFetch}
         // userFollowerFetch={userFollowerFetch}
       />
@@ -42,7 +43,7 @@ const UserContent = ({
       <UserFollowing
         userFollowing={userFollowing}
         myData={myData}
-        iFollowing={iFollowing}
+        myFollowingUser={myFollowingUser}
         // followingsFetch={followingsFetch}
         // userFollowingFetch={userFollowingFetch}
       />
@@ -162,30 +163,12 @@ const UserContent = ({
         myData={myData}
         userFollower={userFollower}
         userFollowing={userFollowing}
-        iFollowing={iFollowing}
+        iFollowing={myFollowingUser}
+        setUserCategory={setUserCategory}
+        myFollowingUserFetch={myFollowingUserFetch}
         // followingsFetch={followingsFetch}
       />
-      {isAll ? (
-        <UserContentFeed userId={userId} />
-      ) : isUserFollow ? (
-        <UserFollower
-          userFollower={userFollower}
-          myData={myData}
-          setIsAll={setIsAll}
-          iFollowing={iFollowing}
-          // followingsFetch={followingsFetch}
-          // userFollowerFetch={userFollowerFetch}
-        />
-      ) : (
-        <UserFollowing
-          userFollowing={userFollowing}
-          myData={myData}
-          setIsAll={setIsAll}
-          iFollowing={iFollowing}
-          // followingsFetch={followingsFetch}
-          // userFollowingFetch={userFollowingFetch}
-        />
-      )}
+      {categoryList[userCategory]}
     </Container>
   );
 };
@@ -194,6 +177,8 @@ export default UserContent;
 
 const Container = styled.div`
   display: flex;
-  justify-content: ${props => (props.isAll ? 'space-between' : 'center')};
+  justify-content: space-between;
+  /* justify-content: ${props => (props.isAll ? 'space-between' : 'center')}; */
   padding-top: 70px;
+  background-color: yellow;
 `;

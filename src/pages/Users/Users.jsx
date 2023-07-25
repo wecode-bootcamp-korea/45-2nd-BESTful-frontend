@@ -125,6 +125,7 @@ const Users = () => {
       myFollowingUser={myFollowingUser}
       userId={userId}
       loading={loading}
+      myFollowingUserFetch={myFollowingUserFetch()}
     />
   );
 };
