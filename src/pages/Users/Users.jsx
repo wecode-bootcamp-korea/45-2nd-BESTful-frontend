@@ -104,17 +104,12 @@ const Users = () => {
     userDataFetch();
     userFollowerFetch();
     userFollowingFetch();
-    // myDataFetch();
-    // myFollowingUserFetch();
-  }, []);
-
-  useEffect(() => {
     myDataFetch();
     myFollowingUserFetch();
     if (parseInt(userId) === parseInt(myData.id)) {
       navigate('/mypage');
     }
-  }, [myData.id]);
+  }, [userId]);
 
   return (
     <UserContent
@@ -123,8 +118,9 @@ const Users = () => {
       userFollowing={userFollowing}
       myData={myData}
       myFollowingUser={myFollowingUser}
-      userId={userId}
       loading={loading}
+      userFollowerFetch={userFollowerFetch}
+      userFollowingFetch={userFollowingFetch}
       myFollowingUserFetch={myFollowingUserFetch()}
     />
   );
