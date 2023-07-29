@@ -44,8 +44,9 @@ const cancelBtn = {
   },
 };
 
-const FeedImage = ({ image, feedGet, category, feedId }) => {
+const FeedImage = ({ image, feedGet, feedOrLike, feedId }) => {
   const [isOpen, setIsOpen] = useState(false);
+
   const navigate = useNavigate();
 
   const handleNavigate = () => {
@@ -72,7 +73,7 @@ const FeedImage = ({ image, feedGet, category, feedId }) => {
   return (
     <Container>
       <Image src={`${image}`} alt="feedImage" onClick={handleNavigate} />
-      {category ? (
+      {feedOrLike ? (
         <Trash>
           <Button onClick={() => handleModal(true)}>
             <FontAwesomeIcon icon={trash} size="xl" color="#fe4600" />

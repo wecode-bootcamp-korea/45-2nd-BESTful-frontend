@@ -2,22 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MyPageCategory = ({
-  setCategory,
-  setProfileOrPosting,
-  setClickedFollow,
-  category,
-  clickedFollow,
+  feedOrLike,
+  myPageCategory,
+  setMyPageCategory,
+  setFeedOrLike,
 }) => {
-  const handleCategory = handle => {
-    setCategory(handle);
-  };
-
-  const handleProfileOrPosting = () => {
-    setProfileOrPosting(true);
-  };
-
-  const handleFollowOrPosting = () => {
-    setClickedFollow(false);
+  const handleFeedContent = x => {
+    setMyPageCategory(0);
+    setFeedOrLike(x);
   };
 
   return (
@@ -26,12 +18,13 @@ const MyPageCategory = ({
         <List>
           <Button
             onClick={() => {
-              handleCategory(true);
-              handleProfileOrPosting();
-              handleFollowOrPosting();
+              handleFeedContent(true);
             }}
           >
-            <PostingButton category={category} clickedFollow={clickedFollow}>
+            <PostingButton
+              feedOrLike={feedOrLike}
+              myPageCategory={myPageCategory}
+            >
               게시글
             </PostingButton>
           </Button>
@@ -39,12 +32,10 @@ const MyPageCategory = ({
         <List>
           <Button
             onClick={() => {
-              handleCategory(false);
-              handleProfileOrPosting();
-              handleFollowOrPosting();
+              handleFeedContent(false);
             }}
           >
-            <LikeButton category={category} clickedFollow={clickedFollow}>
+            <LikeButton feedOrLike={feedOrLike} myPageCategory={myPageCategory}>
               좋아요
             </LikeButton>
           </Button>
@@ -86,14 +77,14 @@ const Button = styled.button`
 
 const PostingButton = styled.div`
   color: ${props =>
-    props.clickedFollow === false &&
-    (props.category ? props.theme.style.orange : 'black')};
+    props.myPageCategory === 0 &&
+    (props.feedOrLike ? props.theme.style.orange : 'black')};
 `;
 
 const LikeButton = styled.div`
   color: ${props =>
-    props.clickedFollow === false &&
-    (props.category ? 'black' : props.theme.style.orange)};
+    props.myPageCategory === 0 &&
+    (props.feedOrLike ? 'black' : props.theme.style.orange)};
 `;
 
 export default MyPageCategory;
