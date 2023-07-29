@@ -6,19 +6,21 @@ import UserFollowerBtn from '../UserFollowerBtn/UserFollowerBtn';
 import { API_ADDRESS } from '../../../utils/API_ADDRESS';
 
 const UserFollowerList = ({
-  name,
-  src,
-  id,
-  iFollowing,
-  meId,
   follower,
-  followingsFetch,
-  userFollowerFetch,
+  iFollowing,
+  myId,
+  myFollowingUserFetch,
 }) => {
   const [followOrNot, setFollowOrNot] = useState(false);
   const [noButton, setNoButton] = useState(false);
 
+  const { userName, profileImage, id } = follower;
+
   const navigate = useNavigate();
+
+  const onClickUserFollower = () => {
+    navigate(`/users/${id}`);
+  };
 
   const followUser = () => {
     const url = `${API_ADDRESS}/follower`;
@@ -33,15 +35,7 @@ const UserFollowerList = ({
         followedId: id,
       }),
     });
-    followingsFetch();
-  };
-
-  const replacePage = () => {
-    window.location.reload();
-  };
-
-  const onClickUserFollower = () => {
-    navigate(`/users/${id}`);
+    myFollowingUserFetch();
   };
 
   const handleBtn = () => {
@@ -49,17 +43,12 @@ const UserFollowerList = ({
     setFollowOrNot(prev => !prev);
   };
 
-  // TODO 1. 개별의 유저마다, 해당 유저를 내가 팔로우 하고 있는지에 대한 정보를 심기가 힘든 상황
-  // TODO 2. 그렇기 때문에, 내가 팔로우하고 있는 모든 유저 list를 주는 api(follower/:userId)를 호출
-  // TODO 3. 내가 판별하고 싶은 userId가 해당 list에 포함되어있는지로 팔로우 여부 확인
-  // TODO 4. following 여부는 state로 관리할 필요 없이, 실제 데이터를 업데이트 하면서 분기처리하면 됨
-  // TODO 5. unfollow, follow 통신이 성공적으로 진행될 때마다 이어서 2번의 api를 재호출하여 업데이트된 데이터 받아옴
-
   useEffect(() => {
-    if (follower.id === meId) {
+    if (id === myId) {
       setNoButton(true);
     }
-  }, [follower]);
+  }, []);
+
   useEffect(() => {
     for (let i = 0; i < iFollowing.length; i++) {
       if (iFollowing[i].id === id) {
@@ -68,29 +57,20 @@ const UserFollowerList = ({
     }
   }, [iFollowing]);
 
-  useEffect(() => {
-    userFollowerFetch();
-  }, []);
-
   return (
     <Container>
       <FollowerInfo
         onClick={() => {
           onClickUserFollower();
-          replacePage();
         }}
       >
-        <ProfileImage src={src} width={40} />
-        <FollowerName>{name}</FollowerName>
+        <ProfileImage src={profileImage} width={40} />
+        <FollowerName>{userName}</FollowerName>
       </FollowerInfo>
       {noButton ? (
         ''
       ) : (
-        <UserFollowerBtn
-          handleBtn={handleBtn}
-          id={id}
-          followOrNot={followOrNot}
-        />
+        <UserFollowerBtn handleBtn={handleBtn} followOrNot={followOrNot} />
       )}
     </Container>
   );

@@ -5,23 +5,19 @@ import { API_ADDRESS } from '../../../../utils/API_ADDRESS';
 
 const UserProfile = ({
   user,
-  setIsAll,
-  setIsUserFollow,
   userFollower,
   userFollowing,
   iFollowing,
-  setUserCategory,
   myFollowingUserFetch,
+  setFollowerOrFollowing,
+  setUserCategory,
 }) => {
   const [followState, setFollowState] = useState(false);
-  const [userImage, setUserImage] = useState(user?.profileImageUrl);
+  const userImage = user?.profileImageUrl;
 
-  const handleCategory = x => {
-    setUserCategory(x);
-  };
-
-  const following = e => {
-    setIsUserFollow(e);
+  const handleFollowerOrFollowing = x => {
+    setUserCategory(1);
+    setFollowerOrFollowing(x);
   };
 
   const followUser = () => {
@@ -55,16 +51,13 @@ const UserProfile = ({
 
   return (
     <Container>
-      <CameraBox>
-        <ProfileImage src={userImage} alt="프로필 이미지" width={100} />
-      </CameraBox>
+      <ProfileImage src={userImage} alt="프로필 이미지" width={100} />
       <ProfileBox>
         <NickName>{user?.userName}</NickName>
         <ButtonBox>
           <FollowButton
             onClick={() => {
-              handleCategory(1);
-              following(true);
+              handleFollowerOrFollowing(true);
             }}
           >
             <FollowNumber>{userFollower.length}</FollowNumber>
@@ -72,17 +65,16 @@ const UserProfile = ({
           </FollowButton>
           <FollowButton
             onClick={() => {
-              handleCategory(2);
-              following(false);
+              handleFollowerOrFollowing(false);
             }}
           >
             <FollowNumber>{userFollowing.length}</FollowNumber>
             following
           </FollowButton>
         </ButtonBox>
-        <ChangeProfile followed={followState} onClick={handleFollowOrNot}>
+        <UserFollowButton followed={followState} onClick={handleFollowOrNot}>
           {followState ? '팔로잉' : '팔로우'}
-        </ChangeProfile>
+        </UserFollowButton>
         <Bio>{user?.bio}</Bio>
       </ProfileBox>
     </Container>
@@ -99,8 +91,6 @@ const Container = styled.div`
   width: 30%;
   height: 600px;
 `;
-
-const CameraBox = styled.div``;
 
 const ProfileBox = styled.div`
   display: flex;
@@ -133,7 +123,7 @@ const FollowNumber = styled.div`
   font-size: 21px;
 `;
 
-const ChangeProfile = styled.button`
+const UserFollowButton = styled.button`
   border: none;
   border-radius: 3px;
   padding: 5px 7px;

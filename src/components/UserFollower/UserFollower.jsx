@@ -1,30 +1,40 @@
 import React from 'react';
 import styled from 'styled-components';
-import UserFollowerContent from './UserFollowerContent/UserFollowerContent';
+import UserFollowerList from './UserFollowerList/UserFollowerList';
 
 const UserFollower = ({
   userFollower,
-  myData,
-  setIsAll,
+  myId,
+  setUserCategory,
   iFollowing,
-  followingsFetch,
-  userFollowerFetch,
+  myFollowingUserFetch,
+  followerOrFollowing,
 }) => {
-  const setAll = () => {
-    setIsAll(true);
+  const backToFeed = () => {
+    setUserCategory(0);
   };
 
   return (
     <RealContainer>
-      <Back onClick={setAll}>&lt; Back</Back>
+      <Back onClick={backToFeed}>&lt; Back</Back>
       <Container>
-        <UserFollowerContent
-          userFollower={userFollower}
-          myData={myData}
-          iFollowing={iFollowing}
-          followingsFetch={followingsFetch}
-          userFollowerFetch={userFollowerFetch}
-        />
+        <Title>{followerOrFollowing ? '팔로워' : '팔로잉'}</Title>
+        {(userFollower === undefined || userFollower.length === 0) && (
+          <None>
+            {followerOrFollowing ? '팔로워' : '팔로잉 유저'}가 없습니다
+          </None>
+        )}
+        {userFollower !== undefined &&
+          userFollower.length > 0 &&
+          userFollower.map(follower => (
+            <UserFollowerList
+              key={follower.id}
+              follower={follower}
+              myId={myId}
+              iFollowing={iFollowing}
+              myFollowingUserFetch={myFollowingUserFetch}
+            />
+          ))}
       </Container>
     </RealContainer>
   );
@@ -41,6 +51,19 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   padding: 10px 60px 60px 60px;
+`;
+
+const Title = styled.div`
+  margin-bottom: 30px;
+  font-weight: bold;
+  font-size: 18px;
+`;
+
+const None = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 `;
 
 const Back = styled.div`
