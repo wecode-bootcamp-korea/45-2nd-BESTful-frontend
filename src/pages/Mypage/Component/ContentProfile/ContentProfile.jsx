@@ -46,6 +46,7 @@ const ContentProfile = ({
 
     fetchResult();
   };
+
   const profileChange = e => {
     if (e.target.files[0]) {
       setProfileImage(e.target.files[0]);
