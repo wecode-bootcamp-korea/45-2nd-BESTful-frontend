@@ -8,6 +8,7 @@ const UserFollower = ({
   setUserCategory,
   iFollowing,
   myFollowingUserFetch,
+  followerOrFollowing,
 }) => {
   const backToFeed = () => {
     setUserCategory(0);
@@ -17,9 +18,11 @@ const UserFollower = ({
     <RealContainer>
       <Back onClick={backToFeed}>&lt; Back</Back>
       <Container>
-        <Title>팔로워</Title>
+        <Title>{followerOrFollowing ? '팔로워' : '팔로잉'}</Title>
         {(userFollower === undefined || userFollower.length === 0) && (
-          <None>팔로워가 없습니다</None>
+          <None>
+            {followerOrFollowing ? '팔로워' : '팔로잉 유저'}가 없습니다
+          </None>
         )}
         {userFollower !== undefined &&
           userFollower.length > 0 &&

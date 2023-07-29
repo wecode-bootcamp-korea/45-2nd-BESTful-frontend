@@ -148,6 +148,7 @@ const Users = () => {
         iFollowing={myFollowingUser}
         setUserCategory={setUserCategory}
         myFollowingUserFetch={myFollowingUserFetch}
+        followerOrFollowing={followerOrFollowing}
       />
     ),
   };
