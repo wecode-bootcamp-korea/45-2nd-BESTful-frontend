@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import MyPageCategory from './Component/MyPageCategory/MyPageCategory';
-import MyPageContent from './Component/MyPageContent/MyPageContent';
 import { API_ADDRESS } from '../../utils/API_ADDRESS';
 import ContentProfile from './Component/ContentProfile/ContentProfile';
 import FollowerPage from '../../components/FollowerPage/FollowerPage';
@@ -17,9 +16,6 @@ const Mypage = () => {
   const [like, setLike] = useState([]);
   const [myPageCategory, setMyPageCategory] = useState(0);
   const [feedOrLike, setFeedOrLike] = useState(true);
-  const [category, setCategory] = useState(true);
-  const [profileOrPosting, setProfileOrPosting] = useState(true);
-  const [clickedFollow, setClickedFollow] = useState(false);
   const [loading, setLoading] = useState(true);
 
   // 내 정보 가져오기
@@ -141,8 +137,6 @@ const Mypage = () => {
       <Container>
         <ContentProfile
           profile={myData}
-          setProfileOrPosting={setProfileOrPosting}
-          setClickedFollow={setClickedFollow}
           followerData={myFollowerData}
           followingData={myFollowingData}
           fetchResult={myDataFetch}

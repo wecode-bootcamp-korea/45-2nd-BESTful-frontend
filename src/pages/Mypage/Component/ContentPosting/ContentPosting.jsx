@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import FeedImage from '../FeedImage/FeedImage';
 import { useNavigate } from 'react-router-dom';
-import { API_ADDRESS } from '../../../../utils/API_ADDRESS';
 
 const ContentPosting = ({ feedOrLike, feed, feedGet }) => {
   const navigate = useNavigate();
