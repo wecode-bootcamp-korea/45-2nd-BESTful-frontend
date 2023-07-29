@@ -17,6 +17,8 @@ const Users = () => {
   const [loading, setLoading] = useState(true);
   const [userCategory, setUserCategory] = useState(0);
 
+  console.log(userFollowing);
+
   const params = useParams();
   const userId = params.id;
 
@@ -109,6 +111,7 @@ const Users = () => {
       });
   };
 
+  // 유저 피드 정보 가져오기
   const feedGet = () => {
     const url = `${API_ADDRESS}/feeds/users/${userId}`;
 
@@ -128,9 +131,6 @@ const Users = () => {
     userFollowingFetch();
     feedGet();
     setUserCategory(0);
-  }, [userId]);
-
-  useEffect(() => {
     myDataFetch();
     myFollowingUserFetch();
     if (parseInt(userId) === parseInt(myData.id)) {
@@ -139,7 +139,7 @@ const Users = () => {
   }, [userId]);
 
   const categoryList = {
-    0: <UserContentFeed userId={userData.id} feed={feed} />,
+    0: <UserContentFeed feed={feed} />,
     1: (
       <UserFollower
         userFollower={userFollower}
@@ -152,10 +152,10 @@ const Users = () => {
     2: (
       <UserFollowing
         userFollowing={userFollowing}
-        myData={myData}
-        myFollowingUser={myFollowingUser}
-        // followingsFetch={followingsFetch}
-        // userFollowingFetch={userFollowingFetch}
+        myId={myId}
+        iFollowing={myFollowingUser}
+        setUserCategory={setUserCategory}
+        myFollowingUserFetch={myFollowingUserFetch}
       />
     ),
   };

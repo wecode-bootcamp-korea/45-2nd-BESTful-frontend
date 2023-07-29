@@ -30,7 +30,6 @@ const UserFollower = ({
               myId={myId}
               iFollowing={iFollowing}
               myFollowingUserFetch={myFollowingUserFetch}
-              setUserCategory={setUserCategory}
             />
           ))}
       </Container>

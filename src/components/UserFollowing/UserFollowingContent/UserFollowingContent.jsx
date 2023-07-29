@@ -18,14 +18,11 @@ const UserFollowingContent = ({
         )}
         {userFollowing !== undefined &&
           userFollowing.length > 0 &&
-          userFollowing.map(follower => (
+          userFollowing.map(following => (
             <UserFollowingList
-              key={follower.id}
-              name={follower.userName}
-              src={follower.profileImage}
-              id={follower.id}
-              follower={follower}
-              meId={myData.id}
+              key={following.id}
+              following={following}
+              myId={myData.id}
               iFollowing={iFollowing}
               followingsFetch={followingsFetch}
               userFollowingFetch={userFollowingFetch}

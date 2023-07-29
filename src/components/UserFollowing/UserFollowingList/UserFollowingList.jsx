@@ -6,19 +6,21 @@ import UserFollowingBtn from '../UserFollowingBtn/UserFollowingBtn';
 import { API_ADDRESS } from '../../../utils/API_ADDRESS';
 
 const UserFollowingList = ({
-  name,
-  src,
-  id,
+  following,
   iFollowing,
-  followingsFetch,
-  meId,
-  follower,
-  userFollowingFetch,
+  myId,
+  myFollowingUserFetch,
 }) => {
   const [followOrNot, setFollowOrNot] = useState(false);
   const [noButton, setNoButton] = useState(false);
 
+  const { userName, profileImage, id } = following;
+
   const navigate = useNavigate();
+
+  const onClickUserFollowing = () => {
+    navigate(`/users/${id}`);
+  };
 
   const followUser = () => {
     const url = `${API_ADDRESS}/follower`;
@@ -33,22 +35,14 @@ const UserFollowingList = ({
         followedId: id,
       }),
     });
-    followingsFetch();
-  };
-
-  const replacePage = () => {
-    window.location.reload();
-  };
-
-  const onClickUserFollowing = () => {
-    navigate(`/users/${id}`);
+    myFollowingUserFetch();
   };
 
   useEffect(() => {
-    if (follower.id === meId) {
+    if (id === myId) {
       setNoButton(true);
     }
-  }, [follower]);
+  }, []);
 
   useEffect(() => {
     for (let i = 0; i < iFollowing.length; i++) {
@@ -56,36 +50,27 @@ const UserFollowingList = ({
         setFollowOrNot(true);
       }
     }
-  }, [iFollowing, id]);
+  }, [iFollowing]);
 
   const handleBtn = () => {
     followUser();
     setFollowOrNot(prev => !prev);
   };
 
-  useEffect(() => {
-    userFollowingFetch();
-  }, []);
-
   return (
     <Container>
       <FollowerInfo
         onClick={() => {
           onClickUserFollowing();
-          replacePage();
         }}
       >
-        <ProfileImage src={src} width={40} />
-        <FollowerName>{name}</FollowerName>
+        <ProfileImage src={profileImage} width={40} />
+        <FollowerName>{userName}</FollowerName>
       </FollowerInfo>
       {noButton ? (
         ''
       ) : (
-        <UserFollowingBtn
-          handleBtn={handleBtn}
-          id={id}
-          followOrNot={followOrNot}
-        />
+        <UserFollowingBtn handleBtn={handleBtn} followOrNot={followOrNot} />
       )}
     </Container>
   );

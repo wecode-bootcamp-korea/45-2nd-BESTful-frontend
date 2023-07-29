@@ -10,7 +10,6 @@ const UserFollowerList = ({
   iFollowing,
   myId,
   myFollowingUserFetch,
-  setUserCategory,
 }) => {
   const [followOrNot, setFollowOrNot] = useState(false);
   const [noButton, setNoButton] = useState(false);

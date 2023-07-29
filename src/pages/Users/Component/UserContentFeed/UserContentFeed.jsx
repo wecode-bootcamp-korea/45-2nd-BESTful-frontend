@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ContentImage from '../ContentImage/ContentImage';
-import { API_ADDRESS } from '../../../../utils/API_ADDRESS';
 
-const UserContentFeed = ({ userId, feed }) => {
+const UserContentFeed = ({ feed }) => {
   return (
     <Container>
       <Posting>
