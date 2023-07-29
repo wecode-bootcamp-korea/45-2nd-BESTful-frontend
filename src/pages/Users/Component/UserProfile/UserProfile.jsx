@@ -87,9 +87,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  padding: 50px 0;
+  border: 1px solid none;
+  border-radius: 10px;
   width: 30%;
-  height: 600px;
+  height: 50%;
+  background-color: #fff9f4;
 `;
 
 const ProfileBox = styled.div`
@@ -107,7 +110,7 @@ const NickName = styled.div`
 const ButtonBox = styled.div``;
 
 const FollowButton = styled.button`
-  padding: 30px 30px;
+  margin: 30px 30px;
   border: none;
   background-color: transparent;
   font-size: 15px;

@@ -44,7 +44,7 @@ export default UserFollower;
 
 const RealContainer = styled.div`
   margin-bottom: 50px;
-  width: 100%;
+  width: 65%;
 `;
 
 const Container = styled.div`
