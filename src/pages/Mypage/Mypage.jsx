@@ -18,6 +18,8 @@ const Mypage = () => {
   const [feedOrLike, setFeedOrLike] = useState(true);
   const [loading, setLoading] = useState(true);
 
+  console.log('hihi');
+
   // 내 정보 가져오기
   const myDataFetch = async () => {
     const url = `${API_ADDRESS}/users`;
