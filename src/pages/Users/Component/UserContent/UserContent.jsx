@@ -16,11 +16,6 @@ const UserContent = ({
   userFollowingFetch,
   myFollowingUserFetch,
 }) => {
-  // isUserFollow가 true면 follower, false면 following
-  // const [userFollower, setUserFollower] = useState([]);
-  // const [userFollowing, setUserFollowing] = useState([]);
-  // const [myData, setMyData] = useState([]);
-  // const [iFollowing, setIFollowing] = useState([]);
   const [userCategory, setUserCategory] = useState(0);
 
   const myId = myData.id;

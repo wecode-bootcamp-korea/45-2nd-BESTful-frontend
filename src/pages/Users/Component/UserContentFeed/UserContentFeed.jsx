@@ -3,25 +3,7 @@ import styled from 'styled-components';
 import ContentImage from '../ContentImage/ContentImage';
 import { API_ADDRESS } from '../../../../utils/API_ADDRESS';
 
-const UserContentFeed = ({ userId }) => {
-  const [feed, setFeed] = useState([]);
-  const feedGet = () => {
-    const url = `${API_ADDRESS}/feeds/users/${userId}`;
-
-    fetch(url, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json;charset=utf-8' },
-    })
-      .then(res => res.json())
-      .then(feed => {
-        setFeed(feed);
-      });
-  };
-
-  useEffect(() => {
-    feedGet();
-  }, []);
-
+const UserContentFeed = ({ userId, feed }) => {
   return (
     <Container>
       <Posting>
