@@ -8,14 +8,16 @@ const UserProfile = ({
   userFollower,
   userFollowing,
   iFollowing,
-  setUserCategory,
   myFollowingUserFetch,
+  setFollowerOrFollowing,
+  setUserCategory,
 }) => {
   const [followState, setFollowState] = useState(false);
   const userImage = user?.profileImageUrl;
 
-  const handleCategory = x => {
-    setUserCategory(x);
+  const handleFollowerOrFollowing = x => {
+    setUserCategory(1);
+    setFollowerOrFollowing(x);
   };
 
   const followUser = () => {
@@ -55,7 +57,7 @@ const UserProfile = ({
         <ButtonBox>
           <FollowButton
             onClick={() => {
-              handleCategory(1);
+              handleFollowerOrFollowing(true);
             }}
           >
             <FollowNumber>{userFollower.length}</FollowNumber>
@@ -63,7 +65,7 @@ const UserProfile = ({
           </FollowButton>
           <FollowButton
             onClick={() => {
-              handleCategory(2);
+              handleFollowerOrFollowing(false);
             }}
           >
             <FollowNumber>{userFollowing.length}</FollowNumber>

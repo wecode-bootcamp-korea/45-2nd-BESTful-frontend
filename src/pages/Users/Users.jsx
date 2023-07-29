@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { API_ADDRESS } from '../../utils/API_ADDRESS';
 import UserContentFeed from './Component/UserContentFeed/UserContentFeed';
 import UserFollower from '../../components/UserFollower/UserFollower';
-import UserFollowing from '../../components/UserFollowing/UserFollowing';
 import UserProfile from './Component/UserProfile/UserProfile';
 
 const Users = () => {
@@ -16,8 +15,7 @@ const Users = () => {
   const [feed, setFeed] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userCategory, setUserCategory] = useState(0);
-
-  console.log(userFollowing);
+  const [followerOrFollowing, setFollowerOrFollowing] = useState(undefined);
 
   const params = useParams();
   const userId = params.id;
@@ -131,6 +129,9 @@ const Users = () => {
     userFollowingFetch();
     feedGet();
     setUserCategory(0);
+  }, [userId]);
+
+  useEffect(() => {
     myDataFetch();
     myFollowingUserFetch();
     if (parseInt(userId) === parseInt(myData.id)) {
@@ -142,16 +143,7 @@ const Users = () => {
     0: <UserContentFeed feed={feed} />,
     1: (
       <UserFollower
-        userFollower={userFollower}
-        myId={myId}
-        iFollowing={myFollowingUser}
-        setUserCategory={setUserCategory}
-        myFollowingUserFetch={myFollowingUserFetch}
-      />
-    ),
-    2: (
-      <UserFollowing
-        userFollowing={userFollowing}
+        userFollower={followerOrFollowing ? userFollower : userFollowing}
         myId={myId}
         iFollowing={myFollowingUser}
         setUserCategory={setUserCategory}
@@ -169,8 +161,9 @@ const Users = () => {
         userFollower={userFollower}
         userFollowing={userFollowing}
         iFollowing={myFollowingUser}
-        setUserCategory={setUserCategory}
         myFollowingUserFetch={myFollowingUserFetch}
+        setFollowerOrFollowing={setFollowerOrFollowing}
+        setUserCategory={setUserCategory}
       />
       {categoryList[userCategory]}
     </Container>
