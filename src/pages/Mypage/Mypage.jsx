@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MyPageCategory from './Component/MyPageCategory/MyPageCategory';
 import { API_ADDRESS } from '../../utils/API_ADDRESS';
@@ -99,6 +99,19 @@ const Mypage = () => {
       });
   };
 
+  useEffect(() => {
+    myDataFetch();
+    feedGet();
+    likeGet();
+  }, []);
+
+  useEffect(() => {
+    if (!myData.id) return;
+
+    myFollowerFetch();
+    myFollowingFetch();
+  }, [myData.id]);
+
   const myPageCategoryList = {
     0: (
       <ContentPosting
@@ -126,6 +139,8 @@ const Mypage = () => {
     ),
   };
 
+  if (loading) return <div>로딩중...</div>;
+
   return (
     <RealContainer>
       <MyPageCategory
@@ -139,7 +154,7 @@ const Mypage = () => {
           profile={myData}
           followerData={myFollowerData}
           followingData={myFollowingData}
-          fetchResult={myDataFetch}
+          myDataFetch={myDataFetch}
         />
         {myPageCategoryList[myPageCategory]}
       </Container>

@@ -77,14 +77,16 @@ const Button = styled.button`
 
 const PostingButton = styled.div`
   color: ${props =>
-    props.myPageCategory === 0 &&
-    (props.feedOrLike ? props.theme.style.orange : 'black')};
+    props.myPageCategory === 0 && props.feedOrLike
+      ? props.theme.style.orange
+      : 'black'};
 `;
 
 const LikeButton = styled.div`
   color: ${props =>
-    props.myPageCategory === 0 &&
-    (props.feedOrLike ? 'black' : props.theme.style.orange)};
+    props.myPageCategory === 0 && props.feedOrLike !== true
+      ? props.theme.style.orange
+      : 'black'};
 `;
 
 export default MyPageCategory;

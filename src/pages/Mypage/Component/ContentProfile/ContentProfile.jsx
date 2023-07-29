@@ -8,19 +8,12 @@ import { API_ADDRESS } from '../../../../utils/API_ADDRESS';
 
 const ContentProfile = ({
   profile,
-  setProfileOrPosting,
-  setClickedFollow,
-  setFollowerFollowing,
   followerData,
   followingData,
-  fetchResult,
+  myDataFetch,
 }) => {
   const [profileImage, setProfileImage] = useState(profile?.profileImageUrl);
   const profileImageInput = useRef(null);
-
-  const clickingFollow = e => {
-    setClickedFollow(e);
-  };
 
   const changeImage = image => {
     const url = `${API_ADDRESS}/users/image`;
@@ -44,7 +37,7 @@ const ContentProfile = ({
         console.error(error); // Error handling
       });
 
-    fetchResult();
+    myDataFetch();
   };
 
   const profileChange = e => {
@@ -62,10 +55,6 @@ const ContentProfile = ({
       }
     };
     reader.readAsDataURL(e.target.files[0]);
-  };
-
-  const clickProfile = () => {
-    setProfileOrPosting(false);
   };
 
   return (
@@ -101,33 +90,16 @@ const ContentProfile = ({
       <ProfileBox>
         <NickName>{profile?.userName}</NickName>
         <ButtonBox>
-          <FollowButton
-            onClick={() => {
-              clickingFollow(true);
-              setFollowerFollowing(true);
-            }}
-          >
+          <FollowButton onClick={() => {}}>
             <FollowNumber>{followerData.length}</FollowNumber>
             follower
           </FollowButton>
-          <FollowButton
-            onClick={() => {
-              clickingFollow(true);
-              setFollowerFollowing(false);
-            }}
-          >
+          <FollowButton onClick={() => {}}>
             <FollowNumber>{followingData.length}</FollowNumber>
             following
           </FollowButton>
         </ButtonBox>
-        <ChangeProfile
-          onClick={() => {
-            clickProfile();
-            clickingFollow(false);
-          }}
-        >
-          프로필 편집
-        </ChangeProfile>
+        <ChangeProfile onClick={() => {}}>프로필 편집</ChangeProfile>
         <Bio>{profile?.bio}</Bio>
       </ProfileBox>
     </Container>
