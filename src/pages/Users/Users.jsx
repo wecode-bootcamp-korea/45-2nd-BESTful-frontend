@@ -175,8 +175,6 @@ export default Users;
 
 const Container = styled.div`
   display: flex;
-  justify-content: ${props =>
-    props.userCategory === 0 ? 'space-between' : 'center'};
+  justify-content: space-between;
   padding-top: 70px;
-  background-color: yellow;
 `;
