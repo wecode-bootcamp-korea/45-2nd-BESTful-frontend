@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ProfileImage from '../../ProfileImage/ProfileImage';
-import UserFollowerBtn from '../UserFollowerBtn/UserFollowerBtn';
+import FollowingButton from '../../followingButton/FollowingButton';
 import { API_ADDRESS } from '../../../utils/API_ADDRESS';
 
 const UserFollowerList = ({
@@ -70,7 +70,7 @@ const UserFollowerList = ({
       {noButton ? (
         ''
       ) : (
-        <UserFollowerBtn handleBtn={handleBtn} followOrNot={followOrNot} />
+        <FollowingButton handleBtn={handleBtn} followOrNot={followOrNot} />
       )}
     </Container>
   );

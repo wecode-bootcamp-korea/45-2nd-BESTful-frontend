@@ -1,42 +1,26 @@
-import React, { useState } from 'react';
-import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 import styled from 'styled-components';
 import theme from '../../styles/theme';
+// import theme from '../../../styles/theme';
 
-const FollowingButton = ({ width, height, init }) => {
-  const [following, setFollowing] = useState(init);
-
-  const handleFollow = () => {
-    setFollowing(prev => !prev);
-  };
-
+const FollowingButton = ({ handleBtn, followOrNot }) => {
   return (
-    <Follow
-      onClick={handleFollow}
-      isSelect={following}
-      width={width}
-      height={height}
-    >
-      {following ? (
-        <FontAwesomeIcon icon={faPlus} />
-      ) : (
-        <FontAwesomeIcon icon={faCheck} />
-      )}
-      {following ? ' 팔로잉' : ' 팔로우'}
-    </Follow>
+    <FollowBtn onClick={handleBtn} follow={followOrNot}>
+      {followOrNot ? '팔로잉' : '팔로우'}
+    </FollowBtn>
   );
 };
 
-const Follow = styled.button`
-  width: ${props => props.width};
-  height: ${props => props.height};
+const FollowBtn = styled.button`
+  width: 80px;
+  height: 30px;
   border-radius: 5px;
-  background-color: ${props => (props.isSelect ? theme.white : theme.orange)};
+  background-color: ${props => (props.follow ? theme.white : theme.orange)};
   outline: none;
-  border: ${props => (props.isSelect ? '1px solid black' : 'none')};
+  border: ${props => (props.follow ? '1px solid black' : 'none')};
   font-weight: bold;
-  color: ${props => (props.isSelect ? theme.black : theme.white)};
+  font-size: ${props => props.size};
+  color: ${props => (props.follow ? theme.black : theme.white)};
 `;
 
 export default FollowingButton;

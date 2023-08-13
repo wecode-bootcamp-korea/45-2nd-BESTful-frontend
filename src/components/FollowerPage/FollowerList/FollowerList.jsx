@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ProfileImage from '../../ProfileImage/ProfileImage';
-import FollowerBtn from '../FollowerBtn/FollowerBtn';
 import { API_ADDRESS } from '../../../utils/API_ADDRESS';
+import FollowingButton from '../../followingButton/FollowingButton';
 
 const FollowerList = ({
   follower,
@@ -61,7 +61,7 @@ const FollowerList = ({
         <ProfileImage src={profileImage} width={40} />
         <FollowerName>{userName}</FollowerName>
       </FollowerInfo>
-      <FollowerBtn handleBtn={handleBtn} followOrNot={followOrNot} />
+      <FollowingButton handleBtn={handleBtn} followOrNot={followOrNot} />
     </Container>
   );
 };
