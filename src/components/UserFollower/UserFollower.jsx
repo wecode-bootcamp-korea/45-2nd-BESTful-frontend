@@ -15,7 +15,7 @@ const UserFollower = ({
   };
 
   return (
-    <RealContainer>
+    <TopContainer>
       <Back onClick={backToFeed}>&lt; Back</Back>
       <Container>
         <Title>{followerOrFollowing ? '팔로워' : '팔로잉'}</Title>
@@ -36,13 +36,13 @@ const UserFollower = ({
             />
           ))}
       </Container>
-    </RealContainer>
+    </TopContainer>
   );
 };
 
 export default UserFollower;
 
-const RealContainer = styled.div`
+const TopContainer = styled.div`
   margin-bottom: 50px;
   width: 65%;
 `;

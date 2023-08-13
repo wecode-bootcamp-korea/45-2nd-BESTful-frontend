@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import theme from '../../../styles/theme';
 
-const FollowerBtn = ({ handleBtn, id, followOrNot }) => {
+const FollowerBtn = ({ handleBtn, followOrNot }) => {
   return (
     <FollowBtn onClick={handleBtn} select={followOrNot}>
       {followOrNot ? '팔로잉' : '팔로우'}

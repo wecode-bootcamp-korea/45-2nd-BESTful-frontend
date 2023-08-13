@@ -5,8 +5,10 @@ import ProfileImage from '../../ProfileImage/ProfileImage';
 import FollowerBtn from '../FollowerBtn/FollowerBtn';
 import { API_ADDRESS } from '../../../utils/API_ADDRESS';
 
-const FollowerList = ({ name, src, id, followingData, followerFetch }) => {
+const FollowerList = ({ follower, followingData, followingFetch }) => {
   const [followOrNot, setFollowOrNot] = useState(false);
+
+  const { userName, profileImage, id } = follower;
 
   const navigate = useNavigate();
 
@@ -29,7 +31,7 @@ const FollowerList = ({ name, src, id, followingData, followerFetch }) => {
     }).catch(error => {
       console.error(error); // Error handling
     });
-    followerFetch();
+    followingFetch();
   };
 
   useEffect(() => {
@@ -39,23 +41,20 @@ const FollowerList = ({ name, src, id, followingData, followerFetch }) => {
       }
     }
   }, [followingData, id]);
+  //날 팔로우 한 유저들을 내가 팔로우 했는지 여부 판단
 
   const handleBtn = () => {
     followUser();
     setFollowOrNot(prev => !prev);
   };
 
-  useEffect(() => {
-    followerFetch();
-  }, []);
-
   return (
     <Container>
       <FollowerInfo onClick={onClickFollowerUser}>
-        <ProfileImage src={src} width={40} />
-        <FollowerName>{name}</FollowerName>
+        <ProfileImage src={profileImage} width={40} />
+        <FollowerName>{userName}</FollowerName>
       </FollowerInfo>
-      <FollowerBtn handleBtn={handleBtn} id={id} followOrNot={followOrNot} />
+      <FollowerBtn handleBtn={handleBtn} followOrNot={followOrNot} />
     </Container>
   );
 };

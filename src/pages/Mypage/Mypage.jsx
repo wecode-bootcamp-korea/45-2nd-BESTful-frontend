@@ -16,6 +16,7 @@ const Mypage = () => {
   const [like, setLike] = useState([]);
   const [myPageCategory, setMyPageCategory] = useState(0);
   const [feedOrLike, setFeedOrLike] = useState(true);
+  const [followerOrFollowing, setFollowerOrFollowing] = useState(undefined);
   const [loading, setLoading] = useState(true);
 
   // 내 정보 가져오기
@@ -125,7 +126,6 @@ const Mypage = () => {
       <FollowerPage
         followerData={myFollowerData}
         followerFetch={myFollowerFetch}
-        me={myData}
         followingData={myFollowingData}
         followingFetch={myFollowingFetch}
       />
@@ -142,7 +142,7 @@ const Mypage = () => {
   if (loading) return <div>로딩중...</div>;
 
   return (
-    <RealContainer>
+    <TopContainer>
       <MyPageCategory
         feedOrLike={feedOrLike}
         myPageCategory={myPageCategory}
@@ -155,16 +155,18 @@ const Mypage = () => {
           followerData={myFollowerData}
           followingData={myFollowingData}
           myDataFetch={myDataFetch}
+          setMyPageCategory={setMyPageCategory}
+          setFollowerOrFollowing={setFollowerOrFollowing}
         />
         {myPageCategoryList[myPageCategory]}
       </Container>
-    </RealContainer>
+    </TopContainer>
   );
 };
 
 export default Mypage;
 
-const RealContainer = styled.div`
+const TopContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
