@@ -120,7 +120,14 @@ const Mypage = () => {
         feedGet={feedGet}
       />
     ),
-    1: <ProfileModify profile={myData} setMe={setMyData} />,
+    1: (
+      <ProfileModify
+        profile={myData}
+        myDataFetch={myDataFetch}
+        setMyPageCategory={setMyPageCategory}
+        setFeedOrLike={setFeedOrLike}
+      />
+    ),
     2: (
       <FollowerPage
         followerData={followerOrFollowing ? myFollowerData : myFollowingData}

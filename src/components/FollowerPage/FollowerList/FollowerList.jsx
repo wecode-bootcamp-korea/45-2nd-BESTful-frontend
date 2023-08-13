@@ -47,6 +47,9 @@ const FollowerList = ({
         }
       }
     }
+    if (!followerOrFollowing) {
+      return;
+    }
   }, [followerOrFollowing, followingData]);
   //날 팔로우 한 유저들을 내가 팔로우 했는지 여부 판단
 
