@@ -12,15 +12,20 @@ const FollowingButton = ({ handleBtn, followOrNot }) => {
 };
 
 const FollowBtn = styled.button`
-  width: 80px;
+  width: 65px;
   height: 30px;
   border-radius: 5px;
   background-color: ${props => (props.follow ? theme.white : theme.orange)};
   outline: none;
-  border: ${props => (props.follow ? '1px solid black' : 'none')};
+  border: ${props => (props.follow ? '1px solid gray' : 'none')};
   font-weight: bold;
-  font-size: ${props => props.size};
+  font-size: 14px;
   color: ${props => (props.follow ? theme.black : theme.white)};
+
+  &:hover {
+    cursor: pointer;
+    opacity: 70%;
+  }
 `;
 
 export default FollowingButton;

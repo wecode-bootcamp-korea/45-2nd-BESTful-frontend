@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ProfileImage from '../../../../components/ProfileImage/ProfileImage';
 import { API_ADDRESS } from '../../../../utils/API_ADDRESS';
+import FollowingButton from '../../../../components/followingButton/FollowingButton';
 
 const UserProfile = ({
   user,
@@ -72,9 +73,10 @@ const UserProfile = ({
             following
           </FollowButton>
         </ButtonBox>
-        <UserFollowButton followed={followState} onClick={handleFollowOrNot}>
-          {followState ? '팔로잉' : '팔로우'}
-        </UserFollowButton>
+        <FollowingButton
+          handleBtn={handleFollowOrNot}
+          followOrNot={followState}
+        />
         <Bio>{user?.bio}</Bio>
       </ProfileBox>
     </Container>
@@ -124,25 +126,6 @@ const FollowButton = styled.button`
 const FollowNumber = styled.div`
   color: black;
   font-size: 21px;
-`;
-
-const UserFollowButton = styled.button`
-  border: none;
-  border-radius: 3px;
-  padding: 5px 7px;
-  outline: none;
-  border: ${props => (props.followed ? '1px solid black' : 'none')};
-
-  background-color: ${props =>
-    props.followed ? props.theme.style.white : props.theme.style.orange};
-  color: ${props =>
-    props.followed ? props.theme.style.black : props.theme.style.white};
-  font-size: 15px;
-  font-weight: bold;
-
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 const Bio = styled.div`
