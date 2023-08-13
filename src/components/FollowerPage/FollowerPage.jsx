@@ -6,15 +6,17 @@ const FollowerPage = ({
   followerData,
   followingData,
   followingFetch,
-  followerFetch,
+  followerOrFollowing,
 }) => {
   return (
     <TopContainer>
       <Container>
-        <Title>팔로워</Title>
+        <Title>{followerOrFollowing ? '팔로워' : '팔로잉'}</Title>
         <List>
           {(followerData === undefined || followerData.length === 0) && (
-            <None>팔로워가 없습니다</None>
+            <None>
+              {followerOrFollowing ? '팔로워' : '팔로잉 유저'}가 없습니다
+            </None>
           )}
           {followerData !== undefined &&
             followerData.length > 0 &&
@@ -24,7 +26,7 @@ const FollowerPage = ({
                 follower={follower}
                 followingData={followingData}
                 followingFetch={followingFetch}
-                followerFetch={followerFetch}
+                followerOrFollowing={followerOrFollowing}
               />
             ))}
         </List>

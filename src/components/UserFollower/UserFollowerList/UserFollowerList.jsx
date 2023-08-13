@@ -50,7 +50,7 @@ const UserFollowerList = ({
   }, []);
 
   useEffect(() => {
-    for (let i = 0; i < iFollowing.length; i++) {
+    for (let i = 0; i < iFollowing?.length; i++) {
       if (iFollowing[i].id === id) {
         setFollowOrNot(true);
       }

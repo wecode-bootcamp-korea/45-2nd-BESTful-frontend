@@ -5,7 +5,12 @@ import ProfileImage from '../../ProfileImage/ProfileImage';
 import FollowerBtn from '../FollowerBtn/FollowerBtn';
 import { API_ADDRESS } from '../../../utils/API_ADDRESS';
 
-const FollowerList = ({ follower, followingData, followingFetch }) => {
+const FollowerList = ({
+  follower,
+  followingData,
+  followingFetch,
+  followerOrFollowing,
+}) => {
   const [followOrNot, setFollowOrNot] = useState(false);
 
   const { userName, profileImage, id } = follower;
@@ -35,12 +40,14 @@ const FollowerList = ({ follower, followingData, followingFetch }) => {
   };
 
   useEffect(() => {
-    for (let i = 0; i < followingData.length; i++) {
-      if (followingData[i].id === id) {
-        setFollowOrNot(true);
+    if (followerOrFollowing) {
+      for (let i = 0; i < followingData.length; i++) {
+        if (followingData[i].id === id) {
+          setFollowOrNot(true);
+        }
       }
     }
-  }, [followingData, id]);
+  }, [followerOrFollowing, followingData]);
   //날 팔로우 한 유저들을 내가 팔로우 했는지 여부 판단
 
   const handleBtn = () => {
@@ -77,10 +84,4 @@ const FollowerInfo = styled.div`
 const FollowerName = styled.div`
   margin-left: 10px;
   font-weight: bold;
-`;
-
-const FollowBtn = styled.button`
-  width: 80px;
-  height: 30px;
-  border-radius: 5px;
 `;

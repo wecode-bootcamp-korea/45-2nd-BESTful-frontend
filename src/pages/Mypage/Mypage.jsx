@@ -4,7 +4,6 @@ import MyPageCategory from './Component/MyPageCategory/MyPageCategory';
 import { API_ADDRESS } from '../../utils/API_ADDRESS';
 import ContentProfile from './Component/ContentProfile/ContentProfile';
 import FollowerPage from '../../components/FollowerPage/FollowerPage';
-import FollowingPage from '../../components/FollowingPage/FollowingPage';
 import ContentPosting from './Component/ContentPosting/ContentPosting';
 import ProfileModify from './Component/ProfileModify/ProfileModify';
 
@@ -124,17 +123,10 @@ const Mypage = () => {
     1: <ProfileModify profile={myData} setMe={setMyData} />,
     2: (
       <FollowerPage
-        followerData={myFollowerData}
-        followerFetch={myFollowerFetch}
-        followingData={myFollowingData}
+        followerData={followerOrFollowing ? myFollowerData : myFollowingData}
+        followingData={followerOrFollowing ? myFollowingData : null}
         followingFetch={myFollowingFetch}
-      />
-    ),
-    3: (
-      <FollowingPage
-        followingData={myFollowingData}
-        me={myData}
-        followingFetch={myFollowingFetch}
+        followerOrFollowing={followerOrFollowing}
       />
     ),
   };
