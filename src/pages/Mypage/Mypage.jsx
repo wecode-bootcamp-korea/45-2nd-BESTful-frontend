@@ -4,7 +4,6 @@ import MyPageCategory from './Component/MyPageCategory/MyPageCategory';
 import { API_ADDRESS } from '../../utils/API_ADDRESS';
 import ContentProfile from './Component/ContentProfile/ContentProfile';
 import FollowerPage from '../../components/FollowerPage/FollowerPage';
-import FollowingPage from '../../components/FollowingPage/FollowingPage';
 import ContentPosting from './Component/ContentPosting/ContentPosting';
 import ProfileModify from './Component/ProfileModify/ProfileModify';
 
@@ -16,6 +15,7 @@ const Mypage = () => {
   const [like, setLike] = useState([]);
   const [myPageCategory, setMyPageCategory] = useState(0);
   const [feedOrLike, setFeedOrLike] = useState(true);
+  const [followerOrFollowing, setFollowerOrFollowing] = useState(undefined);
   const [loading, setLoading] = useState(true);
 
   // 내 정보 가져오기
@@ -123,18 +123,10 @@ const Mypage = () => {
     1: <ProfileModify profile={myData} setMe={setMyData} />,
     2: (
       <FollowerPage
-        followerData={myFollowerData}
-        followerFetch={myFollowerFetch}
-        me={myData}
-        followingData={myFollowingData}
+        followerData={followerOrFollowing ? myFollowerData : myFollowingData}
+        followingData={followerOrFollowing ? myFollowingData : null}
         followingFetch={myFollowingFetch}
-      />
-    ),
-    3: (
-      <FollowingPage
-        followingData={myFollowingData}
-        me={myData}
-        followingFetch={myFollowingFetch}
+        followerOrFollowing={followerOrFollowing}
       />
     ),
   };
@@ -142,7 +134,7 @@ const Mypage = () => {
   if (loading) return <div>로딩중...</div>;
 
   return (
-    <RealContainer>
+    <TopContainer>
       <MyPageCategory
         feedOrLike={feedOrLike}
         myPageCategory={myPageCategory}
@@ -155,16 +147,18 @@ const Mypage = () => {
           followerData={myFollowerData}
           followingData={myFollowingData}
           myDataFetch={myDataFetch}
+          setMyPageCategory={setMyPageCategory}
+          setFollowerOrFollowing={setFollowerOrFollowing}
         />
         {myPageCategoryList[myPageCategory]}
       </Container>
-    </RealContainer>
+    </TopContainer>
   );
 };
 
 export default Mypage;
 
-const RealContainer = styled.div`
+const TopContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;

@@ -11,9 +11,16 @@ const ContentProfile = ({
   followerData,
   followingData,
   myDataFetch,
+  setMyPageCategory,
+  setFollowerOrFollowing,
 }) => {
   const [profileImage, setProfileImage] = useState(profile?.profileImageUrl);
   const profileImageInput = useRef(null);
+
+  const handleFollowrFollowingComponent = x => {
+    setMyPageCategory(2);
+    setFollowerOrFollowing(x);
+  };
 
   const changeImage = image => {
     const url = `${API_ADDRESS}/users/image`;
@@ -90,11 +97,19 @@ const ContentProfile = ({
       <ProfileBox>
         <NickName>{profile?.userName}</NickName>
         <ButtonBox>
-          <FollowButton onClick={() => {}}>
+          <FollowButton
+            onClick={() => {
+              handleFollowrFollowingComponent(true);
+            }}
+          >
             <FollowNumber>{followerData.length}</FollowNumber>
             follower
           </FollowButton>
-          <FollowButton onClick={() => {}}>
+          <FollowButton
+            onClick={() => {
+              handleFollowrFollowingComponent(false);
+            }}
+          >
             <FollowNumber>{followingData.length}</FollowNumber>
             following
           </FollowButton>
