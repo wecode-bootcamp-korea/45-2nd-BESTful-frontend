@@ -55,7 +55,7 @@ const UserProfile = ({
       <ProfileImage src={userImage} alt="프로필 이미지" width={100} />
       <ProfileBox>
         <NickName>{user?.userName}</NickName>
-        <ButtonBox>
+        <div>
           <FollowButton
             onClick={() => {
               handleFollowerOrFollowing(true);
@@ -72,7 +72,7 @@ const UserProfile = ({
             <FollowNumber>{userFollowing.length}</FollowNumber>
             following
           </FollowButton>
-        </ButtonBox>
+        </div>
         <FollowingButton
           handleBtn={handleFollowOrNot}
           followOrNot={followState}
@@ -108,8 +108,6 @@ const NickName = styled.div`
   font-size: 21px;
   font-weight: bold;
 `;
-
-const ButtonBox = styled.div``;
 
 const FollowButton = styled.button`
   margin: 30px 30px;

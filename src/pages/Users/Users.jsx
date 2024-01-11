@@ -19,18 +19,14 @@ const Users = () => {
 
   const params = useParams();
   const userId = params.id;
+  const myId = myData.id;
 
   const navigate = useNavigate();
-
-  const myId = myData.id;
 
   // 유저 데이터 받아오기
   const userDataFetch = async () => {
     try {
-      const response = await fetchApi(`/users/${userId}`);
-      const result = await response.json();
-
-      setUserData(result);
+      await fetchApi(`/users/${userId}`, setUserData);
     } catch (error) {
       console.log(error);
     } finally {
@@ -39,63 +35,28 @@ const Users = () => {
   };
 
   // 팔로워 데이터 받아오기
-  const userFollowerFetch = async () => {
-    try {
-      const response = await fetchApi(`/follower/following/${userId}`);
-      const result = await response.json();
-
-      setUserFollower(result);
-    } catch (error) {
-      console.log(error);
-    }
+  const userFollowerFetch = () => {
+    fetchApi(`/follower/following/${userId}`, setUserFollower);
   };
 
   // 팔로잉 데이터 받아오기
-  const userFollowingFetch = async () => {
-    try {
-      const response = await fetchApi(`/follower/${userId}`);
-      const result = await response.json();
-
-      setUserFollowing(result);
-    } catch (error) {
-      console.log(error);
-    }
+  const userFollowingFetch = () => {
+    fetchApi(`/follower/${userId}`, setUserFollowing);
   };
 
   // 내 정보 가져오기
-  const myDataFetch = async () => {
-    try {
-      const response = await fetchApi(`/users`);
-      const result = await response.json();
-
-      setMyData(result);
-    } catch (error) {
-      console.log(error);
-    }
+  const myDataFetch = () => {
+    fetchApi(`/users`, setMyData);
   };
 
   // 내가 팔로우하는 유저들 정보 가져오기
   const myFollowingUserFetch = async () => {
-    try {
-      const response = await fetchApi(`/follower/${myData.id}`);
-      const result = await response.json();
-
-      setMyFollowingUser(result);
-    } catch (error) {
-      console.log(error);
-    }
+    fetchApi(`/follower/${myData.id}`, setMyFollowingUser);
   };
 
   // 유저 피드 정보 가져오기
   const feedGet = async () => {
-    try {
-      const response = await fetchApi(`/feeds/users/${userId}`);
-      const result = await response.json();
-
-      setFeed(result);
-    } catch (error) {
-      console.log(error);
-    }
+    fetchApi(`/feeds/users/${userId}`, setFeed);
   };
 
   useEffect(() => {
