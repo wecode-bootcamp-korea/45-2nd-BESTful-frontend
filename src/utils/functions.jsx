@@ -1,9 +1,9 @@
 import { API_ADDRESS } from './API_ADDRESS';
 
-const fetchApi = async (endpoint, setStateFunc, method = 'GET') => {
+const fetchApi = async (endpoint, setStateFunc = null, init) => {
   try {
     const response = await fetch(`${API_ADDRESS}${endpoint}`, {
-      method: method,
+      ...init,
       headers: {
         Authorization: localStorage.getItem('resToken'),
         'Content-Type': 'application/json;charset=utf-8',
@@ -11,7 +11,9 @@ const fetchApi = async (endpoint, setStateFunc, method = 'GET') => {
     });
     const result = await response.json();
 
-    setStateFunc(result);
+    if (setStateFunc) {
+      setStateFunc(result);
+    }
   } catch (error) {
     console.log(error);
   }

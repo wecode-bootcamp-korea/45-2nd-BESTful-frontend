@@ -74,7 +74,7 @@ const Users = () => {
       <UserFollower
         userFollower={followerOrFollowing ? userFollower : userFollowing}
         myId={myId}
-        iFollowing={myFollowingUser}
+        myFollowingUser={myFollowingUser}
         setUserCategory={setUserCategory}
         myFollowingUserFetch={myFollowingUserFetch}
         followerOrFollowing={followerOrFollowing}

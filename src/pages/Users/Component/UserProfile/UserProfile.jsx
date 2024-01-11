@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ProfileImage from '../../../../components/ProfileImage/ProfileImage';
-import { API_ADDRESS } from '../../../../utils/API_ADDRESS';
 import FollowingButton from '../../../../components/followingButton/FollowingButton';
 import fetchApi from '../../../../utils/functions';
 
@@ -22,19 +21,14 @@ const UserProfile = ({
     setFollowerOrFollowing(x);
   };
 
-  const followUser = () => {
-    const url = `${API_ADDRESS}/follower`;
-
-    fetch(url, {
+  const followUser = async () => {
+    await fetchApi(`/follower`, {
       method: `${followState ? 'DELETE' : 'POST'}`,
-      headers: {
-        Authorization: localStorage.getItem('resToken'),
-        'Content-Type': 'application/json;charset=utf-8',
-      },
       body: JSON.stringify({
         followedId: id,
       }),
     });
+
     myFollowingUserFetch();
   };
 
@@ -53,10 +47,10 @@ const UserProfile = ({
 
   return (
     <Container>
-      <ProfileImage src={profileImageUrl} alt="프로필 이미지" width={100} />
+      <ProfileImage src={profileImageUrl} width={100} />
       <ProfileBox>
         <NickName>{userName}</NickName>
-        <div>
+        <li>
           <FollowButton
             onClick={() => {
               handleFollowerOrFollowing(true);
@@ -73,7 +67,7 @@ const UserProfile = ({
             <FollowNumber>{userFollowing.length}</FollowNumber>
             following
           </FollowButton>
-        </div>
+        </li>
         <FollowingButton
           handleBtn={handleFollowOrNot}
           followOrNot={followState}
@@ -98,14 +92,15 @@ const Container = styled.div`
   background-color: #fff9f4;
 `;
 
-const ProfileBox = styled.div`
+const ProfileBox = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 50px;
+  list-style-type: none;
 `;
 
-const NickName = styled.div`
+const NickName = styled.li`
   font-size: 21px;
   font-weight: bold;
 `;
@@ -122,12 +117,12 @@ const FollowButton = styled.button`
   }
 `;
 
-const FollowNumber = styled.div`
+const FollowNumber = styled.p`
   color: black;
   font-size: 21px;
 `;
 
-const Bio = styled.div`
+const Bio = styled.li`
   padding-top: 10%;
   width: 70%;
   font-size: 14px;
