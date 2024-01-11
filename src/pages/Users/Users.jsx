@@ -35,29 +35,27 @@ const Users = () => {
   };
 
   // 팔로워 데이터 받아오기
-  const userFollowerFetch = () => {
+  const userFollowerFetch = () =>
     fetchApi(`/follower/following/${userId}`, setUserFollower);
-  };
 
   // 팔로잉 데이터 받아오기
-  const userFollowingFetch = () => {
+  const userFollowingFetch = () =>
     fetchApi(`/follower/${userId}`, setUserFollowing);
-  };
 
   // 내 정보 가져오기
-  const myDataFetch = () => {
-    fetchApi(`/users`, setMyData);
-  };
+  const myDataFetch = () => fetchApi(`/users`, setMyData);
 
   // 내가 팔로우하는 유저들 정보 가져오기
-  const myFollowingUserFetch = async () => {
+  const myFollowingUserFetch = () =>
     fetchApi(`/follower/${myData.id}`, setMyFollowingUser);
-  };
 
   // 유저 피드 정보 가져오기
-  const feedGet = async () => {
-    fetchApi(`/feeds/users/${userId}`, setFeed);
-  };
+  const feedGet = async () => fetchApi(`/feeds/users/${userId}`, setFeed);
+
+  useEffect(() => {
+    myDataFetch();
+    myFollowingUserFetch();
+  }, []);
 
   useEffect(() => {
     userDataFetch();
@@ -65,11 +63,6 @@ const Users = () => {
     userFollowingFetch();
     feedGet();
     setUserCategory(0);
-  }, [userId]);
-
-  useEffect(() => {
-    myDataFetch();
-    myFollowingUserFetch();
     if (parseInt(userId) === parseInt(myData.id)) {
       navigate('/mypage');
     }
@@ -97,7 +90,7 @@ const Users = () => {
         user={userData}
         userFollower={userFollower}
         userFollowing={userFollowing}
-        iFollowing={myFollowingUser}
+        myFollowingUser={myFollowingUser}
         myFollowingUserFetch={myFollowingUserFetch}
         setFollowerOrFollowing={setFollowerOrFollowing}
         setUserCategory={setUserCategory}

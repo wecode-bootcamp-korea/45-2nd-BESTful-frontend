@@ -3,18 +3,19 @@ import styled from 'styled-components';
 import ProfileImage from '../../../../components/ProfileImage/ProfileImage';
 import { API_ADDRESS } from '../../../../utils/API_ADDRESS';
 import FollowingButton from '../../../../components/followingButton/FollowingButton';
+import fetchApi from '../../../../utils/functions';
 
 const UserProfile = ({
   user,
   userFollower,
   userFollowing,
-  iFollowing,
+  myFollowingUser,
   myFollowingUserFetch,
   setFollowerOrFollowing,
   setUserCategory,
 }) => {
   const [followState, setFollowState] = useState(false);
-  const userImage = user?.profileImageUrl;
+  const { profileImageUrl, id, userName, bio } = user;
 
   const handleFollowerOrFollowing = x => {
     setUserCategory(1);
@@ -31,7 +32,7 @@ const UserProfile = ({
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({
-        followedId: user.id,
+        followedId: id,
       }),
     });
     myFollowingUserFetch();
@@ -43,18 +44,18 @@ const UserProfile = ({
   };
 
   useEffect(() => {
-    for (let i = 0; i < iFollowing.length; i++) {
-      if (iFollowing[i].id === user.id) {
+    for (let i = 0; i < myFollowingUser.length; i++) {
+      if (myFollowingUser[i].id === id) {
         setFollowState(true);
       }
     }
-  }, [iFollowing]);
+  }, [myFollowingUser]);
 
   return (
     <Container>
-      <ProfileImage src={userImage} alt="프로필 이미지" width={100} />
+      <ProfileImage src={profileImageUrl} alt="프로필 이미지" width={100} />
       <ProfileBox>
-        <NickName>{user?.userName}</NickName>
+        <NickName>{userName}</NickName>
         <div>
           <FollowButton
             onClick={() => {
@@ -77,7 +78,7 @@ const UserProfile = ({
           handleBtn={handleFollowOrNot}
           followOrNot={followState}
         />
-        <Bio>{user?.bio}</Bio>
+        <Bio>{bio}</Bio>
       </ProfileBox>
     </Container>
   );
