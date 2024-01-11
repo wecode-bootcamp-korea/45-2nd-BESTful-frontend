@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { API_ADDRESS } from '../../utils/API_ADDRESS';
 import UserContentFeed from './Component/UserContentFeed/UserContentFeed';
 import UserFollower from '../../components/UserFollower/UserFollower';
 import UserProfile from './Component/UserProfile/UserProfile';
+import fetchApi from '../../utils/functions';
 
 const Users = () => {
   const [userData, setUserData] = useState([]);
@@ -26,101 +26,76 @@ const Users = () => {
 
   // 유저 데이터 받아오기
   const userDataFetch = async () => {
-    const url = `${API_ADDRESS}/users/${userId}`;
-
     try {
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          Authorization: localStorage.getItem('resToken'),
-          'Content-Type': 'application/json;charset=utf-8',
-        },
-      });
-      const json = await response.json();
-      setUserData(json);
+      const response = await fetchApi(`/users/${userId}`);
+      const result = await response.json();
+
+      setUserData(result);
+    } catch (error) {
+      console.log(error);
     } finally {
       setLoading(false);
     }
   };
 
   // 팔로워 데이터 받아오기
-  const userFollowerFetch = () => {
-    const url = `${API_ADDRESS}/follower/following/${userId}`;
+  const userFollowerFetch = async () => {
+    try {
+      const response = await fetchApi(`/follower/following/${userId}`);
+      const result = await response.json();
 
-    fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: localStorage.getItem('resToken'),
-      },
-    })
-      .then(res => res.json())
-      .then(res => {
-        setUserFollower(res);
-      });
+      setUserFollower(result);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // 팔로잉 데이터 받아오기
-  const userFollowingFetch = () => {
-    const url = `${API_ADDRESS}/follower/${userId}`;
+  const userFollowingFetch = async () => {
+    try {
+      const response = await fetchApi(`/follower/${userId}`);
+      const result = await response.json();
 
-    fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: localStorage.getItem('resToken'),
-      },
-    })
-      .then(res => res.json())
-      .then(res => {
-        setUserFollowing(res);
-      });
+      setUserFollowing(result);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // 내 정보 가져오기
-  const myDataFetch = () => {
-    fetch(`${API_ADDRESS}/users`, {
-      method: 'GET',
-      headers: {
-        Authorization: localStorage.getItem('resToken'),
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-    })
-      .then(res => res.json())
-      .then(res => {
-        setMyData(res);
-      });
+  const myDataFetch = async () => {
+    try {
+      const response = await fetchApi(`/users`);
+      const result = await response.json();
+
+      setMyData(result);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // 내가 팔로우하는 유저들 정보 가져오기
-  const myFollowingUserFetch = () => {
-    const url = `${API_ADDRESS}/follower/${myData.id}`;
+  const myFollowingUserFetch = async () => {
+    try {
+      const response = await fetchApi(`/follower/${myData.id}`);
+      const result = await response.json();
 
-    fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: localStorage.getItem('resToken'),
-      },
-    })
-      .then(res => res.json())
-      .then(res => {
-        setMyFollowingUser(res);
-      });
+      setMyFollowingUser(result);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // 유저 피드 정보 가져오기
-  const feedGet = () => {
-    const url = `${API_ADDRESS}/feeds/users/${userId}`;
+  const feedGet = async () => {
+    try {
+      const response = await fetchApi(`/feeds/users/${userId}`);
+      const result = await response.json();
 
-    fetch(url, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json;charset=utf-8' },
-    })
-      .then(res => res.json())
-      .then(feed => {
-        setFeed(feed);
-      });
+      setFeed(result);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
